@@ -10,7 +10,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Questions[] questions;
+    private Questions[] questions;
     private static List<Questions> _unansweredQuestions;
     private Questions _currentQuestion;
 
@@ -53,10 +53,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Initiate questions from the questions array in to the unanswered question list, to know which questions have been answered and which are yet to be answered.
-        //For a retry scenario just set the unswered question list to null and the count to 0 to load all the questions again.
+        //For a retry scenario just set the unanswered question list to null and the count to 0 to load all the questions again.
         if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
         {
-            _unansweredQuestions = questions.ToList<Questions>();
+            LoadQuestions();
         }
 
 
@@ -115,6 +115,18 @@ public class GameManager : MonoBehaviour
         UIManager.SwitchScreens(interventionScreen);
     }
 
+    private void LoadQuestions()
+    {
+        Object[] questionObject = Resources.LoadAll("Questions", typeof(Questions));
+        questions = new Questions[questionObject.Length];
+        for (int i = 0; i < questionObject.Length; i++)
+        {
+            questions[i] = (Questions) questionObject[i];
+        }
+
+        _unansweredQuestions = questions.ToList();
+
+    }
 
     //Player selects the true button
     public void UserSelectsTrue()

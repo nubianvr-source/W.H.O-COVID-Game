@@ -2,14 +2,16 @@
 
 //Customizable class for questions
 [System.Serializable]
-public class Questions
+
+[CreateAssetMenu(fileName = "New Question", menuName = "Quiz/New Question")]
+public class Questions: ScriptableObject
 {
     public Sprite imageQuestion;
     [TextArea]public string textQuestion;
     public bool isClickTrue;
-    public string correctIntervention;
-    public string wrongIntervention;
-    public string TrueAnswerText;
-    public string falseAnswerText;
+    [TextArea]public string correctIntervention;
+    [TextArea]public string wrongIntervention;
+    [TextArea]public string TrueAnswerText;
+    [TextArea]public string falseAnswerText;
 
 }
