@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
   m_Name: Question2
   m_EditorClassIdentifier: 
-  imageQuestion: {fileID: 0}
-  textQuestion: Question
-  isClickTrue: 0
-  correctIntervention: 
-  wrongIntervention: 
-  TrueAnswerText: 
-  falseAnswerText: 
+  imageQuestion: {fileID: 21300000, guid: c124227b647ba456eae874b4d482d892, type: 3}
+  questionKey: ID_Question2
+  isClickTrue: 1
+  trueAnswerKey: ID_Q2AnswerTrue
+  falseAnswerKey: ID_Q2AnswerFalse
+  correctInterventionKey: ID_Q2Correct
+  wrongInterventionKey: ID_Q2Wrong
+  textQuestion: This is just a test question, right?
+  correctIntervention: Yes this is a test question, some one has got the brains
+  wrongIntervention: You dummy, of course this is a test question
+  TrueAnswerText: 'Yes it is '
+  falseAnswerText: 'No its not '

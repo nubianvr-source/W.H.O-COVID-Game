@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using LocalizationScripts;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 using NubianVR.UI;
 using TMPro;
+using Object = UnityEngine.Object;
 
 public class GameManager : MonoBehaviour
 {
@@ -94,7 +97,7 @@ public class GameManager : MonoBehaviour
     //Update Loop just updates the players score visually during gameplay.
     private void Update()
     {
-        playerPointsText.text = playerPoints + " Points";
+        playerPointsText.text = playerPoints.ToString();
     }
 
     public void LoadNextQuestion()
@@ -122,10 +125,29 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < questionObject.Length; i++)
         {
             questions[i] = (Questions) questionObject[i];
+            questions[i].ChangeLanguage(0);
         }
 
         _unansweredQuestions = questions.ToList();
 
+    }
+
+    private void ChangeLanguage(int index)
+    {
+        for (int i = 0; i < questions.Length; i++)
+        {
+            questions[i].ChangeLanguage(index);
+        }
+    }
+
+    private void OnEnable()
+    {
+        LanguageSwap.ChangeLanguage += ChangeLanguage;
+    }
+
+    private void OnDisable()
+    {
+        LanguageSwap.ChangeLanguage -= ChangeLanguage;
     }
 
     //Player selects the true button
