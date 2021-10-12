@@ -17,38 +17,47 @@ public class GameManager : MonoBehaviour
     private static List<Questions> _unansweredQuestions;
     private Questions _currentQuestion;
 
+    [Header("Text Values")]
     [SerializeField] private Text questionText;
     [SerializeField] private Text trueAnswerText;
     [SerializeField] private Text falseAnswerText;
     [SerializeField] private Text playerPointsText;
     [SerializeField] private Text numberOfQuestionsAnsweredText;
 
-    
+    [Header("TMP Values")]
+    [SerializeField] private TMP_Text trueAnswerTmpText;
+    [SerializeField] private TMP_Text falseAnswerTmpText; 
     [SerializeField] private TMP_Text interventionText;
     [SerializeField] private TMP_Text finalPointsText;
     [SerializeField] private TMP_Text interventionTitle;
     [SerializeField] private TMP_Text questionPoints;
 
+    [Header("Game play Values")]
     private static int _numberOfQuestionsAnswered = 1;
     public int _numberOfQuestionsToAsk = 5;
     [SerializeField] private static int playerPoints;
     [SerializeField] private float delay = 0.5f;
 
+    [Header("UI System")]
     [SerializeField] private Animator animator;
-
     [SerializeField] private UI_System UIManager;
-
     [SerializeField] private UI_Screen interventionScreen;
     [SerializeField] private UI_Screen finishScreen;
 
+    [Header("Buttons")]
     [SerializeField] private Button trueButton;
     [SerializeField] private Button falseButton;
 
+    [Header("Images")]
     [SerializeField] private Image imagePrompt;
     [SerializeField] private Image questionImage;
-
+    
+    [Header("Sprites")]
     [SerializeField] private Sprite correctPrompt;
     [SerializeField] private Sprite incorrectPrompt;
+    [SerializeField] private Sprite btnCorrectSprite;
+    [SerializeField] private Sprite btnIncorrectSprite;
+    [SerializeField] private Sprite btnNeutralSprite;
     
 
 
@@ -72,7 +81,7 @@ public class GameManager : MonoBehaviour
         numberOfQuestionsAnsweredText.text = _numberOfQuestionsAnswered + " of 5";
 
 
-        EnableButtons();
+        EnableButtons(true);
 
         //Change Screen Orientation to potrait on start.
         Screen.orientation = ScreenOrientation.Portrait;
@@ -89,6 +98,7 @@ public class GameManager : MonoBehaviour
         questionText.text = _currentQuestion.textQuestion;
         questionImage.sprite = _currentQuestion.imageQuestion;
         trueAnswerText.text = _currentQuestion.TrueAnswerText;
+        trueAnswerTmpText.text = _currentQuestion.TrueAnswerText;
         falseAnswerText.text = _currentQuestion.falseAnswerText;
 
     }
@@ -159,6 +169,7 @@ public class GameManager : MonoBehaviour
             //correct
             interventionText.text = _currentQuestion.correctIntervention;
             animator.SetTrigger("TrueCorrect");
+            trueButton.image.sprite = btnCorrectSprite;
             questionPoints.text = "CORRECT\n+10 POINTS";
             interventionTitle.text = "You Did the Right Thing!";
             imagePrompt.sprite = correctPrompt;
@@ -170,6 +181,7 @@ public class GameManager : MonoBehaviour
             //false
             interventionText.text = _currentQuestion.wrongIntervention;
             animator.SetTrigger("TrueWrong");
+            trueButton.image.sprite = btnIncorrectSprite;
             questionPoints.text = "WRONG\n-10 POINTS";
             interventionTitle.text = "Risk Alert";
             imagePrompt.sprite = incorrectPrompt;
@@ -191,6 +203,7 @@ public class GameManager : MonoBehaviour
             //correct
             interventionText.text = _currentQuestion.correctIntervention;
             animator.SetTrigger("FalseCorrect");
+            falseButton.image.sprite = btnCorrectSprite;
             questionPoints.text = "CORRECT\n+10 POINTS";
             interventionTitle.text = "You Did the Right Thing!";
             imagePrompt.sprite = correctPrompt;
@@ -203,6 +216,7 @@ public class GameManager : MonoBehaviour
             //false
             interventionText.text = _currentQuestion.wrongIntervention;
             animator.SetTrigger("FalseWrong");
+            falseButton.image.sprite = btnIncorrectSprite;
             questionPoints.text = "WRONG\n-10 POINTS";
             interventionTitle.text = "Risk Alert";
             imagePrompt.sprite = correctPrompt;
@@ -213,9 +227,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void EnableButtons() {
-        trueButton.interactable = true;
-        falseButton.interactable = true;
+    //Hey Chisom, since I was working in this function I decided to implement your suggested improvement here
+    //I hope I didnt take your satisfaction of doing it away. XD
+    private void EnableButtons(bool boolVal) {
+        trueButton.interactable = boolVal;
+        falseButton.interactable = boolVal;
+        trueButton.image.sprite = btnNeutralSprite;
+        falseButton.image.sprite = btnNeutralSprite;
+
     }
 
    
