@@ -1,12 +1,17 @@
 ID,EN ,FR
-ID_Question1,"You see this notification appear on your scrren when browing the web, what do you do? You decide to click open it, is that the right thing to do?","Vous voyez que cette notification apparaÃ®t sur vos stÃ©rriers lors de la briande sur le Web, que faites-vous?\n Vous dÃ©cidez de cliquer dessus, c'est que la bonne chose Ã  faire?"
-ID_Q1AnswerTrue ,Contniue to click on the ad,Contien Ã  cliquer sur l'annonce
-ID_Q1AnswerFalse ,You close the ad and continue browsing.,Vous fermez la publicitÃ© et continuez Ã  naviguer.
-ID_Q1Correct,"No you dont click on it, you ignore it. Better yet get an ad blocker ","Non, vous ne cliquez pas dessus, vous l'ignorez. Mieux encore obtenir un bloqueur d'annonce"
-ID_Q1Wrong,Ooops you just got a virus,Ooops tu viens de recevoir un virus
-ID_Question2,"This is just a test question, right?","Ceci est juste une question de test, non?"
-ID_Q2AnswerTrue,Yes it is ,Oui c'est le cas
-ID_Q2AnswerFalse,No its not ,Non ce n'est pas
-ID_Q2Correct,"Yes this is a test question, some one has got the brains","Oui c'est une question de test, quelqu'un a le cerveau"
-ID_Q2Wrong,"You dummy, of course this is a test question","Vous mangeez, bien sÃ»r ceci est une question de test"
+ID_Question1,Can the vaccine make you sick or give you COVID 19?,"Vous voyez que cette notification apparaît sur vos stérriers lors de la briande sur le Web, que faites-vous?\n Vous décidez de cliquer dessus, c'est que la bonne chose à faire?"
+ID_Q1AnswerTrue ,Yes,Contien à cliquer sur l'annonce
+ID_Q1AnswerFalse ,No,Vous fermez la publicité et continuez à naviguer.
+ID_Q1Correct,,"Non, vous ne cliquez pas dessus, vous l'ignorez. Mieux encore obtenir un bloqueur d'annonce"
+ID_Q1Wrong,,Ooops tu viens de recevoir un virus
+ID_Question2,Can I get vaccinated and contract the virus?,"Ceci est juste une question de test, non?"
+ID_Q2AnswerTrue,Yes,Oui c'est le cas
+ID_Q2AnswerFalse,No,Non ce n'est pas
+ID_Q2Correct,,"Oui c'est une question de test, quelqu'un a le cerveau"
+ID_Q2Wrong,,"Vous mangeez, bien sûr ceci est une question de test"
 ID_PointsText,Points,PointsFrench
+ID_Question3,Can wearing a mask protect us by reducing the chance of the virus transmission from an infected individual?,
+ID_Q3AnswerTrue ,Yes,
+ID_Q3AnswerFalse ,No,
+ID_Q3Correct,,
+ID_Q3Wrong,,

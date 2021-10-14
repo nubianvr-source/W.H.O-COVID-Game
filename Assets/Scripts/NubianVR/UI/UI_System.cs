@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using TMPro;
 
 namespace NubianVR.UI
 {
@@ -16,6 +17,7 @@ namespace NubianVR.UI
     {
         [Header("Main Properties")] 
         public UI_Screen m_StartScreen;
+        [SerializeField] private TMP_Text noOfQuestionText;
         
         [Header("System Events")] public UnityEvent onSwitchScreen = new UnityEvent();
 
@@ -23,6 +25,7 @@ namespace NubianVR.UI
         public Image m_Fader;
         public float m_FadeInDuration = 1f;
         public float m_FadeOutDuration = 1f;
+
 
         #region Variables
 
@@ -44,7 +47,13 @@ namespace NubianVR.UI
         // Start is called before the first frame update
         void Start()
         {
-            
+            if (noOfQuestionText)
+            {
+                Object[] questionObject = Resources.LoadAll("Level1Questions", typeof(Questions));
+                noOfQuestionText.text = questionObject.Length.ToString();
+            }
+                
+
             screens = GetComponentsInChildren<UI_Screen>(true);
             InitializeScreens();
             if (!m_StartScreen) return;
@@ -81,23 +90,29 @@ namespace NubianVR.UI
 
         public void SwitchScreens(UI_Screen aScreen)
         {
+            StartCoroutine(TransitionToNextScreen(aScreen));
+        }
+
+        private IEnumerator TransitionToNextScreen(UI_Screen aScreen)
+        {
+            yield return new WaitForSeconds(0.2f); //Reference here...
             if (aScreen)
             {
+
                 if (_currentScreen)
                 {
                     _currentScreen.CloseScreen();
                     _previousScreen = _currentScreen;
                     print("Current Screen closed = " + _currentScreen.name);
                 }
-                _currentScreen = aScreen; 
-                _currentScreen.gameObject.SetActive(true); 
+                _currentScreen = aScreen;
+                _currentScreen.gameObject.SetActive(true);
                 _currentScreen.StartScreen();
                 print("New Screen = " + _currentScreen.name);
                 onSwitchScreen?.Invoke();
             }
-                
-        }
 
+        }
         public void FadeIn()
         {
             if (m_Fader)
@@ -151,5 +166,10 @@ namespace NubianVR.UI
 
         #endregion
        
+        //Mavreon's Functions...
+        public void LoadQuizScene()
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

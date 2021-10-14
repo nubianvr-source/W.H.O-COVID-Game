@@ -36,9 +36,6 @@ namespace NubianVR.UI
             {
                 EventSystem.current.SetSelectedGameObject(m_StartSelectable.gameObject);
             }
-
-          
-
         }
 
         // Update is called once per frame
