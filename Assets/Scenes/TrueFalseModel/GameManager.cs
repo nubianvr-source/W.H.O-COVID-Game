@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public static float _numberOfQuestionsToAsk;
     [SerializeField] private static float correctAnswers;
     [SerializeField] private static float wrongAnswers;
-    [SerializeField] private float delay = 0.5f;
+    [SerializeField] private float delayTime = 0.5f;
     [SerializeField]private float countdownValue = 6.0f;
     private float countdownBaseValue;
     private static float totalTimeTaken = 0.0f;
@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
     private static bool acquiredSecondBadge = false;
     [SerializeField] private Sprite thirdBadgeSprite;
     private static bool acquiredThirdBadge = false;
-    private GameObject[] checkpoints;
-    private GameObject[] badges;
+    [SerializeField]private GameObject[] checkpoints;
+    [SerializeField] private GameObject[] badges;
     private float progressPoint;
 
     [Header("Congratulatory Screen")]
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
         if (numberOfQuestionsAnsweredText)
             numberOfQuestionsAnsweredText.text = "Question " + _numberOfQuestionsAnswered + " of " + _numberOfQuestionsToAsk;
 
-        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        /*checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         for (int i = 0; i < checkpoints.Length; i++)
         {
             Debug.Log(checkpoints[i].name + " with index : " + i);
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < badges.Length; i++)
         {
             Debug.Log(badges[i].name + " with index : " + i);
-        }
+        }*/
         if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
         {
             LoadQuestions();
@@ -143,11 +143,12 @@ public class GameManager : MonoBehaviour
     //To be possible removed and every instance stated would be replase with TransitionTo NextQuestion...
     public void LoadNextQuestion()
     {
-         StartCoroutine(TransitionToNextQuestion());
+        //StartCoroutine(TransitionToNextQuestion());
+        TransitionToNextQuestion();
     }
 
     //Run a coroutine to wait for specified delay before switching screen to intervention screen.
-    IEnumerator TransitionToNextQuestion()
+   /* IEnumerator TransitionToNextQuestion()
     {
         _numberOfQuestionsAnswered++;
 
@@ -156,6 +157,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         PresentQuestion(2.0f);
+    }*/
+
+    private void TransitionToNextQuestion()
+    {
+        _numberOfQuestionsAnswered++;
+
+        _unansweredQuestions.Remove(_currentQuestion);
+
+        PresentQuestion(delayTime);
     }
 
     private void LoadQuestions()
@@ -309,12 +319,11 @@ public class GameManager : MonoBehaviour
     {
         if (_numberOfQuestionsAnswered > _numberOfQuestionsToAsk)
         {
-            UIManager.SwitchScreens(finishScreen);
-            CongratulatoryScreenHandler();
+            StartCoroutine(FinishScreenHandler());
         }
         else
         {
-            StartCoroutine(ReloadSceneForNextQuestion(0.8f));
+            StartCoroutine(ReloadSceneForNextQuestion(time));
         }
     }
 
@@ -441,5 +450,12 @@ public class GameManager : MonoBehaviour
             thirdBadgeImage.gameObject.SetActive(false);
             badgesWonText.text = "You won no badge";
         }
+    }
+
+    private IEnumerator FinishScreenHandler()
+    {
+        yield return new WaitForSeconds(delayTime);
+        UIManager.SwitchScreens(finishScreen);
+        CongratulatoryScreenHandler();
     }
 }

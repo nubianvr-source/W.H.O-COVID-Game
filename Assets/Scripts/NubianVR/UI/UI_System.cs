@@ -21,10 +21,10 @@ namespace NubianVR.UI
         
         [Header("System Events")] public UnityEvent onSwitchScreen = new UnityEvent();
 
-        [Header("Fader Properties")]
+        /*[Header("Fader Properties")]
         public Image m_Fader;
         public float m_FadeInDuration = 1f;
-        public float m_FadeOutDuration = 1f;
+        public float m_FadeOutDuration = 1f;*/
 
 
         #region Variables
@@ -37,9 +37,11 @@ namespace NubianVR.UI
         private UI_Screen _previousScreen;
         public UI_Screen previousScreen => _previousScreen;
 
-        [FormerlySerializedAs("sceneNames")] public string[] scenes; 
-            
-        
+        [FormerlySerializedAs("sceneNames")] public string[] scenes;
+
+        [Header("Finish Screen Parameters")]
+        [SerializeField] private float delayTime = 2.0f;
+
         #endregion
 
         #region MainMethods
@@ -70,11 +72,11 @@ namespace NubianVR.UI
                print(nextBuildIndex); 
             }
 
-            if (m_Fader)
+            /*if (m_Fader)
             {
                 m_Fader.gameObject.SetActive(true);
             }
-            FadeIn();
+            FadeIn();*/
 
         }
 
@@ -95,10 +97,9 @@ namespace NubianVR.UI
 
         private IEnumerator TransitionToNextScreen(UI_Screen aScreen)
         {
-            yield return new WaitForSeconds(0.2f); //Reference here...
+            yield return new WaitForSeconds(delayTime); //Reference here...
             if (aScreen)
             {
-
                 if (_currentScreen)
                 {
                     _currentScreen.CloseScreen();
@@ -111,15 +112,13 @@ namespace NubianVR.UI
                 print("New Screen = " + _currentScreen.name);
                 onSwitchScreen?.Invoke();
             }
-
         }
-        public void FadeIn()
+       /* public void FadeIn()
         {
             if (m_Fader)
             {
                 m_Fader.CrossFadeAlpha(0f, m_FadeInDuration, false);
             }
-            
         }
 
         public void FadeOut()
@@ -128,9 +127,7 @@ namespace NubianVR.UI
             {
                 m_Fader.CrossFadeAlpha(1f, m_FadeOutDuration, true);
             }
-
-            
-        }
+        }*/
 
         public void GoToPreviousScreen()
         {
@@ -148,7 +145,6 @@ namespace NubianVR.UI
         IEnumerator WaitForLoadScene(int sceneIndex)
         {
             yield return null;
-            
         }
 
         void InitializeScreens()

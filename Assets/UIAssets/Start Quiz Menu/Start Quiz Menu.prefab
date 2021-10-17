@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 393388602682744989}
   - component: {fileID: 8149331596616558195}
   m_Layer: 5
-  m_Name: NumberOfQuestionText
+  m_Name: NumberOfQuestionText(TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,10 +168,10 @@ RectTransform:
   m_Father: {fileID: 7399432583321472440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -567}
+  m_SizeDelta: {x: 1705, y: 1015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8325376744513496714
 CanvasRenderer:
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 02d8e44f28233ad4482a0d4e37d1c457, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -390,7 +390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: 165}
+  m_AnchoredPosition: {x: -350, y: 275}
   m_SizeDelta: {x: 565, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7399432583237041139
@@ -609,7 +609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -672}
+  m_AnchoredPosition: {x: 0, y: -621}
   m_SizeDelta: {x: 600, y: 910}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7399432583351653415
@@ -1109,7 +1109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -578.8, y: -1418}
+  m_AnchoredPosition: {x: -578.8, y: -1523}
   m_SizeDelta: {x: 1555, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7399432583967193852
@@ -1207,15 +1207,15 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+        m_TargetAssemblyTypeName: NubianVR.UI.UI_System, Assembly-CSharp
+        m_MethodName: LoadQuizScene
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: show
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7399432583986140104
