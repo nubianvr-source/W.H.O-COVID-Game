@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button trueButton;
     [SerializeField] private Button falseButton;
+    
 
     [Header("Images")]
     [SerializeField] private Image questionImage;
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Congratulatory Screen")]
     [SerializeField] private TMP_Text congratulatoryText;
+    [SerializeField] private TMP_Text passText;
     [SerializeField] private Text correctAnswersText;
     [SerializeField] private Text wrongAnswersText;
     [SerializeField] private TMP_Text totalTimeText;
@@ -87,13 +89,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image secondBadgeImage;
     [SerializeField] private Image thirdBadgeImage;
 
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip timeTickAudioClip;
+    [SerializeField] private AudioClip timeUpAudioClip;
+    [SerializeField] private AudioClip correctClickAudioClip;
+    [SerializeField] private AudioClip falseClickAudioClip;
+
     private void Start()
     {
         countdownBaseValue = countdownValue;
+        if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
+        {
+            LoadQuestions();
+        }
+        SetCurrentQuestion();
+        ProgressBarHandler();
         if (countdownRadialBarMask)
             countdownRadialBarMask.fillAmount = countdownValue / countdownBaseValue;
         if (numberOfQuestionsAnsweredText)
             numberOfQuestionsAnsweredText.text = "Question " + _numberOfQuestionsAnswered + " of " + _numberOfQuestionsToAsk;
+        EnableButtons(true);
+        InvokeRepeating("StartCountdown", 1.5f, 1.0f);
+
+
+
 
         /*checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         for (int i = 0; i < checkpoints.Length; i++)
@@ -105,15 +124,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(badges[i].name + " with index : " + i);
         }*/
-        if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
-        {
-            LoadQuestions();
-        }
-        SetCurrentQuestion();
-        ProgressBarHandler();
-       
-        EnableButtons(true);
-        InvokeRepeating("StartCountdown", 1.0f, 1.0f);
 
     }
 
@@ -203,10 +213,11 @@ public class GameManager : MonoBehaviour
     //Player selects the true button
     public void UserSelectsTrue()
     {
+        EndCountdown();
         if (_currentQuestion.isClickTrue)
         {
             //correct...
-            EndCountdown();
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(correctClickAudioClip);
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             ProgressBarHandler();
@@ -232,7 +243,7 @@ public class GameManager : MonoBehaviour
         else
         {
             //false
-            EndCountdown();
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(falseClickAudioClip);
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("TrueWrong");
             if (trueButton)
@@ -259,10 +270,11 @@ public class GameManager : MonoBehaviour
     //Player selects the false button
     public void UserSelectsFalse()
     {
+        EndCountdown();
         if (!_currentQuestion.isClickTrue)
         {
             //correct
-            EndCountdown();
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(correctClickAudioClip);
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             ProgressBarHandler();
@@ -287,7 +299,7 @@ public class GameManager : MonoBehaviour
         else
         {
             //false
-            EndCountdown();
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(falseClickAudioClip);
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("FalseWrong");
             if (falseButton)
@@ -343,13 +355,17 @@ public class GameManager : MonoBehaviour
     {
         if(countdownValue > 0)
         {
-            countdownValue--;
+            if (timeTickAudioClip)
+                Camera.main.GetComponent<AudioSource>().PlayOneShot(timeTickAudioClip);
+                countdownValue--;
             countdownValueTmpText.text = countdownValue.ToString();
             if (countdownRadialBarMask)
                 countdownRadialBarMask.fillAmount = countdownValue / countdownBaseValue;
         }
         else
         {
+            if (timeUpAudioClip)
+                Camera.main.GetComponent<AudioSource>().PlayOneShot(timeUpAudioClip);
             EndCountdown();
             EnableButtons(false);
             trueButton.image.sprite = btnNeutralSprite;
@@ -364,6 +380,11 @@ public class GameManager : MonoBehaviour
         totalTimeTaken += (countdownBaseValue - countdownValue);
         Debug.Log("Time taken to answer question : " + totalTimeTaken + " secs");
     }
+
+    /*public void CountdownTimer()
+    {
+        InvokeRepeating("StartCountdown", 1.0f, 1.0f);
+    }*/
 
     private void ProgressBarHandler()
     {
@@ -417,38 +438,35 @@ public class GameManager : MonoBehaviour
         totalTimeText.text = totalTimeTaken.ToString();
         if (acquiredFirstBadge)
         {
-            congratulatoryText.text = "Nice!";
-            firstBadgeImage.gameObject.SetActive(true);
-            secondBadgeImage.gameObject.SetActive(false);
-            thirdBadgeImage.gameObject.SetActive(false);
-            badgesWonText.text = "You won "+ 1.ToString() + " badge";
+            congratulatoryText.text = "Nice Try!";
+            firstBadgeImage.sprite = firstBadgeSprite;
+            badgesWonText.text = "You won " + 1.ToString() + " badge";
+            passText.text = "Oops! You need at least two badges to pass this level...";
         }
             
         if (acquiredSecondBadge)
         {
             congratulatoryText.text = "Good Job!";
-            firstBadgeImage.gameObject.SetActive(true);
-            secondBadgeImage.gameObject.SetActive(true);
-            thirdBadgeImage.gameObject.SetActive(false);
+            firstBadgeImage.sprite = firstBadgeSprite;
+            secondBadgeImage.sprite = secondBadgeSprite;
             badgesWonText.text = "You won " + 2.ToString() + " badges";
+            passText.text = "By passing this level, Marius has now achieved the golden rod of power.Next up she must achieve the degree in clinical science";
         }
             
         if (acquiredThirdBadge)
         {
             congratulatoryText.text = "Excellent!";
-            firstBadgeImage.gameObject.SetActive(true);
-            secondBadgeImage.gameObject.SetActive(true);
-            thirdBadgeImage.gameObject.SetActive(true);
+            firstBadgeImage.sprite = firstBadgeSprite;
+            secondBadgeImage.sprite = secondBadgeSprite;
+            thirdBadgeImage.sprite = thirdBadgeSprite;
             badgesWonText.text = "You won " + 3.ToString() + " badges";
         }
 
         if(!acquiredFirstBadge && !acquiredSecondBadge && !acquiredThirdBadge)
         {
             congratulatoryText.text = "Oops! Try Again...";
-            firstBadgeImage.gameObject.SetActive(false);
-            secondBadgeImage.gameObject.SetActive(false);
-            thirdBadgeImage.gameObject.SetActive(false);
             badgesWonText.text = "You won no badge";
+            passText.text = "Oops! You need at least two badges to pass this level...";
         }
     }
 

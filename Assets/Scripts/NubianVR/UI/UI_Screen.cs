@@ -6,10 +6,12 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+
 namespace NubianVR.UI
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CanvasGroup))]
+
     public class UI_Screen : MonoBehaviour
     {
         #region Variables
@@ -81,6 +83,6 @@ namespace NubianVR.UI
         }
 
         #endregion
-       
+
     }
 }

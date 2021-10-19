@@ -11,8 +11,6 @@ using TMPro;
 
 namespace NubianVR.UI
 {
-
-
     public class UI_System : MonoBehaviour
     {
         [Header("Main Properties")] 
@@ -41,6 +39,10 @@ namespace NubianVR.UI
 
         [Header("Finish Screen Parameters")]
         [SerializeField] private float delayTime = 2.0f;
+
+        [Header("Sprite Swap")]
+        [SerializeField] private Sprite newBackgroundSprite;
+        [SerializeField] private Sprite newButtonSprite;
 
         #endregion
 
@@ -167,5 +169,6 @@ namespace NubianVR.UI
         {
             SceneManager.LoadScene(1);
         }
+
     }
 }
