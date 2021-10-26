@@ -769,7 +769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &385261663
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3415,7 +3415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e17f6f2b61631d4dbabe34ee2770e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartScreen: {fileID: 385261666}
+  m_StartScreen: {fileID: 1102637898}
   noOfQuestionText: {fileID: 1112592869}
   onSwitchScreen:
     m_PersistentCalls:
@@ -5254,7 +5254,7 @@ PrefabInstance:
     - target: {fileID: 6839976431335967973, guid: 49c7f7c7ce70a2f4fb8513c08b9cfcab,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6839976432237716084, guid: 49c7f7c7ce70a2f4fb8513c08b9cfcab,
         type: 3}

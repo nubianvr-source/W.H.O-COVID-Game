@@ -16,6 +16,8 @@ public class Questions: ScriptableObject
     public string falseAnswerKey;
     public string correctInterventionKey;
     public string wrongInterventionKey;
+    public bool isBadgeWorthy;
+    public Sprite LitbadgeImage;
     
     [HideInInspector]
     public string textQuestion;

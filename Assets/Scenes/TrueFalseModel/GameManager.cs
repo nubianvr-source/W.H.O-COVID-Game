@@ -13,9 +13,15 @@ using Object = UnityEngine.Object;
 
 public class GameManager : MonoBehaviour
 {
-    private Questions[] questions;
+    #region Declarations
+    [SerializeField]private Questions[] questions;
     private static List<Questions> _unansweredQuestions;
     private Questions _currentQuestion;
+
+    //Player Life Stats
+    private static float playerLife = 3.0f;
+    private static float maxPlayerLife = 3.0f;
+
 
     [Header("TMP Values")]
     [SerializeField] private TMP_Text questionTmpText;
@@ -23,14 +29,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text trueAnswerTmpText;
     [SerializeField] private TMP_Text falseAnswerTmpText;
     [SerializeField] private TMP_Text countdownValueTmpText;
-    /*[SerializeField] private TMP_Text interventionText;
-    [SerializeField] private TMP_Text playerPointsText;
-    [SerializeField] private TMP_Text finalPointsText;
-    [SerializeField] private TMP_Text interventionTitle;
-    [SerializeField] private TMP_Text questionPoints;*/
+    
 
     [Header("Game play Values")]
-    private static float _numberOfQuestionsAnswered = 1;
+    private static float _numberOfQuestionsAnswered = 1.0f;
     public static float _numberOfQuestionsToAsk;
     [SerializeField] private static float correctAnswers;
     [SerializeField] private static float wrongAnswers;
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]private float countdownValue = 6.0f;
     private float countdownBaseValue;
     private static float totalTimeTaken = 0.0f;
-    //[SerializeField] private static int playerPoints;
+   
 
     [Header("UI System")]
     [SerializeField] private Animator baseAnimator;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UI_System UIManager;
     [SerializeField] private UI_Screen finishScreen;
     
-    //[SerializeField] private UI_Screen interventionScreen;
+    
 
     [Header("Buttons")]
     [SerializeField] private Button trueButton;
@@ -55,28 +57,28 @@ public class GameManager : MonoBehaviour
 
     [Header("Images")]
     [SerializeField] private Image questionImage;
-    [SerializeField] private Image progressBarMask;
     [SerializeField] private Image countdownRadialBarMask;
-    //[SerializeField] private Image imagePrompt;
 
     [Header("Sprites")]
     [SerializeField] private Sprite btnCorrectSprite;
     [SerializeField] private Sprite btnIncorrectSprite;
     [SerializeField] private Sprite btnNeutralSprite;
-    //[SerializeField] private Sprite correctPrompt;
-    //[SerializeField] private Sprite incorrectPrompt;
 
     [Header("Progress Bar")]
-    [SerializeField] private Sprite checkpointLitSprite;
+    [SerializeField] private Image progressBarMask;
+    [SerializeField] private Sprite CheckpointLitSprite;
+    [SerializeField]private GameObject[] checkpoints;
+    private static float progressPoint = 0.0f;
+    
+    [Header("Badges")]
+    [SerializeField] private GameObject[] badges;
     [SerializeField] private Sprite firstBadgeSprite;
     private static bool acquiredFirstBadge = false;
     [SerializeField] private Sprite secondBadgeSprite;
     private static bool acquiredSecondBadge = false;
     [SerializeField] private Sprite thirdBadgeSprite;
     private static bool acquiredThirdBadge = false;
-    [SerializeField]private GameObject[] checkpoints;
-    [SerializeField] private GameObject[] badges;
-    private float progressPoint;
+    private static int noOfBadgesWon;
 
     [Header("Congratulatory Screen")]
     [SerializeField] private TMP_Text congratulatoryText;
@@ -94,6 +96,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip timeUpAudioClip;
     [SerializeField] private AudioClip correctClickAudioClip;
     [SerializeField] private AudioClip falseClickAudioClip;
+    #endregion
+
+    #region("Unused Declarations")
+    /*private static int questionIndex = 0;
+    [SerializeField] private TMP_Text interventionText;
+    [SerializeField] private TMP_Text playerPointsText;
+    [SerializeField] private TMP_Text finalPointsText;
+    [SerializeField] private TMP_Text interventionTitle;
+    [SerializeField] private TMP_Text questionPoints;
+    [SerializeField] private static int playerPoints;
+    [SerializeField] private UI_Screen interventionScreen;*/
+    #endregion
 
     private void Start()
     {
@@ -103,7 +117,9 @@ public class GameManager : MonoBehaviour
             LoadQuestions();
         }
         SetCurrentQuestion();
+
         ProgressBarHandler();
+
         if (countdownRadialBarMask)
             countdownRadialBarMask.fillAmount = countdownValue / countdownBaseValue;
         if (numberOfQuestionsAnsweredText)
@@ -111,9 +127,7 @@ public class GameManager : MonoBehaviour
         EnableButtons(true);
         InvokeRepeating("StartCountdown", 1.5f, 1.0f);
 
-
-
-
+        #region
         /*checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         for (int i = 0; i < checkpoints.Length; i++)
         {
@@ -124,16 +138,14 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(badges[i].name + " with index : " + i);
         }*/
-
+        #endregion
     }
 
     //Randomly picks a question from the _unansweredQuestion array and sets its the current question to ask.
     private void SetCurrentQuestion()
     {
-        int randomQuestionIndex = Random.Range(0, _unansweredQuestions.Count);
-        _currentQuestion = _unansweredQuestions[randomQuestionIndex];
-
-        if(questionTmpText)
+        _currentQuestion = _unansweredQuestions[0];
+        if (questionTmpText)
             questionTmpText.text = _currentQuestion.textQuestion;
         if (questionImage)
             questionImage.sprite = _currentQuestion.imageQuestion;
@@ -141,6 +153,12 @@ public class GameManager : MonoBehaviour
             trueAnswerTmpText.text = _currentQuestion.TrueAnswerText;
         if (falseAnswerTmpText)
             falseAnswerTmpText.text = _currentQuestion.falseAnswerText;
+
+        #region
+        //Mavreon made changes here...
+        //int randomQuestionIndex = Random.Range(0, _unansweredQuestions.Count);
+        //questionIndex++;
+        #endregion
     }
 
 
@@ -153,22 +171,14 @@ public class GameManager : MonoBehaviour
     //To be possible removed and every instance stated would be replase with TransitionTo NextQuestion...
     public void LoadNextQuestion()
     {
-        //StartCoroutine(TransitionToNextQuestion());
-        TransitionToNextQuestion();
+        //Executed based on the health value...
+        if (playerLife > 0.0f)
+            TransitionToNextQuestion();
+        else
+            StartCoroutine(FinishScreenHandler());
     }
 
-    //Run a coroutine to wait for specified delay before switching screen to intervention screen.
-   /* IEnumerator TransitionToNextQuestion()
-    {
-        _numberOfQuestionsAnswered++;
-
-        _unansweredQuestions.Remove(_currentQuestion);
-        
-        yield return new WaitForSeconds(delay);
-
-        PresentQuestion(2.0f);
-    }*/
-
+   
     private void TransitionToNextQuestion()
     {
         _numberOfQuestionsAnswered++;
@@ -178,7 +188,8 @@ public class GameManager : MonoBehaviour
         PresentQuestion(delayTime);
     }
 
-    private void LoadQuestions()
+    #region
+    /*private void LoadQuestions()
     {
         Object[] questionObject = Resources.LoadAll("Level1Questions", typeof(Questions));
         questions = new Questions[questionObject.Length];
@@ -189,6 +200,14 @@ public class GameManager : MonoBehaviour
         }
         _unansweredQuestions = questions.ToList();
         _numberOfQuestionsToAsk = questionObject.Length;
+        Debug.Log("Number of questions to ask is : " + _numberOfQuestionsToAsk);
+    }*/
+    #endregion
+
+    private void LoadQuestions()
+    {
+        _unansweredQuestions = questions.ToList();
+        _numberOfQuestionsToAsk = questions.Length;
         Debug.Log("Number of questions to ask is : " + _numberOfQuestionsToAsk);
     }
 
@@ -220,17 +239,13 @@ public class GameManager : MonoBehaviour
             Camera.main.GetComponent<AudioSource>().PlayOneShot(correctClickAudioClip);
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
-            ProgressBarHandler();
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("TrueCorrect");
             if (trueButton)
                 trueButton.image.sprite = btnCorrectSprite;
+            BadgeHandler();
 
-
-
-
-
-
+            #region
             /*if (interventionText)
                interventionText.text = _currentQuestion.correctIntervention;
             if (questionPoints)
@@ -239,22 +254,21 @@ public class GameManager : MonoBehaviour
                 interventionTitle.text = "You Did the Right Thing!";
                 if (imagePrompt)
                 imagePrompt.sprite = correctPrompt;*/
+            #endregion
         }
         else
         {
             //false
+            playerLife--;
             Camera.main.GetComponent<AudioSource>().PlayOneShot(falseClickAudioClip);
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("TrueWrong");
             if (trueButton)
                 trueButton.image.sprite = btnIncorrectSprite;
-            wrongAnswers += 1;
+            wrongAnswers ++;
             Debug.Log("You have this number of wrong answers : " + wrongAnswers);
 
-
-
-
-           
+            #region
             /*if (interventionText)
                interventionText.text = _currentQuestion.wrongIntervention;
             if (questionPoints)
@@ -263,7 +277,9 @@ public class GameManager : MonoBehaviour
                 interventionTitle.text = "Risk Alert";
             if (imagePrompt)
                 imagePrompt.sprite = correctPrompt;*/
+            #endregion
         }
+        ProgressBarHandler();
     }
 
 
@@ -275,16 +291,15 @@ public class GameManager : MonoBehaviour
         {
             //correct
             Camera.main.GetComponent<AudioSource>().PlayOneShot(correctClickAudioClip);
-            correctAnswers += 1;
+            correctAnswers ++;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
-            ProgressBarHandler();
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("FalseCorrect");
             if (falseButton)
                 falseButton.image.sprite = btnCorrectSprite;
-            
+            BadgeHandler();
 
-
+            #region
             /*if (interventionText)
                 interventionText.text = _currentQuestion.correctIntervention;
             if (questionPoints)
@@ -295,18 +310,21 @@ public class GameManager : MonoBehaviour
                 interventionTitle.text = "You Did the Right Thing!";
             if (imagePrompt)
                 imagePrompt.sprite = correctPrompt;*/
+            #endregion
         }
         else
         {
             //false
+            playerLife--;
             Camera.main.GetComponent<AudioSource>().PlayOneShot(falseClickAudioClip);
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("FalseWrong");
             if (falseButton)
                 falseButton.image.sprite = btnIncorrectSprite;
-            wrongAnswers += 1;
+            wrongAnswers++;
             Debug.Log("You have this number of wrong answers : " + wrongAnswers);
 
+            #region
             /*if (interventionText)
                 interventionText.text = _currentQuestion.wrongIntervention;
             if (playerPointsText)
@@ -315,7 +333,9 @@ public class GameManager : MonoBehaviour
                 interventionTitle.text = "Risk Alert";
             if (imagePrompt)
                 imagePrompt.sprite = correctPrompt;*/
+            #endregion
         }
+        ProgressBarHandler();
     }
 
     public void EnableButtons(bool condition) 
@@ -330,13 +350,9 @@ public class GameManager : MonoBehaviour
     public void PresentQuestion(float time)
     {
         if (_numberOfQuestionsAnswered > _numberOfQuestionsToAsk)
-        {
             StartCoroutine(FinishScreenHandler());
-        }
         else
-        {
             StartCoroutine(ReloadSceneForNextQuestion(time));
-        }
     }
 
     IEnumerator ReloadSceneForNextQuestion(float waitTimeToLoadNextQuestion)
@@ -346,18 +362,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Finish()
-    {
-        SceneManager.LoadScene("OnlineSafetyStoryGame");
-    }
-
     private void StartCountdown()
     {
         if(countdownValue > 0)
         {
             if (timeTickAudioClip)
                 Camera.main.GetComponent<AudioSource>().PlayOneShot(timeTickAudioClip);
-                countdownValue--;
+            countdownValue--;
             countdownValueTmpText.text = countdownValue.ToString();
             if (countdownRadialBarMask)
                 countdownRadialBarMask.fillAmount = countdownValue / countdownBaseValue;
@@ -381,93 +392,105 @@ public class GameManager : MonoBehaviour
         Debug.Log("Time taken to answer question : " + totalTimeTaken + " secs");
     }
 
-    /*public void CountdownTimer()
-    {
-        InvokeRepeating("StartCountdown", 1.0f, 1.0f);
-    }*/
-
     private void ProgressBarHandler()
     {
-        progressPoint = correctAnswers / _numberOfQuestionsToAsk;
+        progressPoint = (correctAnswers + wrongAnswers) / _numberOfQuestionsToAsk;
         progressBarMask.fillAmount = progressPoint;
-        if (progressPoint >= 0.1f && checkpointLitSprite && checkpoints.Length >= 0)
+
+        if (progressPoint >= 0.1f)
         {
-            checkpoints[0].GetComponent<Image>().sprite = checkpointLitSprite;
+            checkpoints[0].GetComponent<Image>().sprite = CheckpointLitSprite;
         }
-        if (progressPoint >= 0.2f && checkpointLitSprite && checkpoints.Length >= 1)
+        if (progressPoint >= 0.2f)
         {
-            checkpoints[1].GetComponent<Image>().sprite = checkpointLitSprite;
+            checkpoints[1].GetComponent<Image>().sprite = CheckpointLitSprite;
         }
-        if (progressPoint >= 0.3f && firstBadgeSprite && badges.Length >= 0)
+        if (progressPoint >= 0.3f)
+        {
+            checkpoints[2].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        //Badge Related...
+        if (progressPoint >= 0.4f && acquiredFirstBadge)
         {
             badges[0].GetComponent<Image>().sprite = firstBadgeSprite;
-            acquiredFirstBadge = true;
         }
-        if (progressPoint >= 0.4f && checkpointLitSprite && checkpoints.Length >= 2)
+        if (progressPoint >= 0.5f)
         {
-            checkpoints[2].GetComponent<Image>().sprite = checkpointLitSprite;
+            checkpoints[3].GetComponent<Image>().sprite = CheckpointLitSprite;
         }
-        if (progressPoint >= 0.5f && checkpointLitSprite && checkpoints.Length >= 3)
+        if (progressPoint >= 0.6f)
         {
-            checkpoints[3].GetComponent<Image>().sprite = checkpointLitSprite;
+            checkpoints[4].GetComponent<Image>().sprite = CheckpointLitSprite;
         }
-        if (progressPoint >= 0.6f && secondBadgeSprite && badges.Length >= 1)
+        //Badge Related...
+        if (progressPoint >= 0.7f && acquiredSecondBadge)
         {
             badges[1].GetComponent<Image>().sprite = secondBadgeSprite;
-            acquiredSecondBadge = true;
         }
-        if (progressPoint >= 0.7f && checkpointLitSprite && checkpoints.Length >= 4)
+        if (progressPoint >= 0.8f)
         {
-            checkpoints[4].GetComponent<Image>().sprite = checkpointLitSprite;
+            checkpoints[5].GetComponent<Image>().sprite = CheckpointLitSprite;
         }
-        if (progressPoint >= 0.8f && checkpointLitSprite && checkpoints.Length >= 5)
+        if (progressPoint >= 0.9f)
         {
-            checkpoints[5].GetComponent<Image>().sprite = checkpointLitSprite;
+            checkpoints[6].GetComponent<Image>().sprite = CheckpointLitSprite;
         }
-        if (progressPoint >= 0.9f && secondBadgeSprite && badges.Length >= 2)
+        //Badge Related...
+        if (progressPoint >= 1.0f && acquiredThirdBadge)
         {
             badges[2].GetComponent<Image>().sprite = thirdBadgeSprite;
-            acquiredThirdBadge = true;
         }
+
     }
 
+    private void BadgeHandler()
+    {
+        if(_currentQuestion == questions[3]  && _currentQuestion.isBadgeWorthy )
+        {
+            badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+            acquiredFirstBadge = true;
+            noOfBadgesWon++;
+        }
+        if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
+        {
+            badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+            acquiredSecondBadge = true;
+            noOfBadgesWon++;
+        }
+        if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
+        {
+            badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+            acquiredThirdBadge = true;
+            noOfBadgesWon++;
+        }
+    }
     private void CongratulatoryScreenHandler()
     {
+        if(correctAnswers < 7)
+        {
+            congratulatoryText.text = "Oops!";
+            passText.text = "You failed to pass this level, please try again!";
+        }
+        if(correctAnswers >= 7 && correctAnswers <= 8)
+            congratulatoryText.text = "Nice!";
+        if(correctAnswers == 9 )
+            congratulatoryText.text = "Good Job!";
+        if (correctAnswers >= 10)
+            congratulatoryText.text = "Excellent";
+        if (noOfBadgesWon > 1)
+            badgesWonText.text = "You earned " + noOfBadgesWon + " badges";
+        else
+            badgesWonText.text = "You earned " + noOfBadgesWon + " badge";
+        if (acquiredFirstBadge)
+            firstBadgeImage.sprite = firstBadgeSprite;
+        if (acquiredSecondBadge)
+            secondBadgeImage.sprite = secondBadgeSprite;
+        if (acquiredThirdBadge)
+            thirdBadgeImage.sprite = thirdBadgeSprite;
+
         correctAnswersText.text = correctAnswers.ToString();
         wrongAnswersText.text = wrongAnswers.ToString();
         totalTimeText.text = totalTimeTaken.ToString();
-        if (acquiredFirstBadge)
-        {
-            congratulatoryText.text = "Nice Try!";
-            firstBadgeImage.sprite = firstBadgeSprite;
-            badgesWonText.text = "You won " + 1.ToString() + " badge";
-            passText.text = "Oops! You need at least two badges to pass this level...";
-        }
-            
-        if (acquiredSecondBadge)
-        {
-            congratulatoryText.text = "Good Job!";
-            firstBadgeImage.sprite = firstBadgeSprite;
-            secondBadgeImage.sprite = secondBadgeSprite;
-            badgesWonText.text = "You won " + 2.ToString() + " badges";
-            passText.text = "By passing this level, Marius has now achieved the golden rod of power.Next up she must achieve the degree in clinical science";
-        }
-            
-        if (acquiredThirdBadge)
-        {
-            congratulatoryText.text = "Excellent!";
-            firstBadgeImage.sprite = firstBadgeSprite;
-            secondBadgeImage.sprite = secondBadgeSprite;
-            thirdBadgeImage.sprite = thirdBadgeSprite;
-            badgesWonText.text = "You won " + 3.ToString() + " badges";
-        }
-
-        if(!acquiredFirstBadge && !acquiredSecondBadge && !acquiredThirdBadge)
-        {
-            congratulatoryText.text = "Oops! Try Again...";
-            badgesWonText.text = "You won no badge";
-            passText.text = "Oops! You need at least two badges to pass this level...";
-        }
     }
 
     private IEnumerator FinishScreenHandler()
