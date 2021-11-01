@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
   m_Name: Question3
   m_EditorClassIdentifier: 
-  imageQuestion: {fileID: 0}
+  imageQuestion: {fileID: 21300000, guid: 770670613e3fcc0418269cf524d1e761, type: 3}
   questionKey: ID_Question3
   isClickTrue: 1
   trueAnswerKey: 'ID_Q3AnswerTrue '
   falseAnswerKey: 'ID_Q3AnswerFalse '
   correctInterventionKey: ID_Q3Correct
   wrongInterventionKey: ID_Q3Wrong
+  isBadgeWorthy: 0
+  LitbadgeImage: {fileID: 0}
   textQuestion: Can wearing a mask protect us by reducing the chance of the virus
     transmission from an infected individual?
   correctIntervention: 

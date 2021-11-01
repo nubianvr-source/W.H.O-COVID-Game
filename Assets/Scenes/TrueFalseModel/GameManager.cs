@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     //Player Life Stats
     private static float playerLife = 3.0f;
-    private static float maxPlayerLife = 3.0f;
+    //private static float maxPlayerLife = 3.0f;
 
 
     [Header("TMP Values")]
@@ -375,6 +375,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            wrongAnswers++;
+            ProgressBarHandler();
             if (timeUpAudioClip)
                 Camera.main.GetComponent<AudioSource>().PlayOneShot(timeUpAudioClip);
             EndCountdown();
@@ -497,6 +499,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         UIManager.SwitchScreens(finishScreen);
+        //UIManager.SwitchScreens1(finishScreen, 0.0f);
         CongratulatoryScreenHandler();
     }
 }

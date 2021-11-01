@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
   m_Name: Question2
   m_EditorClassIdentifier: 
-  imageQuestion: {fileID: 0}
+  imageQuestion: {fileID: 21300000, guid: 2bc64b51c1bae5145869bd6c5dab39f1, type: 3}
   questionKey: ID_Question2
   isClickTrue: 0
   trueAnswerKey: ID_Q2AnswerTrue
   falseAnswerKey: ID_Q2AnswerFalse
   correctInterventionKey: ID_Q2Correct
   wrongInterventionKey: ID_Q2Wrong
+  isBadgeWorthy: 0
+  LitbadgeImage: {fileID: 0}
   textQuestion: Can I get vaccinated and contract the virus?
   correctIntervention: 
   wrongIntervention: 

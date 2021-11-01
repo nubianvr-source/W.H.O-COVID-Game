@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu Scene.unity
+    path: Assets/Scenes/Main Scenes/Menu Scene.unity
     guid: e746f52f816ef9e439cbd84a466e3f9c
   - enabled: 1
-    path: Assets/Scenes/Trivia Scene 1.unity
+    path: Assets/Scenes/Main Scenes/Trivia Scene 1.unity
     guid: 8b842faab900cea4c8a090dcb51c3d4c
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes/Trivia Scene 2.unity
+    guid: e8cfe82aadf48a24fb2024e5c36049aa
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes/Trivia Scene 3.unity
+    guid: 7e3816db05a78984a909bc858c70a3c1
   m_configObjects: {}

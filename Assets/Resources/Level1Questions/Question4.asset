@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
   m_Name: Question4
   m_EditorClassIdentifier: 
-  imageQuestion: {fileID: 0}
+  imageQuestion: {fileID: 21300000, guid: ccdb7c4a44d20184dad813772049cd47, type: 3}
   questionKey: ID_Question3
   isClickTrue: 1
   trueAnswerKey: 'ID_Q3AnswerTrue '

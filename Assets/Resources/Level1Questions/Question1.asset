@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
   m_Name: Question1
   m_EditorClassIdentifier: 
-  imageQuestion: {fileID: 0}
+  imageQuestion: {fileID: 21300000, guid: cf484b4c90c7fc544a11db5e3e0350a6, type: 3}
   questionKey: ID_Question1
   isClickTrue: 0
   trueAnswerKey: 'ID_Q1AnswerTrue '
   falseAnswerKey: 'ID_Q1AnswerFalse '
   correctInterventionKey: ID_Q1Correct
   wrongInterventionKey: ID_Q1Wrong
+  isBadgeWorthy: 0
+  LitbadgeImage: {fileID: 0}
   textQuestion: Can the vaccine make you sick or give you COVID 19?
   correctIntervention: 
   wrongIntervention: 

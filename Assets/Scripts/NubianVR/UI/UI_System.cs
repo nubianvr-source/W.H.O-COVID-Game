@@ -16,14 +16,17 @@ namespace NubianVR.UI
         [Header("Main Properties")] 
         public UI_Screen m_StartScreen;
         [SerializeField] private TMP_Text noOfQuestionText;
-        
+        [SerializeField] private float delayTime = 2.0f;
+        [SerializeField] private float previousScreenTransitionTime = 1.0f; 
+
         [Header("System Events")] public UnityEvent onSwitchScreen = new UnityEvent();
 
+        #region Unused Properties...
         /*[Header("Fader Properties")]
         public Image m_Fader;
         public float m_FadeInDuration = 1f;
         public float m_FadeOutDuration = 1f;*/
-
+        #endregion
 
         #region Variables
 
@@ -38,7 +41,7 @@ namespace NubianVR.UI
         [FormerlySerializedAs("sceneNames")] public string[] scenes;
 
         [Header("Finish Screen Parameters")]
-        [SerializeField] private float delayTime = 2.0f;
+        
 
         [Header("Sprite Swap")]
         [SerializeField] private Sprite newBackgroundSprite;
@@ -81,13 +84,6 @@ namespace NubianVR.UI
             FadeIn();*/
 
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         #endregion
 
         #region HelperMethods
@@ -115,19 +111,29 @@ namespace NubianVR.UI
                 onSwitchScreen?.Invoke();
             }
         }
-       /* public void FadeIn()
+
+       /* //Mavreon's Duplicate...
+        public void SwitchScreensInTime(UI_Screen aScreen, float transitionTime)
         {
-            if (m_Fader)
-            {
-                m_Fader.CrossFadeAlpha(0f, m_FadeInDuration, false);
-            }
+            StartCoroutine(TransitionToNextScreen1(aScreen, transitionTime));
         }
 
-        public void FadeOut()
+        private IEnumerator TransitionToNextScreen1(UI_Screen aScreen, float transitionTime)
         {
-            if (m_Fader)
+            yield return new WaitForSeconds(transitionTime); //Reference here...
+            if (aScreen)
             {
-                m_Fader.CrossFadeAlpha(1f, m_FadeOutDuration, true);
+                if (_currentScreen)
+                {
+                    _currentScreen.CloseScreen();
+                    _previousScreen = _currentScreen;
+                    print("Current Screen closed = " + _currentScreen.name);
+                }
+                _currentScreen = aScreen;
+                _currentScreen.gameObject.SetActive(true);
+                _currentScreen.StartScreen();
+                print("New Screen = " + _currentScreen.name);
+                onSwitchScreen?.Invoke();
             }
         }*/
 
@@ -136,13 +142,14 @@ namespace NubianVR.UI
             if (_previousScreen)
             {
                 SwitchScreens(previousScreen);
+                //SwitchScreens1(previousScreen, previousScreenTransitionTime);
             }
         }
 
-        public void LoadScene(int sceneIndex)
+        /*public void LoadScene(int sceneIndex)
         {
             SceneManager.LoadScene(sceneIndex);
-        }
+        }*/
 
         IEnumerator WaitForLoadScene(int sceneIndex)
         {
@@ -162,13 +169,30 @@ namespace NubianVR.UI
             UnityEngine.Application.Quit();
         }
 
-        #endregion
-       
         //Mavreon's Functions...
-        public void LoadQuizScene()
+        public void LoadQuizScene(int sceneIndex)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(sceneIndex);
         }
+        #endregion
+
+        #region Unused Code...
+        /* public void FadeIn()
+         {
+             if (m_Fader)
+             {
+                 m_Fader.CrossFadeAlpha(0f, m_FadeInDuration, false);
+             }
+         }
+
+         public void FadeOut()
+         {
+             if (m_Fader)
+             {
+                 m_Fader.CrossFadeAlpha(1f, m_FadeOutDuration, true);
+             }
+         }*/
+        #endregion
 
     }
 }
