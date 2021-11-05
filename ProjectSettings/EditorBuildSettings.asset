@@ -11,31 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Scenes/Trivia Scene 1.unity
     guid: 8b842faab900cea4c8a090dcb51c3d4c
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
   - enabled: 1
     path: Assets/Scenes/Main Scenes/Trivia Scene 2.unity
     guid: 46056768d9690774faec545ac0f95286
   - enabled: 1
     path: Assets/Scenes/Main Scenes/Trivia Scene 3.unity
     guid: 01c06c4ffdc1ae44aa0f039d3ec9ab43
-=======
-=======
->>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
->>>>>>> Stashed changes
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
-=======
->>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
->>>>>>> Stashed changes
   m_configObjects: {}
