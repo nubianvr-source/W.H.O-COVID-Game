@@ -17,7 +17,17 @@ namespace NubianVR.UI
         public UI_Screen m_StartScreen;
         [SerializeField] private TMP_Text noOfQuestionText;
         [SerializeField] private float delayTime = 2.0f;
-        [SerializeField] private float previousScreenTransitionTime = 1.0f; 
+        [SerializeField] private UI_Screen AyoMenu;
+        [SerializeField] private UI_Screen levelSelectMenu;
+
+        //[SerializeField] private float previousScreenTransitionTime = 1.0f; 
+        [Header("Hero Properties")]
+        [SerializeField]private Image heroIcon;
+        [SerializeField]private Image heroNameImage;
+        private int selectedHeroIndex;
+        [SerializeField] private Sprite[] heroIcons;
+        [SerializeField] private Sprite[] heroNameImages;
+
 
         [Header("System Events")] public UnityEvent onSwitchScreen = new UnityEvent();
 
@@ -54,13 +64,17 @@ namespace NubianVR.UI
         // Start is called before the first frame update
         void Start()
         {
+            if(SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
+                SelectHero();
+            }
             if (noOfQuestionText)
             {
-                Object[] questionObject = Resources.LoadAll("Level1Questions", typeof(Questions));
-                noOfQuestionText.text = questionObject.Length.ToString();
+                //Object[] questionObject = Resources.LoadAll("Level1Questions", typeof(Questions));
+                //noOfQuestionText.text = questionObject.Length.ToString();
+                noOfQuestionText.text = "10";
             }
-                
-
             screens = GetComponentsInChildren<UI_Screen>(true);
             InitializeScreens();
             if (!m_StartScreen) return;
@@ -76,17 +90,12 @@ namespace NubianVR.UI
                 var nextBuildIndex = SceneManager.GetActiveScene().buildIndex + i;
                print(nextBuildIndex); 
             }
-
-            /*if (m_Fader)
-            {
-                m_Fader.gameObject.SetActive(true);
-            }
-            FadeIn();*/
-
         }
         #endregion
 
         #region HelperMethods
+
+       
 
         public void SwitchScreens(UI_Screen aScreen)
         {
@@ -142,14 +151,9 @@ namespace NubianVR.UI
             if (_previousScreen)
             {
                 SwitchScreens(previousScreen);
-                //SwitchScreens1(previousScreen, previousScreenTransitionTime);
             }
         }
 
-        /*public void LoadScene(int sceneIndex)
-        {
-            SceneManager.LoadScene(sceneIndex);
-        }*/
 
         IEnumerator WaitForLoadScene(int sceneIndex)
         {
@@ -172,9 +176,83 @@ namespace NubianVR.UI
         //Mavreon's Functions...
         public void LoadQuizScene(int sceneIndex)
         {
+            GameManager.ResetAllStaticData();
             SceneManager.LoadScene(sceneIndex);
         }
         #endregion
+
+
+        public void SetHeroIndex(int heroIndex)
+        {
+            PlayerPrefs.SetInt("HeroIndex", heroIndex);
+            SelectHero();
+            PlayerPrefs.SetInt("FirstTime", BoolToInt(true));
+        }
+
+        private void SelectHero()
+        {
+            selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
+            if(heroIcons != null && heroNameImages != null)
+            {
+                switch(selectedHeroIndex)
+                {
+                    case 0:
+                        heroIcon.sprite = heroIcons[0];
+                        heroNameImage.sprite = heroNameImages[0];
+                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
+                        break;
+                    case 1:
+                        heroIcon.sprite = heroIcons[1];
+                        heroNameImage.sprite = heroNameImages[1];
+                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
+                        break;
+                    case 2:
+                        heroIcon.sprite = heroIcons[2];
+                        heroNameImage.sprite = heroNameImages[2];
+                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
+                        break;
+                    case 3:
+                        heroIcon.sprite = heroIcons[3];
+                        heroNameImage.sprite = heroNameImages[3];
+                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
+                        break;
+                }
+            }
+        }
+
+        private int BoolToInt(bool val)
+        {
+            if (val)
+                return 1;
+            else
+                return 0;
+        }
+
+        private bool IntToBool(int val)
+        {
+            if (val != 0)
+                return true;
+            else
+                return false;
+        }
+
+        public void GetStarted()
+        {
+            if (IntToBool(PlayerPrefs.GetInt("FirstTime")))
+            {
+                SwitchScreens(levelSelectMenu);
+            }
+            else
+            {
+                SwitchScreens(AyoMenu);
+            }
+        }
+
+        public void DeleteAllSavedData()
+        {
+            PlayerPrefs.DeleteAll();
+            Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
+        }
 
         #region Unused Code...
         /* public void FadeIn()

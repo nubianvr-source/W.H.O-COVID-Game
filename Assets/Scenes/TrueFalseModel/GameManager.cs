@@ -34,10 +34,29 @@ public class GameManager : MonoBehaviour
     
 
     [Header("Game play Values")]
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private static float _numberOfQuestionsAnswered = 1.0f;
+    public static float _numberOfQuestionsToAsk;
+    private static float correctAnswers;
+    private static float wrongAnswers;
+=======
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
     private static int _numberOfQuestionsAnswered = 1;
     public static int _numberOfQuestionsToAsk;
     [SerializeField] private static int correctAnswers;
     [SerializeField] private static int wrongAnswers;
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
     [SerializeField] private float delayTime = 0.5f;
     [SerializeField]private float countdownValue = 6.0f;
     private float countdownBaseValue;
@@ -80,6 +99,18 @@ public class GameManager : MonoBehaviour
     private static bool acquiredSecondBadge = false;
     [SerializeField] private Sprite thirdBadgeSprite;
     private static bool acquiredThirdBadge = false;
+    [SerializeField] private Sprite fourthBadgeSprite;
+    private static bool acquiredFourthBadge = false;
+    [SerializeField] private Sprite fifthBadgeSprite;
+    private static bool acquiredFifthBadge = false;
+    [SerializeField] private Sprite sixthBadgeSprite;
+    private static bool acquiredSixthBadge = false;
+    [SerializeField] private Sprite seventhBadgeSprite;
+    private static bool acquiredSeventhBadge = false;
+    [SerializeField] private Sprite eighthBadgeSprite;
+    private static bool acquiredEighthBadge = false;
+    [SerializeField] private Sprite ninthBadgeSprite;
+    private static bool acquiredNinthBadge = false;
     private static int noOfBadgesWon;
     private static int  removeBadgesfromCheckpoints = 1;
 
@@ -103,6 +134,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip falseClickAudioClip;
     #endregion
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private static bool levelRestarted = true;
+    #region("Unused Declarations")
+    /*private static int questionIndex = 0;
+    [SerializeField] private TMP_Text interventionText;
+    [SerializeField] private TMP_Text playerPointsText;
+    [SerializeField] private TMP_Text finalPointsText;
+    [SerializeField] private TMP_Text interventionTitle;
+    [SerializeField] private TMP_Text questionPoints;
+    [SerializeField] private static int playerPoints;
+    [SerializeField] private UI_Screen interventionScreen;*/
+    #endregion
+=======
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
 
     private void Awake()
     {
@@ -110,6 +160,13 @@ public class GameManager : MonoBehaviour
         if(Camera.main)
             _audioPlayer = Camera.main.GetComponent<AudioSource>();
     }
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
 
     private void Start()
     {
@@ -121,6 +178,29 @@ public class GameManager : MonoBehaviour
             LoadQuestions();
         }
         SetCurrentQuestion();
+
+        if(levelRestarted)
+        {
+            if(SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                acquiredFirstBadge = intToBool(PlayerPrefs.GetInt("FirstBadge"));
+                acquiredSecondBadge = intToBool(PlayerPrefs.GetInt("SecondBadge"));
+                acquiredThirdBadge = intToBool(PlayerPrefs.GetInt("ThirdBadge"));
+            }
+            if(SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                acquiredFourthBadge = intToBool(PlayerPrefs.GetInt("FourthBadge"));
+                acquiredFifthBadge = intToBool(PlayerPrefs.GetInt("FifthBadge"));
+                acquiredSixthBadge = intToBool(PlayerPrefs.GetInt("SixthBadge"));
+            }
+            if(SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                acquiredSeventhBadge = intToBool(PlayerPrefs.GetInt("SeventhBadge"));
+                acquiredEighthBadge = intToBool(PlayerPrefs.GetInt("EighthBadge"));
+                acquiredNinthBadge = intToBool(PlayerPrefs.GetInt("NinthBadge"));
+            }
+            levelRestarted = false;
+        }
 
         ProgressBarHandler();
 
@@ -344,6 +424,87 @@ public class GameManager : MonoBehaviour
     {
         progressPoint = (correctAnswers + wrongAnswers) / (float)_numberOfQuestionsToAsk;
         progressBarMask.fillAmount = progressPoint;
+<<<<<<< Updated upstream
+        print("Progress Point: "+progressPoint);
+        
+        for (int j = 0; j < _numberOfQuestionsAnswered - removeBadgesfromCheckpoints; j++)
+        {
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        if (progressPoint >= 0.1f)
+        {
+            checkpoints[0].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if (progressPoint >= 0.2f)
+        {
+            checkpoints[1].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if (progressPoint >= 0.3f)
+        {
+            checkpoints[2].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if (progressPoint >= 0.5f)
+        {
+            checkpoints[3].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if (progressPoint >= 0.6f)
+        {
+            checkpoints[4].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if (progressPoint >= 0.8f)
+        {
+            checkpoints[5].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if (progressPoint >= 0.9f)
+        {
+            checkpoints[6].GetComponent<Image>().sprite = CheckpointLitSprite;
+        }
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (/*progressPoint >= 0.4f &&*/ acquiredFirstBadge)
+            {
+                badges[0].GetComponent<Image>().sprite = firstBadgeSprite;
+            }
+            if (/*progressPoint >= 0.7f && */acquiredSecondBadge)
+            {
+                badges[1].GetComponent<Image>().sprite = secondBadgeSprite;
+            }
+            if (/*progressPoint >= 1.0f &&*/ acquiredThirdBadge)
+            {
+                badges[2].GetComponent<Image>().sprite = thirdBadgeSprite;
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            if (/*progressPoint >= 0.4f &&*/ acquiredFourthBadge)
+            {
+                badges[0].GetComponent<Image>().sprite = fourthBadgeSprite;
+            }
+            if (/*progressPoint >= 0.7f && */acquiredFifthBadge)
+            {
+                badges[1].GetComponent<Image>().sprite = fifthBadgeSprite;
+            }
+            if (/*progressPoint >= 1.0f &&*/ acquiredSixthBadge)
+            {
+                badges[2].GetComponent<Image>().sprite = sixthBadgeSprite;
+            }
+        }
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            if (/*progressPoint >= 0.4f &&*/ acquiredSeventhBadge)
+            {
+                badges[0].GetComponent<Image>().sprite = seventhBadgeSprite;
+            }
+            if (/*progressPoint >= 0.7f && */acquiredEighthBadge)
+            {
+                badges[1].GetComponent<Image>().sprite = eighthBadgeSprite;
+            }
+            if (/*progressPoint >= 1.0f &&*/ acquiredNinthBadge)
+            {
+                badges[2].GetComponent<Image>().sprite = ninthBadgeSprite;
+            }
+=======
         print("Progress Point: "+progressPoint);
         
         for (int j = 0; j < _numberOfQuestionsAnswered - removeBadgesfromCheckpoints; j++)
@@ -358,32 +519,136 @@ public class GameManager : MonoBehaviour
             if (acquiredThirdBadge)
                 badges[2].sprite = thirdBadgeSprite;
                     
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+=======
+        print("Progress Point: "+progressPoint);
+        
+        for (int j = 0; j < _numberOfQuestionsAnswered - removeBadgesfromCheckpoints; j++)
+        {
+>>>>>>> Stashed changes
+            checkpoints[j].sprite = CheckpointLitSprite;
+            if (acquiredFirstBadge)
+                badges[0].sprite = firstBadgeSprite;
+
+            if (acquiredSecondBadge)
+                badges[1].sprite = secondBadgeSprite;
+
+            if (acquiredThirdBadge)
+                badges[2].sprite = thirdBadgeSprite;
+                    
+<<<<<<< Updated upstream
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
         }
     }
 
     private void BadgeHandler()
     {
-        if(_currentQuestion == questions[3]  && _currentQuestion.isBadgeWorthy )
+        if(SceneManager.GetActiveScene().buildIndex == 1)
         {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredFirstBadge = true;
+                noOfBadgesWon++;
+            }
+            if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredSecondBadge = true;
+                noOfBadgesWon++;
+            }
+            if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredThirdBadge = true;
+                noOfBadgesWon++;
+            }
+=======
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
             badges[0].sprite = _currentQuestion.LitbadgeImage;
             acquiredFirstBadge = true;
             noOfBadgesWon++;
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
         }
-        if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredFourthBadge = true;
+                noOfBadgesWon++;
+            }
+            if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredFifthBadge = true;
+                noOfBadgesWon++;
+            }
+            if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredSixthBadge = true;
+                noOfBadgesWon++;
+            }
+=======
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
             badges[1].sprite = _currentQuestion.LitbadgeImage;
             acquiredSecondBadge = true;
             noOfBadgesWon++;
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
         }
-        if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
+        if (SceneManager.GetActiveScene().buildIndex == 3)
         {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredSeventhBadge = true;
+                noOfBadgesWon++;
+            }
+            if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredEighthBadge = true;
+                noOfBadgesWon++;
+            }
+            if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
+            {
+                badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                acquiredNinthBadge = true;
+                noOfBadgesWon++;
+            }
+=======
+=======
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
+>>>>>>> Stashed changes
             badges[2].sprite = _currentQuestion.LitbadgeImage;
             acquiredThirdBadge = true;
             noOfBadgesWon++;
+>>>>>>> 669e29aa33af86982af695879e1cdaf10d72eb47
         }
     }
     private void CongratulatoryScreenHandler()
     {
+        SaveData();
+        levelRestarted = true;
         if(correctAnswers < 7)
         {
             congratulatoryText.text = "Oops!";
@@ -405,7 +670,6 @@ public class GameManager : MonoBehaviour
             secondBadgeImage.sprite = secondBadgeSprite;
         if (acquiredThirdBadge)
             thirdBadgeImage.sprite = thirdBadgeSprite;
-
         correctAnswersText.text = correctAnswers.ToString();
         wrongAnswersText.text = wrongAnswers.ToString();
         totalTimeText.text = totalTimeTaken.ToString();
@@ -417,5 +681,49 @@ public class GameManager : MonoBehaviour
         UIManager.SwitchScreens(finishScreen);
         //UIManager.SwitchScreens1(finishScreen, 0.0f);
         CongratulatoryScreenHandler();
+    }
+
+    private int boolToInt(bool val)
+    {
+        if (val)
+            return 1;
+        else
+            return 0;
+    }
+
+    private bool intToBool(int val)
+    {
+        if (val != 0)
+            return true;
+        else
+            return false;
+    }
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("FirstBadge", boolToInt(acquiredFirstBadge));
+        PlayerPrefs.SetInt("SecondBadge", boolToInt(acquiredSecondBadge));
+        PlayerPrefs.SetInt("ThirdBadge", boolToInt(acquiredThirdBadge));
+        PlayerPrefs.SetInt("FourthBadge", boolToInt(acquiredFourthBadge));
+        PlayerPrefs.SetInt("FifthBadge", boolToInt(acquiredFifthBadge));
+        PlayerPrefs.SetInt("SixthBadge", boolToInt(acquiredSixthBadge));
+        PlayerPrefs.SetInt("SeventhBadge", boolToInt(acquiredSeventhBadge));
+        PlayerPrefs.SetInt("EighthBadge", boolToInt(acquiredEighthBadge));
+        PlayerPrefs.SetInt("NinthBadge", boolToInt(acquiredNinthBadge));
+    }
+    public void DeleteAllSavedData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+    
+    public static void ResetAllStaticData()
+    {
+        noOfBadgesWon = 0;
+        playerLife = 3;
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        totalTimeTaken = 0;
+        progressPoint = 0;
+        _numberOfQuestionsAnswered = 1;
+        _unansweredQuestions = null;
     }
 }

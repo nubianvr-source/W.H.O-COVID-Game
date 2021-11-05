@@ -46,7 +46,6 @@ public class Settings : MonoBehaviour
         {
             musicIsMute = false;
             Camera.main.GetComponent<AudioSource>().Stop();
-            //Camera.main.GetComponent<AudioSource>().mute = true;
             if (gameMusicSlashImage && gameMusicOnOffText)
             {
                 gameMusicSlashImage.gameObject.SetActive(true);
@@ -57,7 +56,6 @@ public class Settings : MonoBehaviour
         {
             musicIsMute = true;
             Camera.main.GetComponent<AudioSource>().Play();
-            //Camera.main.GetComponent<AudioSource>().mute = false;
             if (gameMusicSlashImage && gameMusicOnOffText)
             {
                 gameMusicSlashImage.gameObject.SetActive(false);
