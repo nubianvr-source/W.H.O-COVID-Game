@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -147,6 +147,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &168887468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168887470}
+  - component: {fileID: 168887469}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &168887469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168887468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff67f338dcbbbc64bbd92861cb3bf187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: BGMusic
+    clip: {fileID: 8300000, guid: d04c1844a595c1c4b8fb8dd68a8549bf, type: 3}
+    volume: 0.037
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: CorrectClick
+    clip: {fileID: 8300000, guid: aed24db5e49a487469f6d5b4b061243c, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: WrongClick
+    clip: {fileID: 8300000, guid: 97880caaa64a28c4d9b13c01d37c60b7, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: ClockTickV1
+    clip: {fileID: 8300000, guid: 255c947aaf37cef4b863e8f77901e5b9, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: ClockTickV2
+    clip: {fileID: 8300000, guid: abd1b5fe142227e4ea3e1fa4ee4870a9, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: TimeOut
+    clip: {fileID: 8300000, guid: 445587f965c2f6848a4d54730772a2b0, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+--- !u!4 &168887470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168887468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &333587983 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7983358046190482531, guid: 0a1d070653dce5e4d944241b129c9d79,
@@ -300,12 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &634591919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 634591919, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &634870567 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6619005174698016254, guid: 8adf69546e86fb04ca7a16081c89d1b3,
@@ -366,12 +441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1032296837 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1032296837, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1068810536
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,20 +583,26 @@ MonoBehaviour:
   CheckpointLitSprite: {fileID: 21300000, guid: 8ed611cd53425444897822cdae58c90a,
     type: 3}
   checkpoints:
-  - {fileID: 6619005174148638224}
-  - {fileID: 6619005174148638231}
-  - {fileID: 6619005174148638230}
-  - {fileID: 6619005174148638226}
-  - {fileID: 6619005174148638229}
-  - {fileID: 6619005174148638228}
-  - {fileID: 6619005174148638227}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   badges:
-  - {fileID: 1389714157}
-  - {fileID: 634591919}
-  - {fileID: 1032296837}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   firstBadgeSprite: {fileID: 21300000, guid: 4323342d6ffcb4d4d93023e765b29d7f, type: 3}
   secondBadgeSprite: {fileID: 21300000, guid: c2e1ba95ad9a11d48bc076582ce91a30, type: 3}
   thirdBadgeSprite: {fileID: 21300000, guid: 627b62068b32aa04aae197ffea274cd3, type: 3}
+  fourthBadgeSprite: {fileID: 0}
+  fifthBadgeSprite: {fileID: 0}
+  sixthBadgeSprite: {fileID: 0}
+  seventhBadgeSprite: {fileID: 0}
+  eighthBadgeSprite: {fileID: 0}
+  ninthBadgeSprite: {fileID: 0}
   congratulatoryText: {fileID: 115534272}
   passText: {fileID: 406785938}
   correctAnswersText: {fileID: 1193671515}
@@ -1020,12 +1095,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &1389714157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1389714157, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1444392262 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6619005175693941737, guid: 8adf69546e86fb04ca7a16081c89d1b3,
@@ -1252,7 +1321,12 @@ MonoBehaviour:
   m_StartScreen: {fileID: 1944476016}
   noOfQuestionText: {fileID: 0}
   delayTime: 0.5
-  previousScreenTransitionTime: 1
+  AyoMenu: {fileID: 0}
+  levelSelectMenu: {fileID: 0}
+  heroIcon: {fileID: 0}
+  heroNameImage: {fileID: 0}
+  heroIcons: []
+  heroNameImages: []
   onSwitchScreen:
     m_PersistentCalls:
       m_Calls: []
@@ -1571,48 +1645,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8adf69546e86fb04ca7a16081c89d1b3, type: 3}
---- !u!1 &6619005174148638224 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2055006077969111434, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6619005174148638226 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2126925598199248245, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6619005174148638227 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2246862857963528092, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6619005174148638228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2402555735744548108, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6619005174148638229 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5766677729573255677, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6619005174148638230 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5588320793155207466, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6619005174148638231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 231100868886890778, guid: 8adf69546e86fb04ca7a16081c89d1b3,
-    type: 3}
-  m_PrefabInstance: {fileID: 6619005174148638220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7983358046461137516
 PrefabInstance:
   m_ObjectHideFlags: 0

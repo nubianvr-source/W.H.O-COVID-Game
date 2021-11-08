@@ -1489,6 +1489,12 @@ MonoBehaviour:
   m_StartScreen: {fileID: 1944476016}
   noOfQuestionText: {fileID: 0}
   delayTime: 0.5
+  AyoMenu: {fileID: 0}
+  levelSelectMenu: {fileID: 0}
+  heroIcon: {fileID: 0}
+  heroNameImage: {fileID: 0}
+  heroIcons: []
+  heroNameImages: []
   onSwitchScreen:
     m_PersistentCalls:
       m_Calls: []
@@ -1620,6 +1626,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2035300625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2035300627}
+  - component: {fileID: 2035300626}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2035300626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035300625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff67f338dcbbbc64bbd92861cb3bf187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: BGMusic
+    clip: {fileID: 8300000, guid: d04c1844a595c1c4b8fb8dd68a8549bf, type: 3}
+    volume: 0.037
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: CorrectClick
+    clip: {fileID: 8300000, guid: aed24db5e49a487469f6d5b4b061243c, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: WrongClick
+    clip: {fileID: 8300000, guid: 97880caaa64a28c4d9b13c01d37c60b7, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: ClockTickV1
+    clip: {fileID: 8300000, guid: 255c947aaf37cef4b863e8f77901e5b9, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: ClockTickV2
+    clip: {fileID: 8300000, guid: abd1b5fe142227e4ea3e1fa4ee4870a9, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: TimeOut
+    clip: {fileID: 8300000, guid: 445587f965c2f6848a4d54730772a2b0, type: 3}
+    volume: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+--- !u!4 &2035300627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035300625}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2141427243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6619005174319498348, guid: 8adf69546e86fb04ca7a16081c89d1b3,

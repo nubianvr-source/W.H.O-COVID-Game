@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image firstBadgeImage;
     [SerializeField] private Image secondBadgeImage;
     [SerializeField] private Image thirdBadgeImage;
-
-    private AudioSource _audioPlayer;
+    
+    private SoundManager _soundManager;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip timeTickAudioClip;
@@ -135,12 +135,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //A good practice is to get and store your Get components in a variable because the Get Component call is expensive
-        if(Camera.main)
-            _audioPlayer = Camera.main.GetComponent<AudioSource>();
+        _soundManager = FindObjectOfType<SoundManager>();
     }
 
     private void Start()
     {
+        _soundManager.Stop("BGMusic");
         countdownBaseValue = countdownValue;
         if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
         {
@@ -280,7 +280,7 @@ public class GameManager : MonoBehaviour
         if (_currentQuestion.isClickTrue)
         {
             //correct...
-            _audioPlayer.PlayOneShot(correctClickAudioClip);
+            _soundManager.PlaySFX("CorrectClick");
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             if (buttonAnimator)
@@ -293,7 +293,7 @@ public class GameManager : MonoBehaviour
         {
             //false
             playerLife--;
-            _audioPlayer.PlayOneShot(falseClickAudioClip);
+            _soundManager.PlaySFX("WrongClick");
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("TrueWrong");
             if (trueButton)
@@ -313,7 +313,7 @@ public class GameManager : MonoBehaviour
         if (!_currentQuestion.isClickTrue)
         {
             //correct
-            _audioPlayer.PlayOneShot(correctClickAudioClip);
+            _soundManager.PlaySFX("CorrectClick");
             correctAnswers ++;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             if (buttonAnimator)
@@ -326,7 +326,7 @@ public class GameManager : MonoBehaviour
         {
             //false
             playerLife--;
-            _audioPlayer.PlayOneShot(falseClickAudioClip);
+            _soundManager.PlaySFX("WrongClick");
             if (buttonAnimator)
                 buttonAnimator.SetTrigger("FalseWrong");
             if (falseButton)
@@ -365,8 +365,7 @@ public class GameManager : MonoBehaviour
     {
         if(countdownValue > 0)
         {
-            if (timeTickAudioClip)
-                _audioPlayer.PlayOneShot(timeTickAudioClip);
+            _soundManager.PlaySFX("ClockTickV2");
             countdownValue--;
             countdownValueTmpText.text = countdownValue.ToString();
         }
@@ -374,8 +373,7 @@ public class GameManager : MonoBehaviour
         {
             wrongAnswers++;
             ProgressBarHandler();
-            if (timeUpAudioClip)
-                _audioPlayer.PlayOneShot(timeUpAudioClip);
+            _soundManager.PlaySFX("TimeOut");
             EndCountdown();
             EnableButtons(false);
             trueButton.image.sprite = btnNeutralSprite;
@@ -398,75 +396,75 @@ public class GameManager : MonoBehaviour
         print("Progress Point: " + progressPoint);
         if (progressPoint >= 0.1f)
         {
-            checkpoints[0].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[0].sprite = CheckpointLitSprite;
         }
         if (progressPoint >= 0.2f)
         {
-            checkpoints[1].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[1].sprite = CheckpointLitSprite;
         }
         if (progressPoint >= 0.3f)
         {
-            checkpoints[2].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[2].sprite = CheckpointLitSprite;
         }
         if (progressPoint >= 0.5f)
         {
-            checkpoints[3].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[3].sprite = CheckpointLitSprite;
         }
         if (progressPoint >= 0.6f)
         {
-            checkpoints[4].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[4].sprite = CheckpointLitSprite;
         }
         if (progressPoint >= 0.8f)
         {
-            checkpoints[5].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[5].sprite = CheckpointLitSprite;
         }
         if (progressPoint >= 0.9f)
         {
-            checkpoints[6].GetComponent<Image>().sprite = CheckpointLitSprite;
+            checkpoints[6].sprite = CheckpointLitSprite;
         }
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (/*progressPoint >= 0.4f &&*/ acquiredFirstBadge)
             {
-                badges[0].GetComponent<Image>().sprite = firstBadgeSprite;
+                badges[0].sprite = firstBadgeSprite;
             }
             if (/*progressPoint >= 0.7f && */acquiredSecondBadge)
             {
-                badges[1].GetComponent<Image>().sprite = secondBadgeSprite;
+                badges[1].sprite = secondBadgeSprite;
             }
             if (/*progressPoint >= 1.0f &&*/ acquiredThirdBadge)
             {
-                badges[2].GetComponent<Image>().sprite = thirdBadgeSprite;
+                badges[2].sprite = thirdBadgeSprite;
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             if (/*progressPoint >= 0.4f &&*/ acquiredFourthBadge)
             {
-                badges[0].GetComponent<Image>().sprite = fourthBadgeSprite;
+                badges[0].sprite = fourthBadgeSprite;
             }
             if (/*progressPoint >= 0.7f && */acquiredFifthBadge)
             {
-                badges[1].GetComponent<Image>().sprite = fifthBadgeSprite;
+                badges[1].sprite = fifthBadgeSprite;
             }
             if (/*progressPoint >= 1.0f &&*/ acquiredSixthBadge)
             {
-                badges[2].GetComponent<Image>().sprite = sixthBadgeSprite;
+                badges[2].sprite = sixthBadgeSprite;
             }
         }
         if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             if (/*progressPoint >= 0.4f &&*/ acquiredSeventhBadge)
             {
-                badges[0].GetComponent<Image>().sprite = seventhBadgeSprite;
+                badges[0].sprite = seventhBadgeSprite;
             }
             if (/*progressPoint >= 0.7f && */acquiredEighthBadge)
             {
-                badges[1].GetComponent<Image>().sprite = eighthBadgeSprite;
+                badges[1].sprite = eighthBadgeSprite;
             }
             if (/*progressPoint >= 1.0f &&*/ acquiredNinthBadge)
             {
-                badges[2].GetComponent<Image>().sprite = ninthBadgeSprite;
+                badges[2].sprite = ninthBadgeSprite;
             }
 
 
@@ -479,19 +477,19 @@ public class GameManager : MonoBehaviour
         {
             if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
             {
-                badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[0].sprite = _currentQuestion.LitbadgeImage;
                 acquiredFirstBadge = true;
                 noOfBadgesWon++;
             }
             if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
             {
-                badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[1].sprite = _currentQuestion.LitbadgeImage;
                 acquiredSecondBadge = true;
                 noOfBadgesWon++;
             }
             if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
             {
-                badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[2].sprite = _currentQuestion.LitbadgeImage;
                 acquiredThirdBadge = true;
                 noOfBadgesWon++;
             }
@@ -500,19 +498,19 @@ public class GameManager : MonoBehaviour
         {
             if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
             {
-                badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[0].sprite = _currentQuestion.LitbadgeImage;
                 acquiredFourthBadge = true;
                 noOfBadgesWon++;
             }
             if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
             {
-                badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[1].sprite = _currentQuestion.LitbadgeImage;
                 acquiredFifthBadge = true;
                 noOfBadgesWon++;
             }
             if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
             {
-                badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[2].sprite = _currentQuestion.LitbadgeImage;
                 acquiredSixthBadge = true;
                 noOfBadgesWon++;
             }
@@ -525,19 +523,19 @@ public class GameManager : MonoBehaviour
 
             if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
             {
-                badges[0].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[0].sprite = _currentQuestion.LitbadgeImage;
                 acquiredSeventhBadge = true;
                 noOfBadgesWon++;
             }
             if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
             {
-                badges[1].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[1].sprite = _currentQuestion.LitbadgeImage;
                 acquiredEighthBadge = true;
                 noOfBadgesWon++;
             }
             if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
             {
-                badges[2].GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                badges[2].sprite = _currentQuestion.LitbadgeImage;
                 acquiredNinthBadge = true;
                 noOfBadgesWon++;
             }

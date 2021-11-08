@@ -7,30 +7,38 @@ using TMPro;
 public class Settings : MonoBehaviour
 {
     //Properties...
-    public static Settings singleton;
     [SerializeField]private TMP_Text gameMusicOnOffText;
-    [SerializeField] private Image gameMusicSlashImage;
-    private bool musicIsMute = true;
+    [SerializeField]private Image gameMusicSlashImage;
     [SerializeField]private TMP_Text soundEffectOnOffText;
     [SerializeField]private Image soundEffectSlashImage;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
-        if(!singleton)
-        {
-            singleton = this;
-        }
-        if(singleton!=this)
-        {
-            Destroy(singleton);
-            DontDestroyOnLoad(singleton);
-        }
+        _soundManager = FindObjectOfType<SoundManager>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        if (gameMusicSlashImage)
+        if (PlayerPrefs.GetInt("PlaySFX") == 1)
+        {
             gameMusicSlashImage.gameObject.SetActive(false);
+        }
+        else
+        {
+            gameMusicSlashImage.gameObject.SetActive(true);
+        }
+        
+        if (PlayerPrefs.GetInt("PlaySFX") == 1)
+        { 
+            soundEffectSlashImage.gameObject.SetActive(false);
+        }
+        else
+        { 
+            soundEffectSlashImage.gameObject.SetActive(true);
+        }
+        
+        
     }
 
     // Update is called once per frame
@@ -39,13 +47,34 @@ public class Settings : MonoBehaviour
         
     }
 
+    public void MuteSFX()
+    {
+        if (PlayerPrefs.GetInt("PlaySFX") == 1)
+        {
+            PlayerPrefs.SetInt("PlaySFX", 0);
+            if (soundEffectSlashImage && soundEffectOnOffText)
+            {
+                soundEffectSlashImage.gameObject.SetActive(true);
+                soundEffectOnOffText.text = "Off";
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("PlaySFX", 1);
+            if (soundEffectSlashImage && soundEffectOnOffText)
+            {
+                soundEffectSlashImage.gameObject.SetActive(false);
+                soundEffectOnOffText.text = "On";
+            }
+        }
+    }
+
     public void MuteMusic()
     {
-        //muteMusic = false;
-        if(musicIsMute)
+        if(PlayerPrefs.GetInt("PlayMusic") == 1)
         {
-            musicIsMute = false;
-            Camera.main.GetComponent<AudioSource>().Stop();
+            PlayerPrefs.SetInt("PlayMusic", 0);
+            _soundManager.StopAllMusic();
             if (gameMusicSlashImage && gameMusicOnOffText)
             {
                 gameMusicSlashImage.gameObject.SetActive(true);
@@ -54,8 +83,8 @@ public class Settings : MonoBehaviour
         }
         else
         {
-            musicIsMute = true;
-            Camera.main.GetComponent<AudioSource>().Play();
+            PlayerPrefs.SetInt("PlayMusic", 1);
+            _soundManager.PlayAudio("BGMusic");
             if (gameMusicSlashImage && gameMusicOnOffText)
             {
                 gameMusicSlashImage.gameObject.SetActive(false);
@@ -64,8 +93,4 @@ public class Settings : MonoBehaviour
         }
     }
 
-    private void MuteSoundEffects(bool condition)
-    {
-        Camera.main.GetComponent<AudioSource>().mute = condition;
-    }
 }
