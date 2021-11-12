@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f3d3260cb43ff41b6052cf1322d79d, type: 3}
+  m_Name: Ayo
+  m_EditorClassIdentifier: 
+  characterName: Ayo
+  characterAge: 15
+  characterCountry: Central African Republic
+  characterCountryImage: {fileID: 21300000, guid: 36be1ffb75c55464b950944d6d4db5bc,
+    type: 3}
+  characterDescriptionKey: 
+  characterSuperPowerKey: 
+  characterGoalKey: 
+  characterFullImage_Level_1: {fileID: 21300000, guid: 948083e85cecbed498e3743b008e6c0a,
+    type: 3}
+  characterFullImage_Level_2: {fileID: 21300000, guid: 9e8a4b788372f50459cbdd557aeaf684,
+    type: 3}
+  characterFullImage_Level_3: {fileID: 21300000, guid: 97cc5ca6a2e7fe7419de8df22ebc232a,
+    type: 3}
+  characterHalfImage_Level_1: {fileID: 21300000, guid: 3c53d0579c8308e468d08bf00382bf77,
+    type: 3}
+  characterHalfImage_Level_2: {fileID: 21300000, guid: c4b9867bdf0c6f54f8a18ca721e6b69d,
+    type: 3}
+  characterHalfImage_Level_3: {fileID: 21300000, guid: 803cbfbbaa067214e96b0aa0c0fbc37a,
+    type: 3}
+  characterBustImage_Level_1: {fileID: 21300000, guid: f3035cd333a702244bd63557dfe80f7b,
+    type: 3}
+  characterBustImage_Level_2: {fileID: 21300000, guid: 14b797a2ff6820c4aa3b376c00fd8458,
+    type: 3}
+  characterBustImage_Level_3: {fileID: 21300000, guid: 21f0fde128fb1fe4ebfe91fdb42b09ba,
+    type: 3}

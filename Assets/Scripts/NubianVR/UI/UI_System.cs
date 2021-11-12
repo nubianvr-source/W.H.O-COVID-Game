@@ -17,7 +17,7 @@ namespace NubianVR.UI
         public UI_Screen m_StartScreen;
         [SerializeField] private TMP_Text noOfQuestionText;
         [SerializeField] private float delayTime = 2.0f;
-        [SerializeField] private UI_Screen AyoMenu;
+        [SerializeField] private UI_Screen characterSelectMenu;
         [SerializeField] private UI_Screen levelSelectMenu;
 
         //[SerializeField] private float previousScreenTransitionTime = 1.0f; 
@@ -32,10 +32,10 @@ namespace NubianVR.UI
         [Header("System Events")] public UnityEvent onSwitchScreen = new UnityEvent();
 
         #region Unused Properties...
-        /*[Header("Fader Properties")]
+        [Header("Fader Properties")]
         public Image m_Fader;
         public float m_FadeInDuration = 1f;
-        public float m_FadeOutDuration = 1f;*/
+        public float m_FadeOutDuration = 1f;
         #endregion
 
         #region Variables
@@ -69,12 +69,7 @@ namespace NubianVR.UI
                 Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
                 SelectHero();
             }
-            if (noOfQuestionText)
-            {
-                //Object[] questionObject = Resources.LoadAll("Level1Questions", typeof(Questions));
-                //noOfQuestionText.text = questionObject.Length.ToString();
-                noOfQuestionText.text = "10";
-            }
+           
             screens = GetComponentsInChildren<UI_Screen>(true);
             InitializeScreens();
             if (!m_StartScreen) return;
@@ -120,32 +115,7 @@ namespace NubianVR.UI
                 onSwitchScreen?.Invoke();
             }
         }
-
-       /* //Mavreon's Duplicate...
-        public void SwitchScreensInTime(UI_Screen aScreen, float transitionTime)
-        {
-            StartCoroutine(TransitionToNextScreen1(aScreen, transitionTime));
-        }
-
-        private IEnumerator TransitionToNextScreen1(UI_Screen aScreen, float transitionTime)
-        {
-            yield return new WaitForSeconds(transitionTime); //Reference here...
-            if (aScreen)
-            {
-                if (_currentScreen)
-                {
-                    _currentScreen.CloseScreen();
-                    _previousScreen = _currentScreen;
-                    print("Current Screen closed = " + _currentScreen.name);
-                }
-                _currentScreen = aScreen;
-                _currentScreen.gameObject.SetActive(true);
-                _currentScreen.StartScreen();
-                print("New Screen = " + _currentScreen.name);
-                onSwitchScreen?.Invoke();
-            }
-        }*/
-
+        
         public void GoToPreviousScreen()
         {
             if (_previousScreen)
@@ -182,9 +152,9 @@ namespace NubianVR.UI
         #endregion
 
 
-        public void SetHeroIndex(int heroIndex)
+        public void SetHeroIndex()
         {
-            PlayerPrefs.SetInt("HeroIndex", heroIndex);
+            PlayerPrefs.SetInt("HeroIndex", MainAppManager.mainAppManager.characterCarouselIndex);
             SelectHero();
             PlayerPrefs.SetInt("FirstTime", BoolToInt(true));
         }
@@ -244,7 +214,7 @@ namespace NubianVR.UI
             }
             else
             {
-                SwitchScreens(AyoMenu);
+                SwitchScreens(characterSelectMenu);
             }
         }
 
@@ -254,8 +224,8 @@ namespace NubianVR.UI
             Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
         }
 
-        #region Unused Code...
-        /* public void FadeIn()
+      
+         public void FadeIn()
          {
              if (m_Fader)
              {
@@ -269,8 +239,8 @@ namespace NubianVR.UI
              {
                  m_Fader.CrossFadeAlpha(1f, m_FadeOutDuration, true);
              }
-         }*/
-        #endregion
+         }
+
 
     }
 }

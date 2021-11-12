@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f3d3260cb43ff41b6052cf1322d79d, type: 3}
+  m_Name: Bashir
+  m_EditorClassIdentifier: 
+  characterName: Bachir
+  characterAge: 15
+  characterCountry: Algeria
+  characterCountryImage: {fileID: 21300000, guid: b72fb7021696cd64e9b9883d751bfcb4,
+    type: 3}
+  characterDescriptionKey: 
+  characterSuperPowerKey: 
+  characterGoalKey: 
+  characterFullImage_Level_1: {fileID: 21300000, guid: 5f5d32766cd6bef4ba3d38acda4c921d,
+    type: 3}
+  characterFullImage_Level_2: {fileID: 21300000, guid: 674caeab64e1dcc47962cb26520f34a7,
+    type: 3}
+  characterFullImage_Level_3: {fileID: 21300000, guid: 12b85e9600d45144d9d2663f028be6df,
+    type: 3}
+  characterHalfImage_Level_1: {fileID: 21300000, guid: dd9dbad5178e96744b960c0f9ee87be5,
+    type: 3}
+  characterHalfImage_Level_2: {fileID: 21300000, guid: 64e288d218874864dad1fdd7de25947c,
+    type: 3}
+  characterHalfImage_Level_3: {fileID: 21300000, guid: aa6292a678013f543b7f928010c15ae5,
+    type: 3}
+  characterBustImage_Level_1: {fileID: 21300000, guid: 7d4c79149cd1bb748bcd97b207fe7135,
+    type: 3}
+  characterBustImage_Level_2: {fileID: 21300000, guid: 511bd5d4c6408d34f9259a7a2dc34598,
+    type: 3}
+  characterBustImage_Level_3: {fileID: 21300000, guid: 49a78c0e0525f5b408802e8f53aee8a5,
+    type: 3}

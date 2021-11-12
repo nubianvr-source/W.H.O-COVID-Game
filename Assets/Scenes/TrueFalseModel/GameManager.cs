@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //A good practice is to get and store your Get components in a variable because the Get Component call is expensive
-        _soundManager = FindObjectOfType<SoundManager>();
+        _soundManager = SoundManager.instance;
     }
 
     private void Start()

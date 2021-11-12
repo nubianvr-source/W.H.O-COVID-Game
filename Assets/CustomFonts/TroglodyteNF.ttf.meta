@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: be3292aa0ce9e40419600ce04167cbae
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Troglodyte NF
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2827df5af67d51644a92c27cd0b433ca, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

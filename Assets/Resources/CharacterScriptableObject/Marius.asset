@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f3d3260cb43ff41b6052cf1322d79d, type: 3}
+  m_Name: Marius
+  m_EditorClassIdentifier: 
+  characterName: Marius
+  characterAge: 20
+  characterCountry: South Africa
+  characterCountryImage: {fileID: 21300000, guid: 92e5d790770d2eb40b7fe6e62b80ef79,
+    type: 3}
+  characterDescriptionKey: 
+  characterSuperPowerKey: 
+  characterGoalKey: 
+  characterFullImage_Level_1: {fileID: 21300000, guid: 053203e84340fdf4b84da8ad3d21c4f7,
+    type: 3}
+  characterFullImage_Level_2: {fileID: 21300000, guid: 7a5cc19d12aa6f946956fcac496c8c55,
+    type: 3}
+  characterFullImage_Level_3: {fileID: 21300000, guid: 0865d6be1263acc47bc6736137dbfc56,
+    type: 3}
+  characterHalfImage_Level_1: {fileID: 21300000, guid: 4f2a0a5f9e7cd4444bf768b10f5b1636,
+    type: 3}
+  characterHalfImage_Level_2: {fileID: 21300000, guid: 523c3accca7097e4ab337ffc6b4ce464,
+    type: 3}
+  characterHalfImage_Level_3: {fileID: 21300000, guid: 438ea39ca212d994ea595ad5ec19003f,
+    type: 3}
+  characterBustImage_Level_1: {fileID: 21300000, guid: 192ebd8219b5faf419a4db0a22b0814b,
+    type: 3}
+  characterBustImage_Level_2: {fileID: 21300000, guid: 9ff319c75e3ad284f9fcc3316b534a47,
+    type: 3}
+  characterBustImage_Level_3: {fileID: 21300000, guid: e0348a78c633a6d419b5fde75862dd49,
+    type: 3}

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f3d3260cb43ff41b6052cf1322d79d, type: 3}
+  m_Name: Inanya
+  m_EditorClassIdentifier: 
+  characterName: Inyana
+  characterAge: 20
+  characterCountry: Kenya
+  characterCountryImage: {fileID: 21300000, guid: 7263790a624fb614f965779392e2f657,
+    type: 3}
+  characterDescriptionKey: 
+  characterSuperPowerKey: 
+  characterGoalKey: 
+  characterFullImage_Level_1: {fileID: 21300000, guid: be66952e02eff5b4e980c9178826e7f0,
+    type: 3}
+  characterFullImage_Level_2: {fileID: 21300000, guid: 182af779f5fdb4e47becd8d9fb77525e,
+    type: 3}
+  characterFullImage_Level_3: {fileID: 21300000, guid: e4ad0f4d3467518479093ed020328a1b,
+    type: 3}
+  characterHalfImage_Level_1: {fileID: 21300000, guid: 1310a5d0e1a2fd347a67d1adda91efee,
+    type: 3}
+  characterHalfImage_Level_2: {fileID: 21300000, guid: a07a71fdb98832d4097ae39397aaabfb,
+    type: 3}
+  characterHalfImage_Level_3: {fileID: 21300000, guid: 353b4a3f41c9b0c46a43d533322b8615,
+    type: 3}
+  characterBustImage_Level_1: {fileID: 21300000, guid: 22e108f1df0c0ef4a9a01492bf50da91,
+    type: 3}
+  characterBustImage_Level_2: {fileID: 21300000, guid: 6312be261d153234384fb7eab21c6e4d,
+    type: 3}
+  characterBustImage_Level_3: {fileID: 21300000, guid: 0179d0c55829f5547b6851d73678c605,
+    type: 3}
