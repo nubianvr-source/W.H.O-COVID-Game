@@ -13,17 +13,12 @@ MonoBehaviour:
   m_Name: Question9
   m_EditorClassIdentifier: 
   imageQuestion: {fileID: 21300000, guid: 3d11770d7b931f14d8b18ea2872e2c4f, type: 3}
-  questionKey: ID_Question3
-  isClickTrue: 1
-  trueAnswerKey: 'ID_Q3AnswerTrue '
-  falseAnswerKey: 'ID_Q3AnswerFalse '
-  correctInterventionKey: ID_Q3Correct
-  wrongInterventionKey: ID_Q3Wrong
+  questionKey: ID_Q9
+  isClickTrue: 0
+  trueAnswerKey: ID_Q9AnswerTrue
+  falseAnswerKey: ID_Q9AnswerFalse
   isBadgeWorthy: 0
   LitbadgeImage: {fileID: 0}
-  textQuestion: Can wearing a mask protect us by reducing the chance of the virus
-    transmission from an infected individual?
-  correctIntervention: 
-  wrongIntervention: 
-  TrueAnswerText: Yes
-  falseAnswerText: No
+  textQuestion: Peux-tu porter un masque avec tes amis?
+  trueAnswerText: "Non ils ne vont pas m\u2019entendre quand je vais parler"
+  falseAnswerText: Oui ils peuvent me contaminer et je peux les contaminer

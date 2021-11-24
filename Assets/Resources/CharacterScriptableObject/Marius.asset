@@ -17,24 +17,27 @@ MonoBehaviour:
   characterCountry: South Africa
   characterCountryImage: {fileID: 21300000, guid: 92e5d790770d2eb40b7fe6e62b80ef79,
     type: 3}
-  characterDescriptionKey: 
-  characterSuperPowerKey: 
-  characterGoalKey: 
-  characterFullImage_Level_1: {fileID: 21300000, guid: 053203e84340fdf4b84da8ad3d21c4f7,
+  characterDescriptionKey: ID_MariusDesText
+  characterSuperPowerKey: ID_MariusSuperpowerKey
+  characterGoalKey: ID_MariusGoalKey
+  characterFullImage_Level_1: {fileID: 21300000, guid: 948083e85cecbed498e3743b008e6c0a,
     type: 3}
-  characterFullImage_Level_2: {fileID: 21300000, guid: 7a5cc19d12aa6f946956fcac496c8c55,
+  characterFullImage_Level_2: {fileID: 21300000, guid: 726b1a346a4ff6249bffc572ce01bad1,
     type: 3}
-  characterFullImage_Level_3: {fileID: 21300000, guid: 0865d6be1263acc47bc6736137dbfc56,
+  characterFullImage_Level_3: {fileID: 21300000, guid: 97cc5ca6a2e7fe7419de8df22ebc232a,
     type: 3}
-  characterHalfImage_Level_1: {fileID: 21300000, guid: 4f2a0a5f9e7cd4444bf768b10f5b1636,
+  characterHalfImage_Level_1: {fileID: 21300000, guid: 3c53d0579c8308e468d08bf00382bf77,
     type: 3}
-  characterHalfImage_Level_2: {fileID: 21300000, guid: 523c3accca7097e4ab337ffc6b4ce464,
+  characterHalfImage_Level_2: {fileID: 21300000, guid: 723db83c89b08374f9c3951fce5e5324,
     type: 3}
-  characterHalfImage_Level_3: {fileID: 21300000, guid: 438ea39ca212d994ea595ad5ec19003f,
+  characterHalfImage_Level_3: {fileID: 21300000, guid: 8312f19c0f9893046aaff713d0dd49b7,
     type: 3}
-  characterBustImage_Level_1: {fileID: 21300000, guid: 192ebd8219b5faf419a4db0a22b0814b,
+  characterBustImage_Level_1: {fileID: 21300000, guid: f3035cd333a702244bd63557dfe80f7b,
     type: 3}
-  characterBustImage_Level_2: {fileID: 21300000, guid: 9ff319c75e3ad284f9fcc3316b534a47,
+  characterBustImage_Level_2: {fileID: 21300000, guid: 14b797a2ff6820c4aa3b376c00fd8458,
     type: 3}
-  characterBustImage_Level_3: {fileID: 21300000, guid: e0348a78c633a6d419b5fde75862dd49,
+  characterBustImage_Level_3: {fileID: 21300000, guid: 21f0fde128fb1fe4ebfe91fdb42b09ba,
     type: 3}
+  characterDescriptionText: 
+  characterSuperPowerText: 
+  characterGoalText: 

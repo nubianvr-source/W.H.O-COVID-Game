@@ -1,17 +1,148 @@
-ID,EN ,FR
-ID_Question1,Can the vaccine make you sick or give you COVID 19?,"Vous voyez que cette notification appara�t sur vos st�rriers lors de la briande sur le Web, que faites-vous?\n Vous d�cidez de cliquer dessus, c'est que la bonne chose � faire?"
-ID_Q1AnswerTrue ,Yes,Contien � cliquer sur l'annonce
-ID_Q1AnswerFalse ,No,Vous fermez la publicit� et continuez � naviguer.
-ID_Q1Correct,,"Non, vous ne cliquez pas dessus, vous l'ignorez. Mieux encore obtenir un bloqueur d'annonce"
-ID_Q1Wrong,,Ooops tu viens de recevoir un virus
-ID_Question2,Can I get vaccinated and contract the virus?,"Ceci est juste une question de test, non?"
-ID_Q2AnswerTrue,Yes,Oui c'est le cas
-ID_Q2AnswerFalse,No,Non ce n'est pas
-ID_Q2Correct,,"Oui c'est une question de test, quelqu'un a le cerveau"
-ID_Q2Wrong,,"Vous mangeez, bien s�r ceci est une question de test"
-ID_PointsText,Points,PointsFrench
-ID_Question3,Can wearing a mask protect us by reducing the chance of the virus transmission from an infected individual?,
-ID_Q3AnswerTrue ,Yes,
-ID_Q3AnswerFalse ,No,
-ID_Q3Correct,,
-ID_Q3Wrong,,
+ID,EN,FR
+ID_Q1,What does Covid19 mean?,Que signifie Covid19?
+ID_Q1AnswerTrue,Coronavirus Disease 19,Coronavirus Disease 19
+ID_Q1AnswerFalse,CoronaVinyl Doc 19,CoronaVinyl Doc 19
+ID_Q2,In which country did the disease break out?,Dans quel pays la maladie est-elle apparue?
+ID_Q2AnswerTrue,Senegal,Senegal
+ID_Q2AnswerFalse,China,China
+ID_Q3,Can the disease affect children?,La maladie peut-elle toucher les enfants?
+ID_Q3AnswerTrue,"No, it is an adult disease.",Non c’est une maladie d’adultes
+ID_Q3AnswerFalse,"Yes, children can get the disease.",Oui les enfants peuvent attraper la maladie
+ID_Q4,Are all carriers of the disease visibly sick?,Est-on forcement tres malade quand on a covid19 ?
+ID_Q4AnswerTrue,"No, some  can be asymptomatic.",Non on peut etre asymptomatique
+ID_Q4AnswerFalse,"Yes, otherwise it means they are not ill.",Oui sinon ca veut dire qu’on n’est pas malade
+ID_Q5,What should you do if you have symptoms?,En cas de symptômes que dois-tu faire?
+ID_Q5AnswerTrue,I should quarantine myself and call the nearest hospital.,Je dois me mettre en quarantaine et appeler l’hopital le plus proche
+ID_Q5AnswerFalse,I should take medication and visit my friends.,Je prends des medicaments et je sors voir mes amis
+ID_Q6,What are the measures used to prevent the spread of the Covid-19 virus?,Comment s’appelent les mesures pour se proteger de Covid19 ?
+ID_Q6AnswerTrue,Gateway gestures,Les gestes portail
+ID_Q6AnswerFalse,Barrier measures,Les gestes barrieres
+ID_Q7,"During this pandemic, can you give your friends handshakes?",Peux-tu saluer tes amis avec la paume de la main?
+ID_Q7AnswerTrue,"Yes, they are my friends.",Oui ce sont mes amis
+ID_Q7AnswerFalse,"No, it's better to greet them with your fist to avoid being contaminated.",Non il vaut mieux les saluer avec le poing pour éviter d’être contamine
+ID_Q8,Should you wash your hands when you get home?,Dois tu te laver les mains en rentrant à la maison?
+ID_Q8AnswerTrue,"Yes, for at least 30 seconds.",Oui pendant 30 secondes au moins
+ID_Q8AnswerFalse,"No, soap does not kill germs.",Non parce que le savon ne tue pas les microbes
+ID_Q9,Can you wear a mask amongst your friends?,Peux-tu porter un masque avec tes amis?
+ID_Q9AnswerTrue,"No, they won't hear me when I talk.",Non ils ne vont pas m’entendre quand je vais parler
+ID_Q9AnswerFalse,"Yes, they can infect me and I can infect them.",Oui ils peuvent me contaminer et je peux les contaminer
+ID_Q10,Should you be vaccinated?,Faut-il se vacciner ?
+ID_Q10AnswerTrue,"No,the vaccine makes you sick.",Non parce que la vaccination rend malade
+ID_Q10AnswerFalse,"Yes, the vaccine reduces the risk of dying.",Oui parce que la vaccination réduit les risques de mourir
+ID_Q11,Where can we get reliable information on Covid-19?,Où peut-on trouver des informations fiables sur covid19?
+ID_Q11AnswerTrue,From our neighbours.,Chez les voisins
+ID_Q11AnswerFalse,From the UNESCO website.,Sur le site web de l’Unesco
+ID_Q12,Does Covid-19 make it difficult to get food?,Covid19 rend-il plus difficile l'accès à la nourriture?
+ID_Q12AnswerTrue,"Yes, it slows down the economy.",Oui car l’économie est ralentie
+ID_Q12AnswerFalse,"No, everyone has more money.","Non, parce que tout le monde a plus d’argent"
+ID_Q13,Are journalists trained to cover Covid-19 news?,Les journalistes sont-ils formés pour couvrir covid19?
+ID_Q13AnswerTrue,"Yes, they have to publish verified and real information. ","Oui, ils doivent publier des informations vérifiées et réelles"
+ID_Q13AnswerFalse,"No, they can say what they want.",Non ils disent ce qu’ils veulent
+ID_Q14,What name is given to the process of verifying information?,Comment Appelle t on le fait de vérifier les informations que l'on a?
+ID_Q14AnswerTrue,Curiosity,La curiosité
+ID_Q14AnswerFalse,Fact-checking,Le Factchecking
+ID_Q15,Does rinsing the nose with salt and water prevent Covid-19?,Se rincer le nez avec de l’eau salee protège-t-il contre COVID-19?
+ID_Q15AnswerTrue,"No, it prevents the common cold.","Non, ça aide à soigner un simple rhume"
+ID_Q15AnswerFalse,"Yes, especially with boiled water.","Oui, surtout avec de l’eau bouillante"
+ID_Q16,You cannot  be re-infected after recovering from Covid-19.,Si on a eu Covid19 une fois on ne peut pas l’avoir une deuxième fois
+ID_Q16AnswerTrue,"No, you can be re-infected after a while.","Non, on peut à nouveau attraper la maladie après un certain temps"
+ID_Q16AnswerFalse,"Yes, you have antibodies which prevent re-infection.","Oui, on aura beaucoup d’anticorps"
+ID_Q17,Can children contract the disease?,Les enfants peuvent-ils attraper Covid19?
+ID_Q17AnswerTrue,"No, they are very strong.","Non, ils sont trop forts"
+ID_Q17AnswerFalse,"Yes, but they do not become as sick as most adults.","Oui, mais a une fréquence moins importante que les adultes"
+ID_Q18,Does spraying alcohol prevent Covid19?,S’asperger d’alcool permet-il de se protéger contre covid19
+ID_Q18AnswerTrue,"Yes, because the alcohol enters our body.","Oui, car l’alcool entre dans notre corps"
+ID_Q18AnswerFalse,"No, because it also damages our clothes.","Non car en plus de cela, ça abime nos vêtements "
+ID_Q19,Can any antibiotic treat Covid19?,N’importe quel antibiotique peut-il soigner Covid19
+ID_Q19AnswerTrue,"Yes, they are made to treat any kind of disease.","Oui, ils sont faits pour traiter tout genre de maladie"
+ID_Q19AnswerFalse,"No, there are specific antibiotics for treating this disease.","Non, il y a des antibiotiques spécifiques pour le traitement de la maladie"
+ID_Q20,Can mosquitoes transmit Covid19?,Covid19 peut-il se transmettre par les moustiques
+ID_Q20AnswerTrue,"Yes, just like they transmit malaria.",Oui c’est comme le paludisme
+ID_Q20AnswerFalse,"No, it is impossible.",Non c’est impossible
+ID_Q21,Can someone who has had the virus take the vaccine?,Si on a déjà eu Covid19 est-il utile de se vacciner?
+ID_Q21AnswerTrue,"No, the antibodies prevent reinfection for life. ",Non les anticorps nous protègent toute notre vie
+ID_Q21AnswerFalse,"Yes, the disease can be contracted several times.",Oui car on peut faire la maladie plusieurs fois
+ID_Q22,Is the second dose of the vaccine different from the first?,La seconde dose de vaccin peut-elle être différente de la première?
+ID_Q22AnswerTrue,"No, otherwise the vaccine will no longer be effective.",Non car sinon le vaccin ne serait plus efficace
+ID_Q22AnswerFalse,"Yes, it is different.",Oui c’est la même chose
+ID_Q23,Does the Covid19 vaccine give Covid19?,Le vaccin contre covid19 donne-t-il covid19?
+ID_Q23AnswerTrue,"No, vaccines do not spread the disease.","Non, les vaccins ne donnent pas la maladie"
+ID_Q23AnswerFalse,"Yes, the world knows.",Oui tout le monde le sait
+ID_Q24,Does the vaccine effectively prevent Covid19 variants?,Le vaccin est-il efficace contre les variants de Covid-19?
+ID_Q24AnswerTrue,"Yes, there is no evidence that the variants could escape the protection of the vaccine.","Oui, Il n’existe pas de preuves que les variants pourraient échapper à la protection du vaccin."
+ID_Q24AnswerFalse,"No, the variants are very different.","Non, les variants sont très différents."
+ID_Q25, Does being vaccinated prevent you from contaminating others?,Le fait d’être vacciné empêche-t-il de contaminer d’autres personnes?
+ID_Q25AnswerTrue,"Yes, the vaccine is a  barrier measure.","Oui, le vaccin est contre les gestes barrière"
+ID_Q25AnswerFalse,"No, even when vaccinated you can still transmit the disease.","Non, même vaccine on peut quand même transmettre la maladie"
+ID_Q26,Will there be a need for a booster shot every year?,Va-t-on devoir faire un rappel de vaccin tous les ans?
+ID_Q26AnswerTrue,"No, the vaccines are long term.","Non, les vaccins tiennent à long terme."
+ID_Q26AnswerFalse,This is still under consideration.,C’est encore en cours de reflexion
+ID_Q27,Can a contaminated person be vaccinated?,"Si on fait la maladie a Covid-19, faut-il se faire vacciner?"
+ID_Q27AnswerTrue,"Yes, but they will have to wait for 6 months. ","Oui, mais on doit attendre 6 mois"
+ID_Q27AnswerFalse,"No, you only get Covid19 once.","Non, on contracte la covid-19 une fois seule fois"
+ID_Q28,Does the Covid19 vaccine inject 5G into our bodies?,Le vaccin contre covid19 injecte la 5G dans notre corps?
+ID_Q28AnswerTrue,"Yes, we are controlled by laboratories.","Oui, les laboratoires nous contrôlent"
+ID_Q28AnswerFalse,"No, it is absolutely impossible.","Non, c’est absolument impossible"
+ID_Q29,Should children also be vaccinated?,Les enfants doivent-ils se faire vacciner aussi?
+ID_Q29AnswerTrue,"Yes, for younger children.",Oui pour des enfants plus jeunes
+ID_Q29AnswerFalse,"No, for the time being the vaccine is recommended on average from the age of 16.",Non pour l’instant le vaccin est conseillé en moyenne à partir de 16 ans
+ID_Q30,Can we still protect ourselves against covid19?,Peut-on quand même se protéger contre covid19?
+ID_Q30AnswerTrue,"Yes, you have to respect the barrier measures and talk about it to others.",Oui il faut respecter les gestes barrière et en parler autour de soi
+ID_Q30AnswerFalse,"No, it is impossible.",Non ce n'est pas
+ID_LangText,Language,Langue
+ID_SelectLangBtn,Select Language,Choisir la langue
+ID_SelectCharacterText,Select your Character,Sélectionnez votre personnage
+ID_AyoDesText,Ayo lives in Central Africa. Her super power is her ability to detect and avoid fake news. ,Ayo vit en Afrique Centrale. Son super pouvoir est une armure qui protège des Fake News
+ID_BachirDesText,Bachir resides in North Africa and his super power is  spreading good news. ,Bachir vit en Afrique du Nord. Son super pouvoir est de distributeur de bonnes informations
+ID_IyanaDesText,Inaya lives in East Africa and her superpower lies in the fact that she possesses the antibodies used to create the vaccine.,Inaya vit en Afrique de l’Est. Son super pouvoir c’est les anticorps qu’apporte le vaccin 
+ID_MariusDesText,Marius lives in South Africa and his superpower lies in the aura of protection given by the barrier measures.,Marius vit en Afrique du Sud. Son super pouvoir est son aura de protection que lui confèrent les gestes barrières 
+ID_ViewFullText,View Full Profile,Voir le profil complet
+ID_SelectHeroBtnText,Select Hero,Sélectionnez Hero
+ID_AgeText,Age,Âge
+ID_CountryText,Country,Pays
+ID_SuperpowerText,SuperPower,Superpuissance
+ID_GoalText,Goal,But
+ID_AyoGoalKey,Educate Africa on the COVID19,Éduquer l'Afrique sur le Covid19
+ID_BachirGoalKey,Spread Good News & Cheer,Répandre de bonnes nouvelles et applaudir
+ID_IyanaGoalKey,Spread COVID-19 Vaccine ,Répandre le vaccin Covid-19
+ID_MariusGoalKey,Protect people with barrier measures,Protéger les personnes avec des mesures de barrière
+ID_AyoSuperpowerKey,Armour of truth,Armure de vérité
+ID_BachirSuperpowerKey,Bearer of Good News,Porteur de bonnes nouvelles
+ID_IyanaSuperpowerKey,Special Antibodies,Anticorps spéciaux
+ID_MariusSuperpowerKey,Aura of Protection,Aura de protection
+ID_GameProgress,Game progression,Progression du jeu
+ID_MMenuQuestTitleText,About your next task,À propos de votre prochaine tâche
+ID_MMenuQuestTutorialText,Welcome to COVID Warrior. Take a quick Tutorial to learn about your quests.,Bienvenue à Covid Warrior. Faites un tutoriel rapide pour en savoir plus sur vos quêtes.
+ID_MMenuQuestLevel1DesText,What is COVID 19 and where did it come from help our hero's find out.,Qu'est-ce que Covid 19 et d'où vient-il d'aider notre héros à découvrir.
+ID_MMenuQuestLevel2DesText,"Misinformation is a huge problem especially in such times, help our hero's fight off the misinformation and bring knowledge to the people.","La désinformation est un problème énorme, notamment dans ces moments, aidez notre héros à combattre la désinformation et à apporter des connaissances au peuple."
+ID_MMenuQuestLevel3DesText,"Finally the vaccine is ready, but how does it work. Lets find out together.","Enfin, le vaccin est prêt, mais comment ça marche? Permet de découvrir ensemble."
+ID_MMenuLevel1BtnText,Tutorial,Didacticiel
+ID_MMenuAfterLevel1BtnText,Continue,Continuer
+ID_MMenuQuestText,Quests,Quêtes
+ID_MMenuLevel1Text,Level 1,Niveau 1
+ID_MMenuLevel2Text,Level 2,Niveau 2
+ID_MMenuLevel3Text,Level 3,Niveau 3
+ID_MMenuLevel1SubText,The Virus,Le virus
+ID_MMenuLevel2SubText,Misinformation,Désinformation
+ID_MMenuLevel3SubText,The Vaccine,Le vaccin
+ID_LStartQuestObjText,Quest Objective,Objectif de quête
+ID_BadgesToBeWonText,Badges to be won,Badges à gagner
+ID_StartQuizBtnText,Start Quiz,Démarrer quiz
+ID_QuestionText,QUESTION,QUESTION
+ID_OfText,OF,DE
+ID_LReviewGJText,GOOD JOB!,BON TRAVAIL!
+ID_LReviewFailedText,TRY AGAIN!,RÉESSAYER!
+ID_LREarnBadgesText,You earned,Tu as gagné
+ID_BadgeText,badge,badge
+ID_BadgesText,badges,badges
+ID_PeformText,"By passing this level, you have now achieved the golden rod of power. Next up you must achieve the degree in clinical science. ","En passant ce niveau, vous avez maintenant atteint la tige d'or du pouvoir. Ensuite, vous devez atteindre le diplôme en sciences cliniques."
+ID_FailText,"You failed this misson, but you can try again. The fate of the world is in your hand.","Vous avez échoué à ce Misson, mais vous pouvez essayer à nouveau. Le destin du monde est dans votre main."
+ID_QuestPerformText,Quest Performance,Performance de quête
+ID_TotalTimeText,Total Time,Temps total
+ID_ReturnBtnText,Return to Menu,Retour au menu
+ID_SettingsHeaderText,Settings,Paramètres
+ID_GameMusicText,Game Music,Musique de jeu
+ID_SoundEffectsText,Sound Effects,Effets sonores
+ID_ActiveHeroText,Active Hero,Héros actif
+ID_OnSwitchText,On,Activer
+ID_OffSwitchText,Off,Désactivé

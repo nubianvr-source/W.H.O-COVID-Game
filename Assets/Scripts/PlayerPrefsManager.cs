@@ -9,7 +9,7 @@ public class PlayerPrefsManager : MonoBehaviour
 
   private void Awake()
   {
-    CreatePlayerData();
+    
   }
 
   private void Start()
@@ -21,36 +21,35 @@ public class PlayerPrefsManager : MonoBehaviour
     if (launchCount == 1)
     {
       CreatePlayerData();
-      playerData.firstTimeRunningApp = launchCount;
-      print(playerData.ToString());
+      SavePlayerData();
+   
     }
     else
     {
-      playerData.firstTimeRunningApp = launchCount;
-      print(playerData.ToString());
+      LoadPlayerData();
     }
   }
 
   public void CreatePlayerData()
   {
-    playerData = new PlayerData(1,1,"en",0);
+    playerData = new PlayerData(1,1,0, 0);
+    //PlayerLanguagePrefs : English = 0, French = 1....
   }
 
   public void SavePlayerData()
   {
     PlayerPrefs.SetInt("PlayMusic",playerData.playMusic);
     PlayerPrefs.SetInt("PlaySFX", playerData.playSFX);
-    PlayerPrefs.SetString("Lang", playerData.playerLanguagePref);
-    PlayerPrefs.SetInt("First_Time_Running_App", playerData.firstTimeRunningApp);
+    PlayerPrefs.SetInt("Lang", playerData.playerLanguagePref);
+    PlayerPrefs.SetInt("HeroIndex",playerData.heroIndex);
   }
 
   public void LoadPlayerData()
   {
     PlayerPrefs.GetInt("PlayMusic");
     PlayerPrefs.GetInt("PlaySFX");
-    PlayerPrefs.GetString("Lang");
-    PlayerPrefs.GetInt("First_Time_Running_App");
+    PlayerPrefs.GetInt("Lang");
+    PlayerPrefs.GetInt("HeroIndex");
 
-    print(playerData.ToString());
   }
 }

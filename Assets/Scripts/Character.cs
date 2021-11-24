@@ -22,4 +22,18 @@ public class Character : ScriptableObject
      public Sprite characterBustImage_Level_1;
      public Sprite characterBustImage_Level_2;
      public Sprite characterBustImage_Level_3;
+
+     [HideInInspector]
+     public string characterDescriptionText;
+     [HideInInspector]
+     public string characterSuperPowerText;
+     [HideInInspector]
+     public string characterGoalText;
+
+     public void ChangeLanguage(int index)
+     {
+          characterDescriptionText = CSVParser.GetTextFromId(characterDescriptionKey, index);
+          characterSuperPowerText = CSVParser.GetTextFromId(characterSuperPowerKey, index);
+          characterGoalText = CSVParser.GetTextFromId(characterGoalKey, index);
+     }
 }

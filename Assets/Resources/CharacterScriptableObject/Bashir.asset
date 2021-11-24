@@ -17,9 +17,9 @@ MonoBehaviour:
   characterCountry: Algeria
   characterCountryImage: {fileID: 21300000, guid: b72fb7021696cd64e9b9883d751bfcb4,
     type: 3}
-  characterDescriptionKey: 
-  characterSuperPowerKey: 
-  characterGoalKey: 
+  characterDescriptionKey: ID_BachirDesText
+  characterSuperPowerKey: ID_BachirSuperpowerKey
+  characterGoalKey: ID_BachirGoalKey
   characterFullImage_Level_1: {fileID: 21300000, guid: 5f5d32766cd6bef4ba3d38acda4c921d,
     type: 3}
   characterFullImage_Level_2: {fileID: 21300000, guid: 674caeab64e1dcc47962cb26520f34a7,
@@ -38,3 +38,6 @@ MonoBehaviour:
     type: 3}
   characterBustImage_Level_3: {fileID: 21300000, guid: 49a78c0e0525f5b408802e8f53aee8a5,
     type: 3}
+  characterDescriptionText: 
+  characterSuperPowerText: 
+  characterGoalText: 

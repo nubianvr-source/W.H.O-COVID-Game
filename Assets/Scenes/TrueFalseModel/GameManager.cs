@@ -119,6 +119,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip falseClickAudioClip;
     #endregion
 
+    public ParticleSystem confetti;
+
     private static bool levelRestarted = true;
     #region("Unused Declarations")
     /*private static int questionIndex = 0;
@@ -141,6 +143,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _soundManager.Stop("BGMusic");
+        
         countdownBaseValue = countdownValue;
         if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
         {
@@ -205,7 +208,7 @@ public class GameManager : MonoBehaviour
         if (questionImage)
             questionImage.sprite = _currentQuestion.imageQuestion;
         if (trueAnswerTmpText)
-            trueAnswerTmpText.text = _currentQuestion.TrueAnswerText;
+            trueAnswerTmpText.text = _currentQuestion.trueAnswerText;
         if (falseAnswerTmpText)
             falseAnswerTmpText.text = _currentQuestion.falseAnswerText;
         
@@ -250,6 +253,9 @@ public class GameManager : MonoBehaviour
 
     private void LoadQuestions()
     {
+        
+       ChangeLanguage(PlayerPrefs.GetInt("Lang"));
+        
         _unansweredQuestions = questions.ToList();
         _numberOfQuestionsToAsk = questions.Length;
         Debug.Log("Number of questions to ask is : " + _numberOfQuestionsToAsk);
@@ -257,9 +263,9 @@ public class GameManager : MonoBehaviour
 
     private void ChangeLanguage(int index)
     {
-        for (int i = 0; i < questions.Length; i++)
+        foreach (var question in questions)
         {
-            questions[i].ChangeLanguage(index);
+            question.ChangeLanguage(index);
         }
     }
 
@@ -281,6 +287,7 @@ public class GameManager : MonoBehaviour
         {
             //correct...
             _soundManager.PlaySFX("CorrectClick");
+            confetti.Play();
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             if (buttonAnimator)
@@ -314,6 +321,7 @@ public class GameManager : MonoBehaviour
         {
             //correct
             _soundManager.PlaySFX("CorrectClick");
+            confetti.Play();
             correctAnswers ++;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             if (buttonAnimator)

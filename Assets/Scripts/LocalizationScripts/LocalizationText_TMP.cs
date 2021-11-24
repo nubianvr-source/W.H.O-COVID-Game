@@ -12,17 +12,27 @@ using TMPro;
 public class LocalizationText_TMP : MonoBehaviour
 {
     public string key;
-    
+    private TMP_Text textObject;
+    private void Awake()
+    {
+        textObject = gameObject.GetComponent<TMP_Text>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        //Default Language is English for now.
-        ChangeLanguage(0);
+    
+       
+    }
+
+    private void Update()
+    {
+         ChangeLanguage(PlayerPrefs.GetInt("Lang"));
     }
 
     private void ChangeLanguage(int index)
     {
-        gameObject.GetComponent<TMP_Text>().text = CSVParser.GetTextFromId(key, index);
+       textObject.text = CSVParser.GetTextFromId(key, index);
     }
 
     private void OnEnable()

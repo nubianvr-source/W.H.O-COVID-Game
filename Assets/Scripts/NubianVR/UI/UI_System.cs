@@ -17,13 +17,13 @@ namespace NubianVR.UI
         public UI_Screen m_StartScreen;
         [SerializeField] private TMP_Text noOfQuestionText;
         [SerializeField] private float delayTime = 2.0f;
-        [SerializeField] private UI_Screen characterSelectMenu;
+        [SerializeField] private UI_Screen languageSelectMenu;
         [SerializeField] private UI_Screen levelSelectMenu;
 
         //[SerializeField] private float previousScreenTransitionTime = 1.0f; 
         [Header("Hero Properties")]
         [SerializeField]private Image heroIcon;
-        [SerializeField]private Image heroNameImage;
+        [SerializeField]private TMP_Text heroName;
         private int selectedHeroIndex;
         [SerializeField] private Sprite[] heroIcons;
         [SerializeField] private Sprite[] heroNameImages;
@@ -154,9 +154,9 @@ namespace NubianVR.UI
 
         public void SetHeroIndex()
         {
+            print("Hero Index" + MainAppManager.mainAppManager.characterCarouselIndex);
             PlayerPrefs.SetInt("HeroIndex", MainAppManager.mainAppManager.characterCarouselIndex);
             SelectHero();
-            PlayerPrefs.SetInt("FirstTime", BoolToInt(true));
         }
 
         private void SelectHero()
@@ -164,29 +164,8 @@ namespace NubianVR.UI
             selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
             if(heroIcons != null && heroNameImages != null)
             {
-                switch(selectedHeroIndex)
-                {
-                    case 0:
-                        heroIcon.sprite = heroIcons[0];
-                        heroNameImage.sprite = heroNameImages[0];
-                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
-                        break;
-                    case 1:
-                        heroIcon.sprite = heroIcons[1];
-                        heroNameImage.sprite = heroNameImages[1];
-                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
-                        break;
-                    case 2:
-                        heroIcon.sprite = heroIcons[2];
-                        heroNameImage.sprite = heroNameImages[2];
-                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
-                        break;
-                    case 3:
-                        heroIcon.sprite = heroIcons[3];
-                        heroNameImage.sprite = heroNameImages[3];
-                        //PlayerPrefs.SetInt("FirstTime", BoolToInt(false));
-                        break;
-                }
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_1;
+                heroName.text = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterName;
             }
         }
 
@@ -208,19 +187,16 @@ namespace NubianVR.UI
 
         public void GetStarted()
         {
-            if (IntToBool(PlayerPrefs.GetInt("FirstTime")))
-            {
-                SwitchScreens(levelSelectMenu);
-            }
-            else
-            {
-                SwitchScreens(characterSelectMenu);
-            }
+            var count = PlayerPrefs.GetString("unity.player_session_count");
+            var launchCount = int.Parse(count);
+
+            SwitchScreens(launchCount == 1 ? languageSelectMenu : levelSelectMenu);
         }
 
         public void DeleteAllSavedData()
         {
             PlayerPrefs.DeleteAll();
+            
             Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
         }
 

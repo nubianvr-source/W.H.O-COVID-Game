@@ -17,24 +17,27 @@ MonoBehaviour:
   characterCountry: Central African Republic
   characterCountryImage: {fileID: 21300000, guid: 36be1ffb75c55464b950944d6d4db5bc,
     type: 3}
-  characterDescriptionKey: 
-  characterSuperPowerKey: 
-  characterGoalKey: 
-  characterFullImage_Level_1: {fileID: 21300000, guid: 948083e85cecbed498e3743b008e6c0a,
+  characterDescriptionKey: ID_AyoDesText
+  characterSuperPowerKey: ID_AyoSuperpowerKey
+  characterGoalKey: ID_AyoGoalKey
+  characterFullImage_Level_1: {fileID: 21300000, guid: 45671dfb54705184d8942c166822be21,
     type: 3}
-  characterFullImage_Level_2: {fileID: 21300000, guid: 9e8a4b788372f50459cbdd557aeaf684,
+  characterFullImage_Level_2: {fileID: 21300000, guid: 7a5cc19d12aa6f946956fcac496c8c55,
     type: 3}
-  characterFullImage_Level_3: {fileID: 21300000, guid: 97cc5ca6a2e7fe7419de8df22ebc232a,
+  characterFullImage_Level_3: {fileID: 21300000, guid: 7efddf4bec71899459ed8bdb188a81b8,
     type: 3}
-  characterHalfImage_Level_1: {fileID: 21300000, guid: 3c53d0579c8308e468d08bf00382bf77,
+  characterHalfImage_Level_1: {fileID: 21300000, guid: 4f2a0a5f9e7cd4444bf768b10f5b1636,
     type: 3}
-  characterHalfImage_Level_2: {fileID: 21300000, guid: c4b9867bdf0c6f54f8a18ca721e6b69d,
+  characterHalfImage_Level_2: {fileID: 21300000, guid: 523c3accca7097e4ab337ffc6b4ce464,
     type: 3}
-  characterHalfImage_Level_3: {fileID: 21300000, guid: 803cbfbbaa067214e96b0aa0c0fbc37a,
+  characterHalfImage_Level_3: {fileID: 21300000, guid: 27ac8c4f5e213d449b8b1298223e3bfb,
     type: 3}
-  characterBustImage_Level_1: {fileID: 21300000, guid: f3035cd333a702244bd63557dfe80f7b,
+  characterBustImage_Level_1: {fileID: 21300000, guid: 4b532e8449e34624c9ab70e7550932bc,
     type: 3}
-  characterBustImage_Level_2: {fileID: 21300000, guid: 14b797a2ff6820c4aa3b376c00fd8458,
+  characterBustImage_Level_2: {fileID: 21300000, guid: 9ff319c75e3ad284f9fcc3316b534a47,
     type: 3}
-  characterBustImage_Level_3: {fileID: 21300000, guid: 21f0fde128fb1fe4ebfe91fdb42b09ba,
+  characterBustImage_Level_3: {fileID: 21300000, guid: e0348a78c633a6d419b5fde75862dd49,
     type: 3}
+  characterDescriptionText: 
+  characterSuperPowerText: 
+  characterGoalText: 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LocalizationScripts;
 using UnityEngine;
@@ -8,17 +9,23 @@ using UnityEngine.UI;
 public class LocalizationText_Text : MonoBehaviour
 {
     public string key;
-    
+    private Text textObject;
+
+    private void Awake()
+    {
+        textObject = gameObject.GetComponent<Text>();
+    }
+
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
         //Default Language is English for now.
-        ChangeLanguage(0);
+        ChangeLanguage(PlayerPrefs.GetInt("Lang"));
     }
 
     private void ChangeLanguage(int index)
     {
-        gameObject.GetComponent<Text>().text = CSVParser.GetTextFromId(key, index);
+        textObject.text = CSVParser.GetTextFromId(key, index);
     }
 
     private void OnEnable()
