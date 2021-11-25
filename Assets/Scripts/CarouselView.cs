@@ -23,8 +23,6 @@ public class CarouselView : BaseCarouselScript {
     public override void Start()
     {
         base.Start();
-        characterName.text = MainAppManager.mainAppManager.characters[current_index].characterName;
-        characterDescription.text = MainAppManager.mainAppManager.characters[current_index].characterDescriptionText;
     }
     
 
@@ -32,6 +30,8 @@ public class CarouselView : BaseCarouselScript {
     public override void Update () {
 
        base.Update();
+       characterName.text = MainAppManager.mainAppManager.characters[current_index].characterName;
+       characterDescription.text = MainAppManager.mainAppManager.characters[current_index].characterDescriptionText;
        
     }
     #endregion
