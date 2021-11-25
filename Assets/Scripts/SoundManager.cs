@@ -61,10 +61,6 @@ public class SoundManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         int buildIndex = currentScene.buildIndex;
 
-        if (buildIndex == 0)
-        {
-            PlayAudio("BGMusic");
-        }
     }
 
     public void PlayAudio(string sound)

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using TMPro;
+using System;
+using UnityEngine.Analytics;
 
 namespace NubianVR.UI
 {
@@ -187,10 +189,7 @@ namespace NubianVR.UI
 
         public void GetStarted()
         {
-            var count = PlayerPrefs.GetString("unity.player_session_count");
-            var launchCount = int.Parse(count);
-
-            SwitchScreens(launchCount == 1 ? languageSelectMenu : levelSelectMenu);
+            SwitchScreens(AnalyticsSessionInfo.sessionCount == 1 ? languageSelectMenu : levelSelectMenu);
         }
 
         public void DeleteAllSavedData()

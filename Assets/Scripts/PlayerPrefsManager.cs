@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class PlayerPrefsManager : MonoBehaviour
 {
@@ -9,25 +10,15 @@ public class PlayerPrefsManager : MonoBehaviour
 
   private void Awake()
   {
-    
+    if (AnalyticsSessionInfo.sessionCount != 1) return;
+    CreatePlayerData();
+    SavePlayerData();
   }
-
+  
   private void Start()
   {
-    var count = PlayerPrefs.GetString("unity.player_session_count");
-    print("Game Launched: " + count + " times");
-    var launchCount = int.Parse(count);
    
-    if (launchCount == 1)
-    {
-      CreatePlayerData();
-      SavePlayerData();
-   
-    }
-    else
-    {
-      LoadPlayerData();
-    }
+    
   }
 
   public void CreatePlayerData()
