@@ -136,7 +136,7 @@ ID_LREarnBadgesText,You earned,Tu as gagné
 ID_BadgeText,badge,badge
 ID_BadgesText,badges,badges
 ID_PeformText,"By passing this level, you have now achieved the golden rod of power. Next up you must achieve the degree in clinical science. ","En passant ce niveau, vous avez maintenant atteint la tige d'or du pouvoir. Ensuite, vous devez atteindre le diplôme en sciences cliniques."
-ID_FailText,"You failed this misson, but you can try again. The fate of the world is in your hand.","Vous avez échoué à ce Misson, mais vous pouvez essayer à nouveau. Le destin du monde est dans votre main."
+ID_FailText,"You failed this misson, but you can try again. The fate of the world is in your hand.","Vous avez échoué à ce misson, mais vous pouvez essayer à nouveau. Le destin du monde est dans votre main."
 ID_QuestPerformText,Quest Performance,Performance de quête
 ID_TotalTimeText,Total Time,Temps total
 ID_ReturnBtnText,Return to Menu,Retour au menu
@@ -146,3 +146,4 @@ ID_SoundEffectsText,Sound Effects,Effets sonores
 ID_ActiveHeroText,Active Hero,Héros actif
 ID_OnSwitchText,On,Activer
 ID_OffSwitchText,Off,Désactivé
+ID_GetStarted,Get Started,Commencer
