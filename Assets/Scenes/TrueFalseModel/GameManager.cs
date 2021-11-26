@@ -117,6 +117,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip timeUpAudioClip;
     [SerializeField] private AudioClip correctClickAudioClip;
     [SerializeField] private AudioClip falseClickAudioClip;
+
+    public Image heroIcon;
+    private int selectedHeroIndex;
     #endregion
 
     public ParticleSystem confetti;
@@ -138,11 +141,27 @@ public class GameManager : MonoBehaviour
     {
         //A good practice is to get and store your Get components in a variable because the Get Component call is expensive
         _soundManager = SoundManager.instance;
+        selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
+
     }
 
     private void Start()
     {
         _soundManager.Stop("BGMusic");
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 1:
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_1;
+                break;
+            case 2:
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_2;
+                break;
+            case 3:
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_3;
+                break;
+            default:
+                break;
+        }
         
         countdownBaseValue = countdownValue;
         if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)

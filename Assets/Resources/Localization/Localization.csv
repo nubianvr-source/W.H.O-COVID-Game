@@ -147,3 +147,5 @@ ID_ActiveHeroText,Active Hero,Héros actif
 ID_OnSwitchText,On,Activer
 ID_OffSwitchText,Off,Désactivé
 ID_GetStarted,Get Started,Commencer
+ID_LevelNotCompleteText1,Please complete,Veuillez compléter
+ID_LevelNotCompleteText2,to unlock this level.,pour déverrouiller ce niveau.

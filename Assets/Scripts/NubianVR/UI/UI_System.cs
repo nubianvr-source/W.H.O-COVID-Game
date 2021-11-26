@@ -17,28 +17,15 @@ namespace NubianVR.UI
     {
         [Header("Main Properties")] 
         public UI_Screen m_StartScreen;
-        [SerializeField] private TMP_Text noOfQuestionText;
         [SerializeField] private float delayTime = 2.0f;
-        [SerializeField] private UI_Screen languageSelectMenu;
-        [SerializeField] private UI_Screen levelSelectMenu;
-
-        //[SerializeField] private float previousScreenTransitionTime = 1.0f; 
-        [Header("Hero Properties")]
-        [SerializeField]private Image heroIcon;
-        [SerializeField]private TMP_Text heroName;
-        private int selectedHeroIndex;
-        [SerializeField] private Sprite[] heroIcons;
-        [SerializeField] private Sprite[] heroNameImages;
-
 
         [Header("System Events")] public UnityEvent onSwitchScreen = new UnityEvent();
 
-        #region Unused Properties...
-        [Header("Fader Properties")]
+        
+        [Header("Fade Properties")]
         public Image m_Fader;
         public float m_FadeInDuration = 1f;
         public float m_FadeOutDuration = 1f;
-        #endregion
 
         #region Variables
 
@@ -52,13 +39,6 @@ namespace NubianVR.UI
 
         [FormerlySerializedAs("sceneNames")] public string[] scenes;
 
-        [Header("Finish Screen Parameters")]
-        
-
-        [Header("Sprite Swap")]
-        [SerializeField] private Sprite newBackgroundSprite;
-        [SerializeField] private Sprite newButtonSprite;
-
         #endregion
 
         #region MainMethods
@@ -66,12 +46,7 @@ namespace NubianVR.UI
         // Start is called before the first frame update
         void Start()
         {
-            if(SceneManager.GetActiveScene().buildIndex == 0)
-            {
-                Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
-                SelectHero();
-            }
-           
+
             screens = GetComponentsInChildren<UI_Screen>(true);
             InitializeScreens();
             if (!m_StartScreen) return;
@@ -153,50 +128,9 @@ namespace NubianVR.UI
         }
         #endregion
 
-
-        public void SetHeroIndex()
-        {
-            print("Hero Index" + MainAppManager.mainAppManager.characterCarouselIndex);
-            PlayerPrefs.SetInt("HeroIndex", MainAppManager.mainAppManager.characterCarouselIndex);
-            SelectHero();
-        }
-
-        private void SelectHero()
-        {
-            selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
-            if(heroIcons != null && heroNameImages != null)
-            {
-                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_1;
-                heroName.text = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterName;
-            }
-        }
-
-        private int BoolToInt(bool val)
-        {
-            if (val)
-                return 1;
-            else
-                return 0;
-        }
-
-        private bool IntToBool(int val)
-        {
-            if (val != 0)
-                return true;
-            else
-                return false;
-        }
-
-        public void GetStarted()
-        {
-            SwitchScreens(AnalyticsSessionInfo.sessionCount == 1 ? languageSelectMenu : levelSelectMenu);
-        }
-
         public void DeleteAllSavedData()
         {
             PlayerPrefs.DeleteAll();
-            
-            Debug.Log(IntToBool(PlayerPrefs.GetInt("FirstTime")));
         }
 
       
