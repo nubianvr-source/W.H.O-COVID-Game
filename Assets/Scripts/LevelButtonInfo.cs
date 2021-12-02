@@ -11,12 +11,7 @@ public class LevelButtonInfo : MonoBehaviour
    public TMP_Text levelSubHeader;
    public Image levelLockStatus;
    private int _sceneNumber;
-
-   public void LoadScene()
-   {
-      MainAppManager.mainAppManager.uiManager.LoadQuizScene(_sceneNumber);
-   }
-
+   
    public void SetUpBtn(Sprite btnLevelSprite, string levelNumText, string levelSubText, int sceneNumber)
    {
       _sceneNumber = sceneNumber;

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
+  m_Name: QuestionTen
+  m_EditorClassIdentifier: 
+  imageQuestion: {fileID: 21300000, guid: e654eb97725d57f4abdac42d3f7b3b02, type: 3}
+  questionKey: ID_Q30
+  isClickTrue: 1
+  trueAnswerKey: ID_Q30AnswerTrue
+  falseAnswerKey: ID_Q30AnswerFalse
+  isBadgeWorthy: 1
+  LitbadgeImage: {fileID: 21300000, guid: ebc5816556848524dbe4cdd91a4eb135, type: 3}
+  textQuestion: Should you be vaccinated?
+  trueAnswerText: No,the vaccine makes you sick.
+  falseAnswerText: Yes, the vaccine reduces the risk of dying.

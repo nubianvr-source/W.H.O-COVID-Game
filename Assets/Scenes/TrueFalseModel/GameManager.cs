@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Timers;
+using System.Transactions;
+using DG.Tweening;
 using LocalizationScripts;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
@@ -14,16 +19,12 @@ using Object = UnityEngine.Object;
 public class GameManager : MonoBehaviour
 {
     #region Declarations
-    [SerializeField]private Questions[] questions;
-    private static List<Questions> _unansweredQuestions;
+    private Questions[] questions;
+    private List<Questions> _unansweredQuestions;
     private Questions _currentQuestion;
-
-    //Player Life Stats
-    ////This can be an int variable type since there are no fractions involved. 
-    private static int playerLife = 3;
-    //private static float maxPlayerLife = 3.0f;
     
-
+    private int playerLife = 3;
+    
 
     [Header("TMP Values")]
     [SerializeField] private TMP_Text questionTmpText;
@@ -34,23 +35,18 @@ public class GameManager : MonoBehaviour
     
 
     [Header("Game play Values")]
-    private static float _numberOfQuestionsAnswered = 1.0f;
-    public static float _numberOfQuestionsToAsk;
-    private static float correctAnswers;
-    private static float wrongAnswers;
-    /*private static int _numberOfQuestionsAnswered = 1;
-    public static int _numberOfQuestionsToAsk;
-    [SerializeField] private static int correctAnswers;
-    [SerializeField] private static int wrongAnswers;*/
-    [SerializeField] private float delayTime = 0.5f;
+    private  int _numberOfQuestionsAnswered = 1;
+    public  int _numberOfQuestionsToAsk;
+    private  int correctAnswers;
+    private  int wrongAnswers;
+    [SerializeField] private float delayTime = 3.0f;
     [SerializeField]private float countdownValue = 6.0f;
     private float countdownBaseValue;
-    private static float totalTimeTaken = 0.0f;
+    private float totalTimeTaken = 0.0f;
    
 
     [Header("UI System")]
     [SerializeField] private Animator baseAnimator;
-    [SerializeField] private Animator buttonAnimator;
     [SerializeField] private UI_System UIManager;
     [SerializeField] private UI_Screen finishScreen;
     
@@ -58,111 +54,132 @@ public class GameManager : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button trueButton;
+    [SerializeField] private Image trueInnerBtn;
     [SerializeField] private Button falseButton;
-    
+    [SerializeField] private Image falseInnerBtn;
+    [SerializeField] private Button tryAgainBtn;
+    [SerializeField] private Button shareBtn;
+
 
     [Header("Images")]
     [SerializeField] private Image questionImage;
     [SerializeField] private Image countdownRadialBarMask;
-
+    public Image heroIcon;
+    
     [Header("Sprites")]
-    [SerializeField] private Sprite btnCorrectSprite;
-    [SerializeField] private Sprite btnIncorrectSprite;
-    [SerializeField] private Sprite btnNeutralSprite;
+    [SerializeField] private Sprite incorrectCheckpointSprite;
+    [SerializeField] private Sprite correctCheckpointSprite;
+    [SerializeField] private Sprite[] badgesUnlitImages;
+    [SerializeField] private Sprite neutralCheckpointSprite;
+    
+
 
     [Header("Progress Bar")]
     [SerializeField] private Image progressBarMask;
-    [SerializeField] private Sprite CheckpointLitSprite;
-    [SerializeField]private Image[] checkpoints;
-    private static float progressPoint = 0.0f;
+    private float progressPoint = 0.0f;
+    [SerializeField] private GameObject checkPointsParents;
     
     [Header("Badges")]
-    [SerializeField] private Image[] badges;
-    [SerializeField] private Sprite firstBadgeSprite;
-    private static bool acquiredFirstBadge = false;
-    [SerializeField] private Sprite secondBadgeSprite;
-    private static bool acquiredSecondBadge = false;
-    [SerializeField] private Sprite thirdBadgeSprite;
-    private static bool acquiredThirdBadge = false;
-    [SerializeField] private Sprite fourthBadgeSprite;
-    private static bool acquiredFourthBadge = false;
-    [SerializeField] private Sprite fifthBadgeSprite;
-    private static bool acquiredFifthBadge = false;
-    [SerializeField] private Sprite sixthBadgeSprite;
-    private static bool acquiredSixthBadge = false;
-    [SerializeField] private Sprite seventhBadgeSprite;
-    private static bool acquiredSeventhBadge = false;
-    [SerializeField] private Sprite eighthBadgeSprite;
-    private static bool acquiredEighthBadge = false;
-    [SerializeField] private Sprite ninthBadgeSprite;
-    private static bool acquiredNinthBadge = false;
-    private static int noOfBadgesWon;
-    private static int  removeBadgesfromCheckpoints = 1;
+    private int noOfBadgesWon;
 
     [Header("Congratulatory Screen")]
     [SerializeField] private TMP_Text congratulatoryText;
+    [SerializeField] private Image avatarImage;
     [SerializeField] private TMP_Text passText;
     [SerializeField] private Text correctAnswersText;
     [SerializeField] private Text wrongAnswersText;
     [SerializeField] private TMP_Text totalTimeText;
     [SerializeField] private TMP_Text badgesWonText;
-    [SerializeField] private Image firstBadgeImage;
-    [SerializeField] private Image secondBadgeImage;
-    [SerializeField] private Image thirdBadgeImage;
+    [SerializeField] private LocalizationText_TMP badgeText;
+    [SerializeField] private Image[] badgeImages;
     
+
     private SoundManager _soundManager;
 
-    [Header("Audio Clips")]
-    [SerializeField] private AudioClip timeTickAudioClip;
-    [SerializeField] private AudioClip timeUpAudioClip;
-    [SerializeField] private AudioClip correctClickAudioClip;
-    [SerializeField] private AudioClip falseClickAudioClip;
-
-    public Image heroIcon;
+    private int alreadyEarned;
     private int selectedHeroIndex;
+    private bool timerStopped;
+    private GameObject currentQuestionCheckpoint;
     #endregion
 
     public ParticleSystem confetti;
 
     private static bool levelRestarted = true;
-    #region("Unused Declarations")
-    /*private static int questionIndex = 0;
-    [SerializeField] private TMP_Text interventionText;
-    [SerializeField] private TMP_Text playerPointsText;
-    [SerializeField] private TMP_Text finalPointsText;
-    [SerializeField] private TMP_Text interventionTitle;
-    [SerializeField] private TMP_Text questionPoints;
-    [SerializeField] private static int playerPoints;
-    [SerializeField] private UI_Screen interventionScreen;*/
-    #endregion
 
 
     private void Awake()
     {
         //A good practice is to get and store your Get components in a variable because the Get Component call is expensive
-        _soundManager = SoundManager.instance;
+        
         selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
 
     }
 
     private void Start()
     {
+        _soundManager = SoundManager.instance;
+    }
+
+    public void OnStart()
+    {
         _soundManager.Stop("BGMusic");
-        switch (SceneManager.GetActiveScene().buildIndex)
+        alreadyEarned = 0;
+        ResetProgressBar();
+        ResetData();
+        switch (MainAppManager.mainAppManager.selectedLevel + 1)
         {
             case 1:
-                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_1;
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                    .characterBustImage_Level_1;
                 break;
             case 2:
-                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_2;
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                    .characterBustImage_Level_2;
                 break;
             case 3:
-                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_3;
+                heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                    .characterBustImage_Level_3;
                 break;
             default:
                 break;
         }
+
+       SetCurrentQuestion();
+    }
+
+    public void ResetProgressBar()
+    {
+        progressBarMask.fillAmount = 0f;
+        for (int i = 0; i < checkPointsParents.transform.childCount; i++)
+        {
+            switch (i+1)
+            {
+                case 4:
+                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                        badgesUnlitImages[0];
+                    break;
+                case 7:
+                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                        badgesUnlitImages[1];
+                    break;
+                case 10:
+                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                        badgesUnlitImages[2];
+                    break;
+                default:
+                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                        neutralCheckpointSprite;
+                    break;
+            }
+        }
         
+    }
+
+    private void SetCurrentQuestion()
+    {
+        countdownValue = 30f;
+        timerStopped = false;
+        countdownValueTmpText.text = countdownValue.ToString();
         countdownBaseValue = countdownValue;
         if (_unansweredQuestions == null || _unansweredQuestions.Count == 0)
         {
@@ -170,57 +187,20 @@ public class GameManager : MonoBehaviour
             //It can be placed here after the question list check and before the question loads.
             LoadQuestions();
         }
-        SetCurrentQuestion();
+        
 
-        if(levelRestarted)
-        {
-            if(SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                acquiredFirstBadge = intToBool(PlayerPrefs.GetInt("FirstBadge"));
-                acquiredSecondBadge = intToBool(PlayerPrefs.GetInt("SecondBadge"));
-                acquiredThirdBadge = intToBool(PlayerPrefs.GetInt("ThirdBadge"));
-            }
-            if(SceneManager.GetActiveScene().buildIndex == 2)
-            {
-                acquiredFourthBadge = intToBool(PlayerPrefs.GetInt("FourthBadge"));
-                acquiredFifthBadge = intToBool(PlayerPrefs.GetInt("FifthBadge"));
-                acquiredSixthBadge = intToBool(PlayerPrefs.GetInt("SixthBadge"));
-            }
-            if(SceneManager.GetActiveScene().buildIndex == 3)
-            {
-                acquiredSeventhBadge = intToBool(PlayerPrefs.GetInt("SeventhBadge"));
-                acquiredEighthBadge = intToBool(PlayerPrefs.GetInt("EighthBadge"));
-                acquiredNinthBadge = intToBool(PlayerPrefs.GetInt("NinthBadge"));
-            }
-            levelRestarted = false;
-        }
-
+        trueInnerBtn.DOColor(Color.white, 0.1f);
+        falseInnerBtn.DOColor(Color.white, 0.1f);
         ProgressBarHandler();
 
         if (countdownRadialBarMask)
             countdownRadialBarMask.fillAmount = 1.0f;
         if (numberOfQuestionsAnsweredText)
-            numberOfQuestionsAnsweredText.text = "Question " + _numberOfQuestionsAnswered + " of " + _numberOfQuestionsToAsk;
+            numberOfQuestionsAnsweredText.text = _numberOfQuestionsAnswered.ToString();
         EnableButtons(true);
-        InvokeRepeating("StartCountdown", 1.5f, 1.0f);
-
-        #region
-        /*checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-        for (int i = 0; i < checkpoints.Length; i++)
-        {
-            Debug.Log(checkpoints[i].name + " with index : " + i);
-        }
-        badges = GameObject.FindGameObjectsWithTag("Badge");
-        for (int i = 0; i < badges.Length; i++)
-        {
-            Debug.Log(badges[i].name + " with index : " + i);
-        }*/
-        #endregion
-    }
-
-    //Randomly picks a question from the _unansweredQuestion array and sets its the current question to ask.
-    private void SetCurrentQuestion()
-    {
+        InvokeRepeating(nameof(StartCountdown),
+            1.5f,
+            1.0f);
         _currentQuestion = _unansweredQuestions[0];
         if (questionTmpText)
             questionTmpText.text = _currentQuestion.textQuestion;
@@ -233,12 +213,14 @@ public class GameManager : MonoBehaviour
         
     }
 
+    
 
     //Update Loop just updates the players score visually during gameplay.
     private void Update()
     {
+        if(!timerStopped)
         //Helped with the smooth timer animation. Added plus one to the countdownBaseValue to account for the timer ending on zero
-        countdownRadialBarMask.fillAmount -= 1.0f / (countdownBaseValue + 1f) * Time.deltaTime;
+            countdownRadialBarMask.fillAmount -= 1.0f / (countdownBaseValue + 1f) * Time.deltaTime;
         
     }
 
@@ -247,37 +229,70 @@ public class GameManager : MonoBehaviour
     {
         //Executed based on the health value...
         if (playerLife > 0)
-            TransitionToNextQuestion();
+            StartCoroutine(TransitionToNextQuestion());
         else
             StartCoroutine(FinishScreenHandler());
     }
 
    
-    private void TransitionToNextQuestion()
+    IEnumerator TransitionToNextQuestion()
     {
         _numberOfQuestionsAnswered++;
-        if( 5<= _numberOfQuestionsAnswered && _numberOfQuestionsAnswered <=7)
-        {
-            removeBadgesfromCheckpoints = 2;
-        }
-        else if (7 <= _numberOfQuestionsAnswered && _numberOfQuestionsAnswered <=9 )
-        {
-            removeBadgesfromCheckpoints = 3;
-        }
-
         _unansweredQuestions.Remove(_currentQuestion);
-
+        
+        yield return new WaitForSeconds(delayTime);
+        currentQuestionCheckpoint.transform.DOScale(new Vector3(1f, 1f), 0.25f);
         PresentQuestion(delayTime);
     }
 
     private void LoadQuestions()
     {
         
-       ChangeLanguage(PlayerPrefs.GetInt("Lang"));
-        
-        _unansweredQuestions = questions.ToList();
-        _numberOfQuestionsToAsk = questions.Length;
-        Debug.Log("Number of questions to ask is : " + _numberOfQuestionsToAsk);
+       //ChangeLanguage(PlayerPrefs.GetInt("Lang"));
+       switch (MainAppManager.mainAppManager.levels[MainAppManager.mainAppManager.selectedLevel].levelNumberKey)
+       {
+           case "ID_MMenuLevel1Text":
+               Object[] questionObjectLevel1 = Resources.LoadAll("Questions/Level1", typeof(Questions));
+               questions = new Questions[questionObjectLevel1.Length];
+               for (int i = 0; i < questionObjectLevel1.Length; i++)
+               {
+                   questions[i] = (Questions) questionObjectLevel1[i];
+                   questions[i].ChangeLanguage(PlayerPrefs.GetInt("Lang"));
+               }
+
+               _unansweredQuestions = questions.ToList();
+               _numberOfQuestionsToAsk = questions.Length;
+               break;
+           case "ID_MMenuLevel2Text":
+               Object[] questionObjectLevel2 = Resources.LoadAll("Questions/Level2", typeof(Questions));
+               questions = new Questions[questionObjectLevel2.Length];
+               for (int i = 0; i < questionObjectLevel2.Length; i++)
+               {
+                   questions[i] = (Questions) questionObjectLevel2[i];
+                   questions[i].ChangeLanguage(PlayerPrefs.GetInt("Lang"));
+               }
+
+               _unansweredQuestions = questions.ToList();
+               _numberOfQuestionsToAsk = questions.Length;
+               break;
+           case  "ID_MMenuLevel3Text":
+               Object[] questionObjectLevel3 = Resources.LoadAll("Questions/Level2", typeof(Questions));
+               questions = new Questions[questionObjectLevel3.Length];
+               for (int i = 0; i < questionObjectLevel3.Length; i++)
+               {
+                   questions[i] = (Questions) questionObjectLevel3[i];
+                   questions[i].ChangeLanguage(PlayerPrefs.GetInt("Lang"));
+               }
+
+               _unansweredQuestions = questions.ToList();
+               _numberOfQuestionsToAsk = questions.Length;
+               break;
+           default:
+               break;
+               
+       }
+       
+       
     }
 
     private void ChangeLanguage(int index)
@@ -306,29 +321,36 @@ public class GameManager : MonoBehaviour
         {
             //correct...
             _soundManager.PlaySFX("CorrectClick");
-            confetti.Play();
+            //confetti.Play();
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
-            if (buttonAnimator)
-                buttonAnimator.SetTrigger("TrueCorrect");
-            if (trueButton)
-                trueButton.image.sprite = btnCorrectSprite;
-            BadgeHandler();
+            trueInnerBtn.DOColor(new Color(0f / 255f, 211f / 255f, 57f / 255f), 0.5f);
+            if (_currentQuestion.isBadgeWorthy)
+            {
+                currentQuestionCheckpoint.GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                noOfBadgesWon++;
+                UpdateBadgesFound();
+            }
+            else
+            {
+                currentQuestionCheckpoint.GetComponent<Image>().sprite = correctCheckpointSprite;
+            }
+            
         }
         else
         {
             //false
             playerLife--;
             _soundManager.PlaySFX("WrongClick");
-            if (buttonAnimator)
-                buttonAnimator.SetTrigger("TrueWrong");
-            if (trueButton)
-                trueButton.image.sprite = btnIncorrectSprite;
+            trueInnerBtn.DOColor(new Color(246f / 255f, 40f / 255f, 40f / 255f), 0.5f);
             wrongAnswers ++;
+            if (_currentQuestion.isBadgeWorthy)return;
+                currentQuestionCheckpoint.GetComponent<Image>().sprite = incorrectCheckpointSprite;
+            
             Debug.Log("You have this number of wrong answers : " + wrongAnswers);
             
         }
-        ProgressBarHandler();
+        //ProgressBarHandler();
     }
 
 
@@ -340,28 +362,105 @@ public class GameManager : MonoBehaviour
         {
             //correct
             _soundManager.PlaySFX("CorrectClick");
-            confetti.Play();
+            //confetti.Play();
             correctAnswers ++;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
-            if (buttonAnimator)
-                buttonAnimator.SetTrigger("FalseCorrect");
-            if (falseButton)
-                falseButton.image.sprite = btnCorrectSprite;
-            BadgeHandler();
+            falseInnerBtn.DOColor(new Color(0f / 255f, 211f / 255f, 57f / 255f), 0.5f);
+            if (_currentQuestion.isBadgeWorthy)
+            {
+                currentQuestionCheckpoint.GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
+                noOfBadgesWon++;
+                UpdateBadgesFound();
+            }
+            else
+            {
+                currentQuestionCheckpoint.GetComponent<Image>().sprite = correctCheckpointSprite;
+            }
+
         }
         else
         {
             //false
             playerLife--;
             _soundManager.PlaySFX("WrongClick");
-            if (buttonAnimator)
-                buttonAnimator.SetTrigger("FalseWrong");
-            if (falseButton)
-                falseButton.image.sprite = btnIncorrectSprite;
+            falseInnerBtn.DOColor(new Color(246f / 255f, 40f / 255f, 40f / 255f), 0.5f);
             wrongAnswers++;
+            if (_currentQuestion.isBadgeWorthy)return;
+                currentQuestionCheckpoint.GetComponent<Image>().sprite = incorrectCheckpointSprite;
+        
+
+            
             Debug.Log("You have this number of wrong answers : " + wrongAnswers);
+
         }
-        ProgressBarHandler();
+        //ProgressBarHandler();
+    }
+
+    public void UpdateBadgesFound()
+    {
+        switch (MainAppManager.mainAppManager.selectedLevel + 1)
+        {
+            case 1:
+            {
+                for (int i = 0; i < MainAppManager.mainAppManager.level1Badges.Length; i++)
+                {
+                    if (_currentQuestion.LitbadgeImage == MainAppManager.mainAppManager.level1Badges[i])
+                    {
+                        if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
+                        {
+                            alreadyEarned += 1;
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetInt($"Level1Badge{i+1}",1);
+                        }
+
+                        
+                    }
+                }
+                break;
+            }
+            case 2:
+            {
+                for (int i = 0; i < MainAppManager.mainAppManager.level2Badges.Length; i++)
+                {
+                    if (_currentQuestion.LitbadgeImage == MainAppManager.mainAppManager.level2Badges[i])
+                    {
+                        if (PlayerPrefs.GetInt($"Level2Badge{i + 1}") == 1)
+                        {
+                            alreadyEarned += 1;
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetInt($"Level2Badge{i+1}",1);
+                        }
+
+                        
+                    }
+                }
+                break;
+            }
+            case 3:
+            {
+                for (int i = 0; i < MainAppManager.mainAppManager.level3Badges.Length; i++)
+                {
+                    if (_currentQuestion.LitbadgeImage == MainAppManager.mainAppManager.level3Badges[i])
+                    {
+                        if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
+                        {
+                            alreadyEarned += 1;
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetInt($"Level3Badge{i+1}",1);
+                        }
+
+                        
+                    }
+                }
+                break;
+            }
+        }
     }
 
     public void EnableButtons(bool condition) 
@@ -378,7 +477,7 @@ public class GameManager : MonoBehaviour
         if (_numberOfQuestionsAnswered > _numberOfQuestionsToAsk)
             StartCoroutine(FinishScreenHandler());
         else
-            StartCoroutine(ReloadSceneForNextQuestion(time));
+            SetCurrentQuestion();
     }
 
     IEnumerator ReloadSceneForNextQuestion(float waitTimeToLoadNextQuestion)
@@ -399,12 +498,11 @@ public class GameManager : MonoBehaviour
         else
         {
             wrongAnswers++;
-            ProgressBarHandler();
+            currentQuestionCheckpoint.GetComponent<Image>().sprite = incorrectCheckpointSprite;
+            //ProgressBarHandler();
             _soundManager.PlaySFX("TimeOut");
             EndCountdown();
             EnableButtons(false);
-            trueButton.image.sprite = btnNeutralSprite;
-            falseButton.image.sprite = btnNeutralSprite;
             LoadNextQuestion();
         }
     }
@@ -412,233 +510,213 @@ public class GameManager : MonoBehaviour
     private void EndCountdown()
     {
         CancelInvoke("StartCountdown");
+        timerStopped = true;
         totalTimeTaken += (countdownBaseValue - countdownValue);
         Debug.Log("Time taken to answer question : " + totalTimeTaken + " secs");
     }
 
     private void ProgressBarHandler()
     {
-        progressPoint = (correctAnswers + wrongAnswers) / (float)_numberOfQuestionsToAsk;
-        progressBarMask.fillAmount = progressPoint;
+        progressPoint = _numberOfQuestionsAnswered / (float)_numberOfQuestionsToAsk;
+        progressBarMask.DOFillAmount(progressPoint, 0.75f);
         print("Progress Point: " + progressPoint);
-        if (progressPoint >= 0.1f)
-        {
-            checkpoints[0].sprite = CheckpointLitSprite;
-        }
-        if (progressPoint >= 0.2f)
-        {
-            checkpoints[1].sprite = CheckpointLitSprite;
-        }
-        if (progressPoint >= 0.3f)
-        {
-            checkpoints[2].sprite = CheckpointLitSprite;
-        }
-        if (progressPoint >= 0.5f)
-        {
-            checkpoints[3].sprite = CheckpointLitSprite;
-        }
-        if (progressPoint >= 0.6f)
-        {
-            checkpoints[4].sprite = CheckpointLitSprite;
-        }
-        if (progressPoint >= 0.8f)
-        {
-            checkpoints[5].sprite = CheckpointLitSprite;
-        }
-        if (progressPoint >= 0.9f)
-        {
-            checkpoints[6].sprite = CheckpointLitSprite;
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if (/*progressPoint >= 0.4f &&*/ acquiredFirstBadge)
-            {
-                badges[0].sprite = firstBadgeSprite;
-            }
-            if (/*progressPoint >= 0.7f && */acquiredSecondBadge)
-            {
-                badges[1].sprite = secondBadgeSprite;
-            }
-            if (/*progressPoint >= 1.0f &&*/ acquiredThirdBadge)
-            {
-                badges[2].sprite = thirdBadgeSprite;
-            }
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            if (/*progressPoint >= 0.4f &&*/ acquiredFourthBadge)
-            {
-                badges[0].sprite = fourthBadgeSprite;
-            }
-            if (/*progressPoint >= 0.7f && */acquiredFifthBadge)
-            {
-                badges[1].sprite = fifthBadgeSprite;
-            }
-            if (/*progressPoint >= 1.0f &&*/ acquiredSixthBadge)
-            {
-                badges[2].sprite = sixthBadgeSprite;
-            }
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 3)
-        {
-            if (/*progressPoint >= 0.4f &&*/ acquiredSeventhBadge)
-            {
-                badges[0].sprite = seventhBadgeSprite;
-            }
-            if (/*progressPoint >= 0.7f && */acquiredEighthBadge)
-            {
-                badges[1].sprite = eighthBadgeSprite;
-            }
-            if (/*progressPoint >= 1.0f &&*/ acquiredNinthBadge)
-            {
-                badges[2].sprite = ninthBadgeSprite;
-            }
 
-
+        for (int i = 0; i < checkPointsParents.transform.childCount; i++)
+        {
+            if (_numberOfQuestionsAnswered - 1 == i)
+            {
+                currentQuestionCheckpoint = checkPointsParents.transform.GetChild(i).gameObject;
+                currentQuestionCheckpoint.transform.DOScale(new Vector3(1.5f, 1.5f), 0.25f);
+            }
         }
+
     }
 
-    private void BadgeHandler()
-    {
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[0].sprite = _currentQuestion.LitbadgeImage;
-                acquiredFirstBadge = true;
-                noOfBadgesWon++;
-            }
-            if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[1].sprite = _currentQuestion.LitbadgeImage;
-                acquiredSecondBadge = true;
-                noOfBadgesWon++;
-            }
-            if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[2].sprite = _currentQuestion.LitbadgeImage;
-                acquiredThirdBadge = true;
-                noOfBadgesWon++;
-            }
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[0].sprite = _currentQuestion.LitbadgeImage;
-                acquiredFourthBadge = true;
-                noOfBadgesWon++;
-            }
-            if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[1].sprite = _currentQuestion.LitbadgeImage;
-                acquiredFifthBadge = true;
-                noOfBadgesWon++;
-            }
-            if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[2].sprite = _currentQuestion.LitbadgeImage;
-                acquiredSixthBadge = true;
-                noOfBadgesWon++;
-            }
-            badges[1].sprite = _currentQuestion.LitbadgeImage;
-            acquiredSecondBadge = true;
-            noOfBadgesWon++;
-        }
-        if (SceneManager.GetActiveScene().buildIndex == 3)
-        {
+  
+    private void LevelSummaryHandler()
+    {     
+        var congratsLocalizationTextTmp = congratulatoryText.gameObject.GetComponent<LocalizationText_TMP>();
+        
+        var passTextLocalizationTextTmp = passText.gameObject.GetComponent<LocalizationText_TMP>();
 
-            if (_currentQuestion == questions[3] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[0].sprite = _currentQuestion.LitbadgeImage;
-                acquiredSeventhBadge = true;
-                noOfBadgesWon++;
-            }
-            if (_currentQuestion == questions[6] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[1].sprite = _currentQuestion.LitbadgeImage;
-                acquiredEighthBadge = true;
-                noOfBadgesWon++;
-            }
-            if (_currentQuestion == questions[9] && _currentQuestion.isBadgeWorthy)
-            {
-                badges[2].sprite = _currentQuestion.LitbadgeImage;
-                acquiredNinthBadge = true;
-                noOfBadgesWon++;
-            }
-        }
-    }
-    private void CongratulatoryScreenHandler()
-    {
-        SaveData();
-        levelRestarted = true;
-        if(correctAnswers < 7)
-        {
-            congratulatoryText.text = "Oops!";
-            passText.text = "You failed to pass this level, please try again!";
-        }
-        if(correctAnswers >= 7 && correctAnswers <= 8)
-            congratulatoryText.text = "Nice!";
-        if(correctAnswers == 9 )
-            congratulatoryText.text = "Good Job!";
-        if (correctAnswers >= 10)
-            congratulatoryText.text = "Excellent";
-        if (noOfBadgesWon > 1)
-            badgesWonText.text = "You earned " + noOfBadgesWon + " badges";
-        else
-            badgesWonText.text = "You earned " + noOfBadgesWon + " badge";
-        if (acquiredFirstBadge)
-            firstBadgeImage.sprite = firstBadgeSprite;
-        if (acquiredSecondBadge)
-            secondBadgeImage.sprite = secondBadgeSprite;
-        if (acquiredThirdBadge)
-            thirdBadgeImage.sprite = thirdBadgeSprite;
-        correctAnswersText.text = correctAnswers.ToString();
-        wrongAnswersText.text = wrongAnswers.ToString();
+        
+
+        var newBadgesEarned = 0;
+        
         totalTimeText.text = totalTimeTaken.ToString();
+
+        if (playerLife > 0)
+        {
+
+            switch (MainAppManager.mainAppManager.selectedLevel + 1)
+            {
+                case 1:
+                    avatarImage.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .characterHalfImage_Level_1;
+                    passTextLocalizationTextTmp.key = "ID_PassTextLevel1";
+                    PlayerPrefs.SetInt("Level1Complete", 1);
+                    for (int i = 0; i < badgeImages.Length; i++)
+                    {
+                        if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
+                        {
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.level1Badges[i];
+                        }
+                    }
+                    break;
+                case 2:
+                    avatarImage.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .characterHalfImage_Level_2;
+                    passTextLocalizationTextTmp.key = "ID_PassTextLevel2";
+                    PlayerPrefs.SetInt("Level2Complete", 1);
+                    for (int i = 0; i < badgeImages.Length; i++)
+                    {
+                        if (PlayerPrefs.GetInt($"Level2Badge{i + 1}") == 1)
+                        {
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.level2Badges[i];
+                        }
+                    }
+                    break;
+                case 3:
+                    avatarImage.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .characterHalfImage_Level_3;
+                    passTextLocalizationTextTmp.key = "ID_PassTextLevel3";
+                    PlayerPrefs.SetInt("Level3Complete", 1);
+                    for (int i = 0; i < badgeImages.Length; i++)
+                    {
+                        if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
+                        {
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.level3Badges[i];
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+           
+            congratsLocalizationTextTmp.key = "ID_LReviewGJText";
+            correctAnswersText.text = correctAnswers.ToString();
+            wrongAnswersText.text = wrongAnswers.ToString();
+            shareBtn.gameObject.SetActive(true);
+            tryAgainBtn.gameObject.SetActive(false);
+            
+            newBadgesEarned = (noOfBadgesWon - alreadyEarned);
+            if (newBadgesEarned < 0)
+            {
+                newBadgesEarned = 0;
+                badgesWonText.text = newBadgesEarned.ToString();
+                badgeText.key = "ID_BadgesText";
+                
+            }
+            else
+            {
+                if (newBadgesEarned == 0)
+                {
+                    badgesWonText.text = newBadgesEarned.ToString();
+                    badgeText.key = "ID_BadgesText";
+                }
+                else
+                {
+                    badgesWonText.text = newBadgesEarned.ToString();
+                    badgeText.key = newBadgesEarned > 1 ? "ID_BadgesText" : "ID_BadgeText";
+                }
+
+                
+            }
+      
+        }
+        else
+        {
+            shareBtn.gameObject.SetActive(false);
+            tryAgainBtn.gameObject.SetActive(true);
+            congratsLocalizationTextTmp.key = "ID_LReviewFailedText";
+            passTextLocalizationTextTmp.key = "ID_FailText";
+            correctAnswersText.text = correctAnswers.ToString();
+            wrongAnswersText.text = wrongAnswers.ToString();
+            switch (MainAppManager.mainAppManager.selectedLevel + 1)
+            {
+                case 1:
+                    avatarImage.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .characterHalfImage_Level_1;
+                    for (int i = 0; i < badgeImages.Length; i++)
+                    {
+                        if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
+                        {
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.level1Badges[i];
+                        }
+                    }
+                    break;
+                case 2:
+                    avatarImage.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .characterHalfImage_Level_2;
+                    for (int i = 0; i < badgeImages.Length; i++)
+                    {
+                        if (PlayerPrefs.GetInt($"Level2Badge{i + 1}") == 1)
+                        {
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.level2Badges[i];
+                        }
+                    }
+                    break;
+                case 3:
+                    avatarImage.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .characterHalfImage_Level_3;
+                    for (int i = 0; i < badgeImages.Length; i++)
+                    {
+                        if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
+                        {
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.level3Badges[i];
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+             newBadgesEarned = (noOfBadgesWon - alreadyEarned);
+            if (newBadgesEarned < 0)
+            {
+                newBadgesEarned = 0;
+                badgesWonText.text = newBadgesEarned.ToString();
+                badgeText.key = "ID_BadgesText";
+                
+            }
+            else
+            {
+                if (newBadgesEarned == 0)
+                {
+                    badgesWonText.text = newBadgesEarned.ToString();
+                    badgeText.key = "ID_BadgesText";
+                }
+                else
+                {
+                    badgesWonText.text = newBadgesEarned.ToString();
+                    badgeText.key = newBadgesEarned > 1 ? "ID_BadgesText" : "ID_BadgeText";
+                }
+            }
+            
+        }
+
     }
 
     private IEnumerator FinishScreenHandler()
     {
         yield return new WaitForSeconds(delayTime);
         UIManager.SwitchScreens(finishScreen);
-        //UIManager.SwitchScreens1(finishScreen, 0.0f);
-        CongratulatoryScreenHandler();
+        LevelSummaryHandler();
     }
-
-    private int boolToInt(bool val)
-    {
-        if (val)
-            return 1;
-        else
-            return 0;
-    }
-
-    private bool intToBool(int val)
-    {
-        if (val != 0)
-            return true;
-        else
-            return false;
-    }
-    private void SaveData()
-    {
-        PlayerPrefs.SetInt("FirstBadge", boolToInt(acquiredFirstBadge));
-        PlayerPrefs.SetInt("SecondBadge", boolToInt(acquiredSecondBadge));
-        PlayerPrefs.SetInt("ThirdBadge", boolToInt(acquiredThirdBadge));
-        PlayerPrefs.SetInt("FourthBadge", boolToInt(acquiredFourthBadge));
-        PlayerPrefs.SetInt("FifthBadge", boolToInt(acquiredFifthBadge));
-        PlayerPrefs.SetInt("SixthBadge", boolToInt(acquiredSixthBadge));
-        PlayerPrefs.SetInt("SeventhBadge", boolToInt(acquiredSeventhBadge));
-        PlayerPrefs.SetInt("EighthBadge", boolToInt(acquiredEighthBadge));
-        PlayerPrefs.SetInt("NinthBadge", boolToInt(acquiredNinthBadge));
-    }
+    
+  
     public void DeleteAllSavedData()
     {
         PlayerPrefs.DeleteAll();
     }
-    
-    public static void ResetAllStaticData()
+
+    public void SetLoadedFromQuizTrue()
+    {
+        MainAppManager.mainAppManager.loadedFromTriviaLevel = true;
+    }
+
+    public void ResetData()
     {
         noOfBadgesWon = 0;
         playerLife = 3;
@@ -650,3 +728,4 @@ public class GameManager : MonoBehaviour
         _unansweredQuestions = null;
     }
 }
+

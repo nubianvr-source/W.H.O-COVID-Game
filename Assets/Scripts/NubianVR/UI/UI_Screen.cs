@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
@@ -25,15 +26,23 @@ namespace NubianVR.UI
         public UnityEvent onScreenClose = new UnityEvent();
         
         private Animator animator;
-        private CanvasGroup canvasGroup;
+        [HideInInspector]
+        public CanvasGroup canvasGroup;
         
         #endregion
 
         #region MainMethods
+
+        private void Awake()
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+            animator = GetComponent<Animator>();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-            animator = GetComponent<Animator>();
+            
             if (m_StartSelectable)
             {
                 EventSystem.current.SetSelectedGameObject(m_StartSelectable.gameObject);

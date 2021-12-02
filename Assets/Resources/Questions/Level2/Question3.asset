@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
   m_Name: Question3
   m_EditorClassIdentifier: 
-  imageQuestion: {fileID: 21300000, guid: 770670613e3fcc0418269cf524d1e761, type: 3}
-  questionKey: ID_Q3
+  imageQuestion: {fileID: 21300000, guid: f01de43396429414396b9830851b3db2, type: 3}
+  questionKey: ID_Q13
   isClickTrue: 1
-  trueAnswerKey: ID_Q3AnswerTrue
-  falseAnswerKey: ID_Q3AnswerFalse
+  trueAnswerKey: ID_Q13AnswerTrue
+  falseAnswerKey: ID_Q13AnswerFalse
   isBadgeWorthy: 0
   LitbadgeImage: {fileID: 0}
-  textQuestion: La maladie peut-elle toucher les enfants?
-  trueAnswerText: "Non c\u2019est une maladie d\u2019adultes"
-  falseAnswerText: Oui les enfants peuvent attraper la maladie
+  textQuestion: Can the disease affect children?
+  trueAnswerText: No, it is an adult disease.
+  falseAnswerText: Yes, children can get the disease.

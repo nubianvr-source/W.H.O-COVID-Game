@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc4586cd908600745ac76bdafe1d3fd3, type: 3}
-  m_Name: Question10
+  m_Name: QuestionTen
   m_EditorClassIdentifier: 
   imageQuestion: {fileID: 21300000, guid: 165e2c7ad9c75a941978f1f6f5fe6459, type: 3}
   questionKey: ID_Q10
@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q10AnswerTrue
   falseAnswerKey: ID_Q10AnswerFalse
   isBadgeWorthy: 1
-  LitbadgeImage: {fileID: 21300000, guid: 4323342d6ffcb4d4d93023e765b29d7f, type: 3}
-  textQuestion: Faut-il se vacciner ?
-  trueAnswerText: Non parce que la vaccination rend malade
-  falseAnswerText: "Oui parce que la vaccination r\xE9duit les risques de mourir"
+  LitbadgeImage: {fileID: 21300000, guid: ebc5816556848524dbe4cdd91a4eb135, type: 3}
+  textQuestion: Should you be vaccinated?
+  trueAnswerText: No,the vaccine makes you sick.
+  falseAnswerText: Yes, the vaccine reduces the risk of dying.

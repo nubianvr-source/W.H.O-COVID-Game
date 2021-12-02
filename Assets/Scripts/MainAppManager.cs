@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using JetBrains.Annotations;
 using LocalizationScripts;
 using NubianVR.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum CharacterEnumValue
@@ -31,7 +33,7 @@ public class MainAppManager : MonoBehaviour
     public int languageIndex;
     public string[] languages;
     public GameObject langListParent;
-    public Text[] languageTests;
+    [FormerlySerializedAs("languageTests")] public Text[] languageText;
     
     [Header("UI Manager System")]
     [SerializeField] public UI_System uiManager;
@@ -44,7 +46,7 @@ public class MainAppManager : MonoBehaviour
     [SerializeField]private TMP_Text heroName;
 
     [Header("Levels Data")] 
-    [SerializeField] private LevelClass[] levels;
+    [SerializeField] public LevelClass[] levels;
     [SerializeField] private GameObject levelButton;
     [SerializeField] private GameObject levelButtonsParent;
     [SerializeField] public Sprite unlockedLevel;
@@ -55,7 +57,11 @@ public class MainAppManager : MonoBehaviour
     [SerializeField] private Transform openPoint;
     private bool warningShowing;
     private bool showWarningTimerStarted;
-    private int _selectedLevel;
+    [HideInInspector]
+    public int selectedLevel;
+    
+    [HideInInspector]
+    public bool loadedFromTriviaLevel = false;
     public float warningTimer = 4.0f;
 
     [Header("Selected Level Properties")] 
@@ -63,21 +69,28 @@ public class MainAppManager : MonoBehaviour
     [SerializeField] private TMP_Text levelNumber;
     [SerializeField] private TMP_Text levelName;
     [SerializeField] private TMP_Text levelQuestDescription;
-    //[SerializeField] private 
+
+    [Header("Badges")] 
+    [SerializeField] public Sprite[] level1Badges;
+    [SerializeField] public Sprite[] level2Badges;
+    [SerializeField] public Sprite[] level3Badges;
 
     #region Main Methods
  private void Awake()
     {
         mainAppManager = this;
-        characterCarouselIndex = PlayerPrefs.GetInt("HeroIndex");
-        languageIndex = PlayerPrefs.GetInt("Lang");
         
+        DontDestroyOnLoad(gameObject);
+        
+        characterCarouselIndex = PlayerPrefs.GetInt("HeroIndex");
+        
+        languageIndex = PlayerPrefs.GetInt("Lang");
+
     }
 
     void Start()
     {
         SelectHero();
-        ShowSelectedLanguage();
         ShowActiveHero();
         warningShowing = false;
         showWarningTimerStarted = false;
@@ -90,6 +103,7 @@ public class MainAppManager : MonoBehaviour
         PlayerPrefs.SetInt("Lang", languageIndex);
         
         ChangeLanguage(PlayerPrefs.GetInt("Lang"));
+        ShowSelectedLanguage();
         
         if (showWarningTimerStarted)
         {
@@ -143,16 +157,17 @@ public class MainAppManager : MonoBehaviour
                 if (PlayerPrefs.GetInt("Lang") == i)
                 {
                     langListParent.transform.GetChild(i).gameObject.GetComponent<Image>().enabled = true;
-                    languageTests[i].color = Color.white;
+                    languageText[i].color = Color.white;
                 }
                 else
                 {
-                    languageTests[i].color = Color.black;
+                    languageText[i].color = Color.black;
                     langListParent.transform.GetChild(i).gameObject.GetComponent<Image>().enabled = false;
                 }
             }
         }
         
+
         public void ShowActiveHero()
         {
             for (int i = 0; i < characters.Length; i++)
@@ -195,7 +210,10 @@ public class MainAppManager : MonoBehaviour
                 }
                 else
                 {
-                    levelButtonInfo.levelLockStatus.sprite = levels[level.sceneToLoad - 1].levelComplete ? unlockedLevel : lockedLevel;
+                    levelButtonInfo.levelLockStatus.sprite =
+                        PlayerPrefs.GetInt($"Level{level.sceneToLoad - 1}Complete") == 0 ? lockedLevel : unlockedLevel;
+                    
+                    
                 }
             }
         }
@@ -218,11 +236,12 @@ public class MainAppManager : MonoBehaviour
                 levelNumber.text = levels[btnSceneIndex].levelNumber;
                 levelName.text = levels[btnSceneIndex].levelTitle;
                 levelQuestDescription.text = levels[btnSceneIndex].levelQuestDesc;
+                selectedLevel = btnSceneIndex;
                 uiManager.SwitchScreens(levelStartMenu);
                 return;
             }
 
-            if (levels[btnSceneIndex].levelComplete)
+            if (PlayerPrefs.GetInt($"Level{btnSceneIndex}Complete") == 1)
             {
                 switch (selectedBtnSceneIndex)
                 {
@@ -239,14 +258,14 @@ public class MainAppManager : MonoBehaviour
                 levelNumber.text = levels[btnSceneIndex].levelNumber;
                 levelName.text = levels[btnSceneIndex].levelTitle;
                 levelQuestDescription.text = levels[btnSceneIndex].levelQuestDesc;
-                _selectedLevel = selectedBtnSceneIndex;
+                selectedLevel = btnSceneIndex;
                 uiManager.SwitchScreens(levelStartMenu);
                     
             }
             else
             {
                 if (warningShowing) return;
-                levelNumberforWarning.text = levels[btnSceneIndex].levelNumber;
+                levelNumberforWarning.text = levels[btnSceneIndex-1].levelNumber;
                 completeLevelWarning.transform.DOMoveY(openPoint.transform.position.y,0.75f,false);
                 warningShowing = true;
                 showWarningTimerStarted = true;
@@ -256,6 +275,13 @@ public class MainAppManager : MonoBehaviour
 
         }
 
+        public void LoadedFromQuiz()
+        {
+            if (!loadedFromTriviaLevel) return;
+            uiManager.SwitchScreens(levelSelectMenu);
+            
+        }
+        
         public void CloseLevelWarning()
         {
             completeLevelWarning.transform.DOMoveY(closePoint.transform.position.y,0.75f,false);
@@ -264,11 +290,7 @@ public class MainAppManager : MonoBehaviour
             warningTimer = 4.0f;
         }
 
-        public void StartQuizBtn()
-        {
-            uiManager.LoadQuizScene(_selectedLevel);
-        }
-
+    
         #endregion
    
 

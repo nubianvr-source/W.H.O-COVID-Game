@@ -117,7 +117,7 @@ ID_MMenuQuestLevel1DesText,What is COVID 19 and where did it come from help our 
 ID_MMenuQuestLevel2DesText,"Misinformation is a huge problem especially in such times, help our hero's fight off the misinformation and bring knowledge to the people.","La désinformation est un problème énorme, notamment dans ces moments, aidez notre héros à combattre la désinformation et à apporter des connaissances au peuple."
 ID_MMenuQuestLevel3DesText,"Finally the vaccine is ready, but how does it work. Lets find out together.","Enfin, le vaccin est prêt, mais comment ça marche? Permet de découvrir ensemble."
 ID_MMenuLevel1BtnText,Tutorial,Didacticiel
-ID_MMenuAfterLevel1BtnText,Continue,Continuer
+ID_ContinueText,Continue,Continuer
 ID_MMenuQuestText,Quests,Quêtes
 ID_MMenuLevel1Text,Level 1,Niveau 1
 ID_MMenuLevel2Text,Level 2,Niveau 2
@@ -128,18 +128,21 @@ ID_MMenuLevel3SubText,The Vaccine,Le vaccin
 ID_LStartQuestObjText,Quest Objective,Objectif de quête
 ID_BadgesToBeWonText,Badges to be won,Badges à gagner
 ID_StartQuizBtnText,Start Quiz,Démarrer quiz
-ID_QuestionText,QUESTION,QUESTION
-ID_OfText,OF,DE
+ID_QuestionText,Question,Question
+ID_OfText,of,de
 ID_LReviewGJText,GOOD JOB!,BON TRAVAIL!
 ID_LReviewFailedText,TRY AGAIN!,RÉESSAYER!
 ID_LREarnBadgesText,You earned,Tu as gagné
-ID_BadgeText,badge,badge
-ID_BadgesText,badges,badges
-ID_PeformText,"By passing this level, you have now achieved the golden rod of power. Next up you must achieve the degree in clinical science. ","En passant ce niveau, vous avez maintenant atteint la tige d'or du pouvoir. Ensuite, vous devez atteindre le diplôme en sciences cliniques."
-ID_FailText,"You failed this misson, but you can try again. The fate of the world is in your hand.","Vous avez échoué à ce misson, mais vous pouvez essayer à nouveau. Le destin du monde est dans votre main."
+ID_BadgeText,new badge,nouveau badge
+ID_BadgesText,new badges,nouveaux badges
+ID_PassTextLevel1,"Magnificent, you completed the mission and showcased your knowledge on the COVID-19 virus and how to protect yourself from it. Now your next mission is to stop the spread of misinformation on the virus COVID-19 virus. ","Magnifique, vous avez terminé la mission et avez présenté vos connaissances sur le virus COVID-19 et comment vous protéger de cela. Votre prochaine mission est maintenant d'arrêter la propagation de la désinformation sur le virus Virus Covid-19."
+ID_PassTextLevel2,"You have dispelled all the misinformation that was going around and now people are informed on the subject of the COVID-19 virus. Mission was successful. The vaccine is ready, your next mission is to get it to as many people as possible. ","Vous avez dissipé toute la désinformation qui se passait autour et maintenant les gens sont informés sur le sujet du virus Covid-19. La mission a réussi. Le vaccin est prêt, votre prochaine mission est de l'obtenir autant de personnes que possible."
+ID_PassTextLevel3,The mission was a success. Data shows there has been an increase in the number of people taking the vaccines now. Sociecty is slowly recovering and its all thanks to you. ,La mission était un succès. Les données montrent qu'il y a eu une augmentation du nombre de personnes qui prennent les vaccins maintenant. La sociée se remet lentement et tout remercie.
+ID_FailText,"You failed this misson, but you can try again. The fate of the world is in your hand.","Vous avez échoué à ce Misson, mais vous pouvez essayer à nouveau. Le destin du monde est dans votre main."
 ID_QuestPerformText,Quest Performance,Performance de quête
 ID_TotalTimeText,Total Time,Temps total
 ID_ReturnBtnText,Return to Menu,Retour au menu
+ID_TryAgainBtnText,Retry,Réessayez
 ID_SettingsHeaderText,Settings,Paramètres
 ID_GameMusicText,Game Music,Musique de jeu
 ID_SoundEffectsText,Sound Effects,Effets sonores
@@ -149,3 +152,12 @@ ID_OffSwitchText,Off,Désactivé
 ID_GetStarted,Get Started,Commencer
 ID_LevelNotCompleteText1,Please complete,Veuillez compléter
 ID_LevelNotCompleteText2,to unlock this level.,pour déverrouiller ce niveau.
+ID_LevelUpText,LEVEL UP!,NIVEAU SUPÉRIEUR!
+ID_AwesomeBadgeWonText,Awesome!,Impressionnant!
+ID_WonBadgeText,You just won a badge.,Vous venez de gagner un badge.
+ID_ConfirmText,Confirm!,Confirmer!
+ID_ConfirmationTextDesc,Are you sure you want to change the language?,Êtes-vous sûr de vouloir changer la langue?
+ID_ConfirmYesText,Yes,Oui
+ID_ConfirmNoText,No,Non
+ID_BadgesLeftPlural,badges still yet to be won.,badges encore à gagner.
+ID_BadgesLeftSingle,badge still yet to be won.,badge encore pour être gagné.

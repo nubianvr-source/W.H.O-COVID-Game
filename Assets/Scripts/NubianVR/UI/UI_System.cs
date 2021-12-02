@@ -77,6 +77,11 @@ namespace NubianVR.UI
         private IEnumerator TransitionToNextScreen(UI_Screen aScreen)
         {
             yield return new WaitForSeconds(delayTime); //Reference here...
+           SwtichScreenMethod(aScreen);
+        }
+
+        public void SwtichScreenMethod(UI_Screen aScreen)
+        {
             if (aScreen)
             {
                 if (_currentScreen)
@@ -92,7 +97,31 @@ namespace NubianVR.UI
                 onSwitchScreen?.Invoke();
             }
         }
-        
+
+        public void ShowModalScreen(UI_Screen modalScreen)
+        {
+            if (modalScreen)
+            {
+                if (_currentScreen)
+                {
+                    _currentScreen.canvasGroup.interactable = false;
+                }
+                
+                modalScreen.gameObject.SetActive(true);
+                modalScreen.StartScreen();
+            }
+        }
+
+        public void CloseModalScreen(UI_Screen modalScreen)
+        {
+            if (_previousScreen)
+            {
+                _currentScreen.canvasGroup.interactable = true;
+            }
+            modalScreen.CloseScreen();
+            
+        }
+
         public void GoToPreviousScreen()
         {
             if (_previousScreen)
@@ -121,9 +150,8 @@ namespace NubianVR.UI
         }
 
         //Mavreon's Functions...
-        public void LoadQuizScene(int sceneIndex)
+        public void LoadScene(int sceneIndex)
         {
-            GameManager.ResetAllStaticData();
             SceneManager.LoadScene(sceneIndex);
         }
         #endregion
