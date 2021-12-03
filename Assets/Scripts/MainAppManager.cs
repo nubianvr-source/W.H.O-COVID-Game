@@ -44,6 +44,7 @@ public class MainAppManager : MonoBehaviour
     [Header("Selected Hero Properties")]
     [SerializeField]private Image heroIcon;
     [SerializeField]private TMP_Text heroName;
+    [SerializeField] private GameObject heroObject;
 
     [Header("Levels Data")] 
     [SerializeField] public LevelClass[] levels;
@@ -59,9 +60,13 @@ public class MainAppManager : MonoBehaviour
     private bool showWarningTimerStarted;
     [HideInInspector]
     public int selectedLevel;
+
+    [Header("Animated Characters")] 
+    [SerializeField] private GameObject[] startScreenAnimatedCharacters;
+
+    [SerializeField] private GameObject[] selectScreenAnimatedCharacters;
     
     [HideInInspector]
-    public bool loadedFromTriviaLevel = false;
     public float warningTimer = 4.0f;
 
     [Header("Selected Level Properties")] 
@@ -275,13 +280,68 @@ public class MainAppManager : MonoBehaviour
 
         }
 
-        public void LoadedFromQuiz()
+
+        public void BackgroundPropsAnimate()
         {
-            if (!loadedFromTriviaLevel) return;
-            uiManager.SwitchScreens(levelSelectMenu);
             
         }
-        
+
+        public void InstantiateLevelUpCharacter()
+        {
+            switch (selectedLevel+1)
+            {
+                case 1:
+                {
+                    var obj = Instantiate(characters[characterCarouselIndex].animatedCharacterLevel2, heroObject.transform);
+                    obj.transform.localScale = new Vector3(100,100,1);
+                    obj.GetComponent<Animator>().SetTrigger("victory");
+                    break;
+                }
+                case 2:
+                {
+                    var obj = Instantiate(characters[characterCarouselIndex].animatedCharacterLevel3, heroObject.transform);
+                    obj.transform.localScale = new Vector3(100,100,1);
+                    break;
+                }
+                case 3:
+                {
+                    var obj = Instantiate(characters[characterCarouselIndex].animatedCharacterLevel3, heroObject.transform);
+                    obj.transform.localScale = new Vector3(100,100,1);
+                    break;
+                }
+
+            }
+
+            if(characterCarouselIndex == 2)
+                heroObject.GetComponent<RectTransform>().pivot = new Vector2(0.71f,0.19f);
+
+        }
+
+        public void RemoveAllInstantiatesLevelUpScreen()
+        {
+            foreach (Transform child in heroObject.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        public void SetAnimationsActiveStartScreen(bool active)
+        {
+            foreach (var obj in startScreenAnimatedCharacters)
+            {
+                obj.SetActive(active);
+            }
+        }
+
+        public void SetAnimationsActiveSelectCharacterScreen(bool active)
+        {
+            foreach (var obj in selectScreenAnimatedCharacters)
+            {
+                obj.SetActive(active);
+            }
+        }
+
+
         public void CloseLevelWarning()
         {
             completeLevelWarning.transform.DOMoveY(closePoint.transform.position.y,0.75f,false);

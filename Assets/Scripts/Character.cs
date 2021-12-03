@@ -22,6 +22,9 @@ public class Character : ScriptableObject
      public Sprite characterBustImage_Level_1;
      public Sprite characterBustImage_Level_2;
      public Sprite characterBustImage_Level_3;
+     public GameObject animatedCharacterLevel1;
+     public GameObject animatedCharacterLevel2;
+     public GameObject animatedCharacterLevel3;
 
      [HideInInspector]
      public string characterDescriptionText;

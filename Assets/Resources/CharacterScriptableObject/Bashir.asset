@@ -38,6 +38,13 @@ MonoBehaviour:
     type: 3}
   characterBustImage_Level_3: {fileID: 21300000, guid: 49a78c0e0525f5b408802e8f53aee8a5,
     type: 3}
-  characterDescriptionText: 
-  characterSuperPowerText: 
-  characterGoalText: 
+  animatedCharacterLevel1: {fileID: 9070794906009701319, guid: 79d817fbd1575ea468a4140cca7c698e,
+    type: 3}
+  animatedCharacterLevel2: {fileID: 7405089902043361929, guid: ac14802e958e07d4fb92e5c383751dcb,
+    type: 3}
+  animatedCharacterLevel3: {fileID: 4729324590978769087, guid: 9fae6e8e16874aa4bb192bc1c7b04887,
+    type: 3}
+  characterDescriptionText: Bachir vit en Afrique du Nord. Son super pouvoir est
+    de distributeur de bonnes informations
+  characterSuperPowerText: Porteur de bonnes nouvelles
+  characterGoalText: "R\xE9pandre de bonnes nouvelles et applaudir"

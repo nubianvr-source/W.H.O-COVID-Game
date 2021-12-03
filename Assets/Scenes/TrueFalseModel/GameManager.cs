@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Animator baseAnimator;
     [SerializeField] private UI_System UIManager;
     [SerializeField] private UI_Screen finishScreen;
+    [SerializeField] private UI_Screen levelUpScreen; 
     
     
 
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
     [Header("Badges")]
     private int noOfBadgesWon;
 
-    [Header("Congratulatory Screen")]
+    [Header("Level Summary Screen")]
     [SerializeField] private TMP_Text congratulatoryText;
     [SerializeField] private Image avatarImage;
     [SerializeField] private TMP_Text passText;
@@ -92,7 +93,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text badgesWonText;
     [SerializeField] private LocalizationText_TMP badgeText;
     [SerializeField] private Image[] badgeImages;
-    
+
+    [Header("Level Up Screen")] [SerializeField]
+    private GameObject fakeBGSprites;
 
     private SoundManager _soundManager;
 
@@ -102,7 +105,8 @@ public class GameManager : MonoBehaviour
     private GameObject currentQuestionCheckpoint;
     #endregion
 
-    public ParticleSystem confetti;
+    public ParticleSystem[] confetti;
+    public Image redVignette;
 
     private static bool levelRestarted = true;
 
@@ -201,6 +205,7 @@ public class GameManager : MonoBehaviour
         InvokeRepeating(nameof(StartCountdown),
             1.5f,
             1.0f);
+        _soundManager.PlayAudio("ClockTick");
         _currentQuestion = _unansweredQuestions[0];
         if (questionTmpText)
             questionTmpText.text = _currentQuestion.textQuestion;
@@ -242,7 +247,7 @@ public class GameManager : MonoBehaviour
         
         yield return new WaitForSeconds(delayTime);
         currentQuestionCheckpoint.transform.DOScale(new Vector3(1f, 1f), 0.25f);
-        PresentQuestion(delayTime);
+        PresentQuestion();
     }
 
     private void LoadQuestions()
@@ -321,7 +326,7 @@ public class GameManager : MonoBehaviour
         {
             //correct...
             _soundManager.PlaySFX("CorrectClick");
-            //confetti.Play();
+            PlayAllConfetti();
             correctAnswers += 1;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             trueInnerBtn.DOColor(new Color(0f / 255f, 211f / 255f, 57f / 255f), 0.5f);
@@ -342,6 +347,7 @@ public class GameManager : MonoBehaviour
             //false
             playerLife--;
             _soundManager.PlaySFX("WrongClick");
+            PlayRedVignetteAnimation();
             trueInnerBtn.DOColor(new Color(246f / 255f, 40f / 255f, 40f / 255f), 0.5f);
             wrongAnswers ++;
             if (_currentQuestion.isBadgeWorthy)return;
@@ -362,7 +368,7 @@ public class GameManager : MonoBehaviour
         {
             //correct
             _soundManager.PlaySFX("CorrectClick");
-            //confetti.Play();
+            PlayAllConfetti();
             correctAnswers ++;
             Debug.Log("You have this number of correct answers : " + correctAnswers);
             falseInnerBtn.DOColor(new Color(0f / 255f, 211f / 255f, 57f / 255f), 0.5f);
@@ -383,6 +389,7 @@ public class GameManager : MonoBehaviour
             //false
             playerLife--;
             _soundManager.PlaySFX("WrongClick");
+            PlayRedVignetteAnimation();
             falseInnerBtn.DOColor(new Color(246f / 255f, 40f / 255f, 40f / 255f), 0.5f);
             wrongAnswers++;
             if (_currentQuestion.isBadgeWorthy)return;
@@ -472,12 +479,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PresentQuestion(float time)
+    public void PresentQuestion()
     {
         if (_numberOfQuestionsAnswered > _numberOfQuestionsToAsk)
             StartCoroutine(FinishScreenHandler());
         else
+        {
             SetCurrentQuestion();
+           
+        }
+
+        
     }
 
     IEnumerator ReloadSceneForNextQuestion(float waitTimeToLoadNextQuestion)
@@ -487,11 +499,28 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void PlayAllConfetti()
+    {
+        
+        foreach (var localConfetti in confetti)
+        {
+            localConfetti.Play();
+        }
+        _soundManager.PlaySFX("CorrectCelebration");
+    }
+
+    public void PlayRedVignetteAnimation()
+    {
+        redVignette.DOFade(255f, 1.0f);
+        _soundManager.PlaySFX("WrongPrompt");
+        redVignette.DOFade(0, 1.0f);
+        _soundManager.PlaySFX("WrongDisappointment");
+    }
+
     private void StartCountdown()
     {
         if(countdownValue > 0)
         {
-            _soundManager.PlaySFX("ClockTickV2");
             countdownValue--;
             countdownValueTmpText.text = countdownValue.ToString();
         }
@@ -510,6 +539,7 @@ public class GameManager : MonoBehaviour
     private void EndCountdown()
     {
         CancelInvoke("StartCountdown");
+        _soundManager.Stop("ClockTick");
         timerStopped = true;
         totalTimeTaken += (countdownBaseValue - countdownValue);
         Debug.Log("Time taken to answer question : " + totalTimeTaken + " secs");
@@ -698,10 +728,54 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void OnLevelUpScreenStart()
+    {
+        StartCoroutine(LevelUpEnumeratorMethod());
+    }
+
+    IEnumerator LevelUpEnumeratorMethod()
+    {
+        MainAppManager.mainAppManager.InstantiateLevelUpCharacter();
+        fakeBGSprites.transform.DOScale(new Vector3(1.5f, 1.5f), 3f);
+        yield return new WaitForSeconds(5f);
+        UIManager.SwitchScreens(finishScreen);
+    }
+
     private IEnumerator FinishScreenHandler()
     {
         yield return new WaitForSeconds(delayTime);
-        UIManager.SwitchScreens(finishScreen);
+       
+        if (playerLife > 0)
+            switch (MainAppManager.mainAppManager.selectedLevel + 1)
+            {
+                case 1:
+                {
+                    if (PlayerPrefs.GetInt("Level1Complete") == 1)
+                        UIManager.SwitchScreens(finishScreen);
+                    else
+                        UIManager.SwitchScreens(levelUpScreen);
+                    break;
+                }
+                case 2:
+                {
+                    if (PlayerPrefs.GetInt("Level2Complete") == 1)
+                        UIManager.SwitchScreens(finishScreen);
+                    else
+                        UIManager.SwitchScreens(levelUpScreen);
+                    break;
+                }
+                case 3:
+                {
+                    if (PlayerPrefs.GetInt("Level3Complete") == 1)
+                        UIManager.SwitchScreens(finishScreen);
+                    else
+                        UIManager.SwitchScreens(levelUpScreen);
+                    break;
+                }
+            }
+        else
+            UIManager.SwitchScreens(finishScreen);
+        
         LevelSummaryHandler();
     }
     
@@ -710,11 +784,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
     }
-
-    public void SetLoadedFromQuizTrue()
-    {
-        MainAppManager.mainAppManager.loadedFromTriviaLevel = true;
-    }
+    
 
     public void ResetData()
     {

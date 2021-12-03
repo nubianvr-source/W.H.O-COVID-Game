@@ -8,11 +8,12 @@ public class CovidVirusImageShake : MonoBehaviour
 {
 
     public Image[] covidVirusSprites;
+    public Image[] finishScreenBackgroundProps;
     
     // Start is called before the first frame update
     void Start()
     {
-       StartCovidSpriteTweens();
+       
     }
 
     public void StartCovidSpriteTweens()
@@ -30,7 +31,23 @@ public class CovidVirusImageShake : MonoBehaviour
         }
         
     }
-    
+
+    public void StartSpinningBackgroundElements()
+    {
+        foreach (var props in finishScreenBackgroundProps)
+        {
+            props.transform.DORotate(new Vector3(0, 0, 360f), 1f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Yoyo);
+        }
+    }
+
+    public void StopSpinningBackgroundElements()
+    {
+        foreach (var props in finishScreenBackgroundProps)
+        {
+            props.transform.DOKill();
+        }
+    }
+
 
 
 }

@@ -38,6 +38,13 @@ MonoBehaviour:
     type: 3}
   characterBustImage_Level_3: {fileID: 21300000, guid: 0179d0c55829f5547b6851d73678c605,
     type: 3}
-  characterDescriptionText: 
-  characterSuperPowerText: 
-  characterGoalText: 
+  animatedCharacterLevel1: {fileID: 1070219854871523904, guid: bb40e1edeaa6aa240ae5de450e43c235,
+    type: 3}
+  animatedCharacterLevel2: {fileID: 7331311817109811096, guid: 6fca4fd69da06414581726cb2e9dd5a0,
+    type: 3}
+  animatedCharacterLevel3: {fileID: 1603372269668294628, guid: 0eaa05d469f47e7409ac35a51892fc48,
+    type: 3}
+  characterDescriptionText: "Inaya vit en Afrique de l\u2019Est. Son super pouvoir
+    c\u2019est les anticorps qu\u2019apporte le vaccin "
+  characterSuperPowerText: "Anticorps sp\xE9ciaux"
+  characterGoalText: "R\xE9pandre le vaccin Covid-19"

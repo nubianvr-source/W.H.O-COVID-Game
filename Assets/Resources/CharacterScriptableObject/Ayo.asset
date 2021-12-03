@@ -38,6 +38,13 @@ MonoBehaviour:
     type: 3}
   characterBustImage_Level_3: {fileID: 21300000, guid: e0348a78c633a6d419b5fde75862dd49,
     type: 3}
-  characterDescriptionText: 
-  characterSuperPowerText: 
-  characterGoalText: 
+  animatedCharacterLevel1: {fileID: 1076322146328885756, guid: 2183e3b816a026b43b05419ee4fa41e8,
+    type: 3}
+  animatedCharacterLevel2: {fileID: 4195809343793397010, guid: 090779a15c83888408fc6b3a39956553,
+    type: 3}
+  animatedCharacterLevel3: {fileID: 1321234735316672037, guid: c180d656ede6f4c40a4fba31dcdde6b7,
+    type: 3}
+  characterDescriptionText: "Ayo vit en Afrique Centrale. Son super pouvoir est une
+    armure qui prot\xE8ge des Fake News"
+  characterSuperPowerText: "Armure de v\xE9rit\xE9"
+  characterGoalText: "\xC9duquer l'Afrique sur le Covid19"

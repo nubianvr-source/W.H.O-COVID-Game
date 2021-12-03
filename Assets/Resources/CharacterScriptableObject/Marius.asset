@@ -38,6 +38,13 @@ MonoBehaviour:
     type: 3}
   characterBustImage_Level_3: {fileID: 21300000, guid: 21f0fde128fb1fe4ebfe91fdb42b09ba,
     type: 3}
-  characterDescriptionText: 
-  characterSuperPowerText: 
-  characterGoalText: 
+  animatedCharacterLevel1: {fileID: 926237034795497330, guid: dbb6b2a32d3591a4b88408a3d5cc36c3,
+    type: 3}
+  animatedCharacterLevel2: {fileID: 8298657833089210036, guid: 6dcd09c0929d4564391ffe2029fafde6,
+    type: 3}
+  animatedCharacterLevel3: {fileID: 4075722365532312643, guid: 5d9431c750f95d94fa9ab597c1a6b13c,
+    type: 3}
+  characterDescriptionText: "Marius vit en Afrique du Sud. Son super pouvoir est
+    son aura de protection que lui conf\xE8rent les gestes barri\xE8res "
+  characterSuperPowerText: Aura de protection
+  characterGoalText: "Prot\xE9ger les personnes avec des mesures de barri\xE8re"
