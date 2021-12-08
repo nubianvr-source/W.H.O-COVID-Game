@@ -215,6 +215,7 @@ public class GameManager : MonoBehaviour
             trueAnswerTmpText.text = _currentQuestion.trueAnswerText;
         if (falseAnswerTmpText)
             falseAnswerTmpText.text = _currentQuestion.falseAnswerText;
+        EnableButtons(true);
         
     }
 
@@ -281,7 +282,7 @@ public class GameManager : MonoBehaviour
                _numberOfQuestionsToAsk = questions.Length;
                break;
            case  "ID_MMenuLevel3Text":
-               Object[] questionObjectLevel3 = Resources.LoadAll("Questions/Level2", typeof(Questions));
+               Object[] questionObjectLevel3 = Resources.LoadAll("Questions/Level3", typeof(Questions));
                questions = new Questions[questionObjectLevel3.Length];
                for (int i = 0; i < questionObjectLevel3.Length; i++)
                {
@@ -572,8 +573,8 @@ public class GameManager : MonoBehaviour
         
 
         var newBadgesEarned = 0;
-        
-        totalTimeText.text = totalTimeTaken.ToString();
+
+        totalTimeText.text = $"{Mathf.FloorToInt(totalTimeTaken / 60)}:{Mathf.FloorToInt(totalTimeTaken % 60)}";
 
         if (playerLife > 0)
         {

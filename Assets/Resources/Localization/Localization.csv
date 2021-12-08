@@ -71,14 +71,14 @@ ID_Q23AnswerFalse,"Yes, the world knows.",Oui tout le monde le sait
 ID_Q24,Does the vaccine effectively prevent Covid19 variants?,Le vaccin est-il efficace contre les variants de Covid-19?
 ID_Q24AnswerTrue,"Yes, there is no evidence that the variants could escape the protection of the vaccine.","Oui, Il n’existe pas de preuves que les variants pourraient échapper à la protection du vaccin."
 ID_Q24AnswerFalse,"No, the variants are very different.","Non, les variants sont très différents."
-ID_Q25, Does being vaccinated prevent you from contaminating others?,Le fait d’être vacciné empêche-t-il de contaminer d’autres personnes?
-ID_Q25AnswerTrue,"Yes, the vaccine is a  barrier measure.","Oui, le vaccin est contre les gestes barrière"
+ID_Q25,Does being vaccinated prevent you from contaminating others?,Le fait d’être vacciné empêche-t-il de contaminer d’autres personnes?
+ID_Q25AnswerTrue,"Yes, the vaccine is a barrier measure.","Oui, le vaccin est contre les gestes barrière"
 ID_Q25AnswerFalse,"No, even when vaccinated you can still transmit the disease.","Non, même vaccine on peut quand même transmettre la maladie"
 ID_Q26,Will there be a need for a booster shot every year?,Va-t-on devoir faire un rappel de vaccin tous les ans?
 ID_Q26AnswerTrue,"No, the vaccines are long term.","Non, les vaccins tiennent à long terme."
 ID_Q26AnswerFalse,This is still under consideration.,C’est encore en cours de reflexion
 ID_Q27,Can a contaminated person be vaccinated?,"Si on fait la maladie a Covid-19, faut-il se faire vacciner?"
-ID_Q27AnswerTrue,"Yes, but they will have to wait for 6 months. ","Oui, mais on doit attendre 6 mois"
+ID_Q27AnswerTrue,"Yes, but they will have to wait for 6 months.","Oui, mais on doit attendre 6 mois"
 ID_Q27AnswerFalse,"No, you only get Covid19 once.","Non, on contracte la covid-19 une fois seule fois"
 ID_Q28,Does the Covid19 vaccine inject 5G into our bodies?,Le vaccin contre covid19 injecte la 5G dans notre corps?
 ID_Q28AnswerTrue,"Yes, we are controlled by laboratories.","Oui, les laboratoires nous contrôlent"
@@ -161,3 +161,19 @@ ID_ConfirmYesText,Yes,Oui
 ID_ConfirmNoText,No,Non
 ID_BadgesLeftPlural,badges still yet to be won.,badges encore à gagner.
 ID_BadgesLeftSingle,badge still yet to be won.,badge encore pour être gagné.
+ID_TutorialHeaderText,Tutorial,Didacticiel
+ID_ AboutCovidWarriorText,About COVID Warrior,À propos de Covid Warrior
+ID_CovidWarriorDesc,"COVID Warrior is an interactive game that helps you battle the pandemic, one correct answer at a time. The game is designed to educate players on the Corona Virus. By correctly answering question relating to the corona virus, player’s acquire’s super powers that enable them contribute towards the global effort to defeat the corona virus.","Covid Warrior est un jeu interactif qui vous aide à combattre la pandémie, une réponse correcte à la fois. Le jeu est conçu pour éduquer les joueurs sur le virus Corona. En répondant correctement à la question relative au virus corona, le Super Acquire du joueur Pouvoirs qui leur permettent de contribuer à l'effort mondial pour vaincre le virus de la corona."
+ID_HowToPlayText,How to play,Comment jouer
+ID_ClickHereToStartText,Click here to start playing ,Cliquez ici pour commencer à jouer
+ID_SelectCovidHeroText,Select your COVID Hero,Sélectionnez votre héros de Covid
+ID_SelectCovidHeroDesc,Each hero has a superpower & backstory.,Chaque héros a une superpuissance et une table arrière.
+ID_AnswerQuestionsCorrectlyText,Answer questions correctly,Répondez aux questions correctement
+ID_CorrectAnswerText,Correct answer!,Bonne réponse!
+ID_CorrectAnswerDesc,Each level has 10 questions to answer. ,Chaque niveau a 10 questions à répondre.
+ID_WinBadgesText,Win Badges!,Win badges!
+ID_WinBadgesDesc,Answer each question correctly to collect badges. Each level has 3 badges.,Répondez correctement à chaque question pour collecter des badges. Chaque niveau a 3 badges.
+ID_LevelUpWithEachLevelText,Level up with each level,Niveau de niveau avec chaque niveau
+ID_ShareInfoText,Share the knowledge & Fun!,Partagez les connaissances et le plaisir!
+ID_ShareInfoDesc,Remember to share with friends and family. Together we can beat the COVID Pandemic! ,"N'oubliez pas de partager avec des amis et de la famille. Ensemble, nous pouvons battre la pandémie de Covid!"
+ID_ShareText,Share,Partager

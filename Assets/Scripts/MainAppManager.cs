@@ -50,12 +50,15 @@ public class MainAppManager : MonoBehaviour
     [SerializeField] public LevelClass[] levels;
     [SerializeField] private GameObject levelButton;
     [SerializeField] private GameObject levelButtonsParent;
-    [SerializeField] public Sprite unlockedLevel;
-    [SerializeField] public Sprite lockedLevel;
+    [SerializeField] public Sprite unlockedLevelSprite;
+    [SerializeField] public Sprite lockedLevelSprite;
+    [SerializeField] public Sprite levelCompleteSprite;
     [SerializeField] private GameObject completeLevelWarning;
     [SerializeField] private TMP_Text levelNumberforWarning;
     [SerializeField] private Transform closePoint;
     [SerializeField] private Transform openPoint;
+    [SerializeField] private TMP_Text gameProgressionText;
+    [SerializeField] private Image gameProgressionImage;
     private bool warningShowing;
     private bool showWarningTimerStarted;
     [HideInInspector]
@@ -68,6 +71,8 @@ public class MainAppManager : MonoBehaviour
     
     [HideInInspector]
     public float warningTimer = 4.0f;
+    
+    private float _gameProgressionValue;
 
     [Header("Selected Level Properties")] 
     [SerializeField] private Image heroImage;
@@ -191,11 +196,29 @@ public class MainAppManager : MonoBehaviour
         private void SelectHero()
         {
             var selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
-            heroIcon.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterBustImage_Level_1;
-            heroName.text = MainAppManager.mainAppManager.characters[selectedHeroIndex].characterName;
+            heroIcon.sprite = characters[selectedHeroIndex].characterBustImage_Level_1;
+            heroName.text = characters[selectedHeroIndex].characterName;
                 
         }
-    
+
+        public void GameProgressionCalculator()
+        {
+            _gameProgressionValue = 0;
+            foreach (var t in levels)
+            {
+                _gameProgressionValue += (PlayerPrefs.GetInt($"Level{t.sceneToLoad}Complete") * 8.3f);
+                
+                foreach (var t1 in levels)
+                {
+                   _gameProgressionValue += (PlayerPrefs.GetInt($"Level{t.sceneToLoad}Badge{t1.sceneToLoad}") * 8.3f);
+                }
+            }
+
+
+            gameProgressionText.text = $"{Mathf.Ceil(_gameProgressionValue)}%";
+            gameProgressionImage.DOFillAmount( (float)Math.Round(_gameProgressionValue / 100f,2), 1f);
+        }
+
         public void GetStarted()
         {
             uiManager.SwitchScreens(AnalyticsSessionInfo.sessionCount == 1 ? languageSelectMenu : levelSelectMenu);
@@ -211,14 +234,18 @@ public class MainAppManager : MonoBehaviour
           
                 if (level.sceneToLoad == 1)
                 {
-                    levelButtonInfo.levelLockStatus.sprite = unlockedLevel;
+                    levelButtonInfo.levelLockStatus.sprite = PlayerPrefs.GetInt("Level1Complete") == 0 ? unlockedLevelSprite : levelCompleteSprite;
                 }
                 else
                 {
                     levelButtonInfo.levelLockStatus.sprite =
-                        PlayerPrefs.GetInt($"Level{level.sceneToLoad - 1}Complete") == 0 ? lockedLevel : unlockedLevel;
-                    
-                    
+                        PlayerPrefs.GetInt($"Level{level.sceneToLoad - 1}Complete") == 0
+                            ? lockedLevelSprite
+                            : PlayerPrefs.GetInt($"Level{level.sceneToLoad}Complete") == 0
+                                ? unlockedLevelSprite
+                                : levelCompleteSprite;
+
+
                 }
             }
         }
@@ -280,12 +307,7 @@ public class MainAppManager : MonoBehaviour
 
         }
 
-
-        public void BackgroundPropsAnimate()
-        {
-            
-        }
-
+        
         public void InstantiateLevelUpCharacter()
         {
             switch (selectedLevel+1)
