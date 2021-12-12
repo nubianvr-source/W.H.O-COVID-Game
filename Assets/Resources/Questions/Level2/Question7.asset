@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q17AnswerTrue
   falseAnswerKey: ID_Q17AnswerFalse
   isBadgeWorthy: 1
-  questionBadge: {fileID: 11400000, guid: cc4c87843c63e0e4783d91f66fcd0d99, type: 2}
+  questionBadge: {fileID: 11400000, guid: cdbc8d2e27f7c014bb6b159c2610ce77, type: 2}
   textQuestion: Can children contract the disease?
   trueAnswerText: No, they are very strong.
   falseAnswerText: Yes, but they do not become as sick as most adults.

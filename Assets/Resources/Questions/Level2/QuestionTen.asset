@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q20AnswerTrue
   falseAnswerKey: ID_Q20AnswerFalse
   isBadgeWorthy: 1
-  questionBadge: {fileID: 11400000, guid: 472dc335d409a7d479590725b041d11e, type: 2}
+  questionBadge: {fileID: 11400000, guid: f8033b26f50108c4bb20dd89d01894cd, type: 2}
   textQuestion: Can mosquitoes transmit Covid19?
   trueAnswerText: Yes, just like they transmit malaria.
   falseAnswerText: No, it is impossible.

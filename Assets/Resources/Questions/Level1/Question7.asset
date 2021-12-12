@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q7AnswerTrue
   falseAnswerKey: ID_Q7AnswerFalse
   isBadgeWorthy: 1
-  questionBadge: {fileID: 11400000, guid: 43e74f4e7a797744faab5e1c5a4c2fd0, type: 2}
+  questionBadge: {fileID: 11400000, guid: b27828d9105bab14aacfb59d8f8273e1, type: 2}
   textQuestion: During this pandemic, can you give your friends handshakes?
   trueAnswerText: Yes, they are my friends.
   falseAnswerText: No, it's better to greet them with your fist to avoid being contaminated.

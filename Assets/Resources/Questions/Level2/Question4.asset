@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q14AnswerTrue
   falseAnswerKey: ID_Q14AnswerFalse
   isBadgeWorthy: 1
-  questionBadge: {fileID: 11400000, guid: 79aae6f02d804aa48a65c3b0449e6394, type: 2}
+  questionBadge: {fileID: 11400000, guid: b09efb9127a84d141ba3a4efe50b4079, type: 2}
   textQuestion: What name is given to the process of verifying information?
   trueAnswerText: Curiosity
   falseAnswerText: Fact-checking

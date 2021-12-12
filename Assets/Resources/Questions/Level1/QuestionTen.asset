@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q10AnswerTrue
   falseAnswerKey: ID_Q10AnswerFalse
   isBadgeWorthy: 1
-  questionBadge: {fileID: 11400000, guid: aaaf489a78fcaa14db5595af11b6c2b5, type: 2}
+  questionBadge: {fileID: 11400000, guid: 7f395f95f490e9447b50e23deb262acb, type: 2}
   textQuestion: Should you be vaccinated?
   trueAnswerText: No,the vaccine makes you sick.
   falseAnswerText: Yes, the vaccine reduces the risk of dying.

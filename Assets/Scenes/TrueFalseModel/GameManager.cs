@@ -679,8 +679,11 @@ public class GameManager : MonoBehaviour
         
 
         var newBadgesEarned = 0;
+        var seconds = Mathf.FloorToInt(totalTimeTaken % 60) < 10
+            ? $"0{Mathf.FloorToInt(totalTimeTaken % 60)}"
+            : Mathf.FloorToInt(totalTimeTaken % 60).ToString(); 
 
-        totalTimeText.text = $"{Mathf.FloorToInt(totalTimeTaken / 60)}:{Mathf.FloorToInt(totalTimeTaken % 60)}";
+        totalTimeText.text = $"{Mathf.FloorToInt(totalTimeTaken / 60)}:{seconds}";
 
         if (playerLife > 0)
         {
@@ -843,6 +846,7 @@ public class GameManager : MonoBehaviour
     IEnumerator LevelUpEnumeratorMethod()
     {
         MainAppManager.mainAppManager.InstantiateLevelUpCharacter();
+        _soundManager.PlayAudio("LevelUpAudio");
         fakeBGSprites.transform.DOScale(new Vector3(1.5f, 1.5f), 3f);
         yield return new WaitForSeconds(5f);
         UIManager.SwitchScreens(finishScreen);
@@ -893,7 +897,7 @@ public class GameManager : MonoBehaviour
     }
     
     //Badge Set up for Level Start Menu too lazy to rewrite it
-    public void SetupBadges(GameObject badgeHolder)
+    public void SetupBadgesSummaryPage(GameObject badgeHolder)
     {
         switch (MainAppManager.mainAppManager.selectedLevel+1)
         {
@@ -902,7 +906,17 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < badgeHolder.transform.childCount; i++)
                 {
                     var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
-                    child.sprite = level1Badges[i].litBadge;
+                    if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
+                    {
+                        child.gameObject.SetActive(true);
+                        child.sprite = level1Badges[i].litBadge;
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+
+                    
                 }
                 break;
             } 
@@ -911,7 +925,17 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < badgeHolder.transform.childCount; i++)
                 {
                     var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
-                    child.sprite = level2Badges[i].litBadge;
+                    if (PlayerPrefs.GetInt($"Level2Badge{i+1}") == 1)
+                    {
+                        child.gameObject.SetActive(true);
+                        child.sprite = level2Badges[i].litBadge;
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+
+                    
                 }
                 break;
             } 
@@ -920,7 +944,87 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < badgeHolder.transform.childCount; i++)
                 {
                     var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
-                    child.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge;
+                    if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
+                    {
+                        child.gameObject.SetActive(true);
+                        child.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge;
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+
+                    
+                }
+                break;
+            }
+            default:
+                break;
+
+        }
+    }
+
+    public void SetUpBadgesStartLevelPage(GameObject badgeHolder)
+    {
+         switch (MainAppManager.mainAppManager.selectedLevel+1)
+        {
+            case 1:
+            {
+                for (int i = 0; i < badgeHolder.transform.childCount; i++)
+                {
+                    var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
+                    if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        
+                        child.gameObject.SetActive(true);
+                        child.sprite = level1Badges[i].litBadge;
+                    }
+
+                    
+                }
+                break;
+            } 
+            case 2:
+            {
+                for (int i = 0; i < badgeHolder.transform.childCount; i++)
+                {
+                    var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
+                    if (PlayerPrefs.GetInt($"Level2Badge{i+1}") == 1)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        
+                        child.gameObject.SetActive(true);
+                        child.sprite = level2Badges[i].litBadge;
+                    }
+
+                    
+                }
+                break;
+            } 
+            case 3:
+            {
+                for (int i = 0; i < badgeHolder.transform.childCount; i++)
+                {
+                    var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
+                    if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
+                    {
+                        child.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        child.gameObject.SetActive(true);
+                        child.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge;
+                        
+                    }
+
+                    
                 }
                 break;
             }
