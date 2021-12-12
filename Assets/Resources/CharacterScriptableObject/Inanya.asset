@@ -44,7 +44,11 @@ MonoBehaviour:
     type: 3}
   animatedCharacterLevel3: {fileID: 1603372269668294628, guid: 0eaa05d469f47e7409ac35a51892fc48,
     type: 3}
-  characterDescriptionText: "Inaya vit en Afrique de l\u2019Est. Son super pouvoir
-    c\u2019est les anticorps qu\u2019apporte le vaccin "
-  characterSuperPowerText: "Anticorps sp\xE9ciaux"
-  characterGoalText: "R\xE9pandre le vaccin Covid-19"
+  finalCharacterBadges:
+  - {fileID: 11400000, guid: 33ce59963d71da74da50591548d7c56c, type: 2}
+  - {fileID: 11400000, guid: 43e74f4e7a797744faab5e1c5a4c2fd0, type: 2}
+  - {fileID: 11400000, guid: aaaf489a78fcaa14db5595af11b6c2b5, type: 2}
+  characterDescriptionText: Inaya lives in East Africa and her superpower lies in
+    the fact that she possesses the antibodies used to create the vaccine.
+  characterSuperPowerText: Special Antibodies
+  characterGoalText: 'Spread COVID-19 Vaccine '

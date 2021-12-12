@@ -25,6 +25,7 @@ public class Character : ScriptableObject
      public GameObject animatedCharacterLevel1;
      public GameObject animatedCharacterLevel2;
      public GameObject animatedCharacterLevel3;
+     public Badges[] finalCharacterBadges;
 
      [HideInInspector]
      public string characterDescriptionText;

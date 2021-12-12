@@ -44,7 +44,11 @@ MonoBehaviour:
     type: 3}
   animatedCharacterLevel3: {fileID: 4075722365532312643, guid: 5d9431c750f95d94fa9ab597c1a6b13c,
     type: 3}
-  characterDescriptionText: "Marius vit en Afrique du Sud. Son super pouvoir est
-    son aura de protection que lui conf\xE8rent les gestes barri\xE8res "
-  characterSuperPowerText: Aura de protection
-  characterGoalText: "Prot\xE9ger les personnes avec des mesures de barri\xE8re"
+  finalCharacterBadges:
+  - {fileID: 11400000, guid: 79aae6f02d804aa48a65c3b0449e6394, type: 2}
+  - {fileID: 11400000, guid: cc4c87843c63e0e4783d91f66fcd0d99, type: 2}
+  - {fileID: 11400000, guid: 472dc335d409a7d479590725b041d11e, type: 2}
+  characterDescriptionText: Marius lives in South Africa and his superpower lies
+    in the aura of protection given by the barrier measures.
+  characterSuperPowerText: Aura of Protection
+  characterGoalText: Protect people with barrier measures

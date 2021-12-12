@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using DG.Tweening;
 using JetBrains.Annotations;
 using LocalizationScripts;
@@ -10,6 +11,7 @@ using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using VoxelBusters.EssentialKit;
 
 public enum CharacterEnumValue
 {
@@ -61,7 +63,7 @@ public class MainAppManager : MonoBehaviour
     [SerializeField] private Image gameProgressionImage;
     private bool warningShowing;
     private bool showWarningTimerStarted;
-    [HideInInspector]
+    
     public int selectedLevel;
 
     [Header("Animated Characters")] 
@@ -73,18 +75,14 @@ public class MainAppManager : MonoBehaviour
     public float warningTimer = 4.0f;
     
     private float _gameProgressionValue;
+    private string _shareMessage;
 
     [Header("Selected Level Properties")] 
     [SerializeField] private Image heroImage;
     [SerializeField] private TMP_Text levelNumber;
     [SerializeField] private TMP_Text levelName;
     [SerializeField] private TMP_Text levelQuestDescription;
-
-    [Header("Badges")] 
-    [SerializeField] public Sprite[] level1Badges;
-    [SerializeField] public Sprite[] level2Badges;
-    [SerializeField] public Sprite[] level3Badges;
-
+    
     #region Main Methods
  private void Awake()
     {
@@ -323,12 +321,14 @@ public class MainAppManager : MonoBehaviour
                 {
                     var obj = Instantiate(characters[characterCarouselIndex].animatedCharacterLevel3, heroObject.transform);
                     obj.transform.localScale = new Vector3(100,100,1);
+                    obj.GetComponent<Animator>().SetTrigger("victory");
                     break;
                 }
                 case 3:
                 {
                     var obj = Instantiate(characters[characterCarouselIndex].animatedCharacterLevel3, heroObject.transform);
                     obj.transform.localScale = new Vector3(100,100,1);
+                    obj.GetComponent<Animator>().SetTrigger("victory");
                     break;
                 }
 
@@ -374,7 +374,40 @@ public class MainAppManager : MonoBehaviour
 
     
         #endregion
-   
 
+        public void RateMyAppNow()
+        {
+            RateMyApp.AskForReviewNow();
+        }
+
+        public void ShareBtn()
+        {
+            _shareMessage = $"{characters[characterCarouselIndex].name} and I just completed a mission. Check it out";
+            StartCoroutine(TakeScreenshotAndShare());
+        }
+
+        private IEnumerator TakeScreenshotAndShare()
+        {
+            yield return new WaitForEndOfFrame();
+
+            Texture2D ss = new Texture2D( Screen.width, Screen.height, TextureFormat.RGB24, false );
+            ss.ReadPixels( new Rect( 0, 0, Screen.width, Screen.height ), 0, 0 );
+            ss.Apply();
+
+            string filePath = Path.Combine( Application.temporaryCachePath, "shared img.png" );
+            File.WriteAllBytes( filePath, ss.EncodeToPNG() );
+
+            // To avoid memory leaks
+            Destroy( ss );
+
+            new NativeShare().AddFile( filePath )
+                .SetSubject( "COVID Warrior Quest" ).SetText(_shareMessage).SetUrl("")
+                .SetCallback( ( result, shareTarget ) => Debug.Log( "Share result: " + result + ", selected app: " + shareTarget ) )
+                .Share();
+
+            // Share on WhatsApp only, if installed (Android only)
+            //if( NativeShare.TargetExists( "com.whatsapp" ) )
+            //	new NativeShare().AddFile( filePath ).AddTarget( "com.whatsapp" ).Share();
+        }
    
 }

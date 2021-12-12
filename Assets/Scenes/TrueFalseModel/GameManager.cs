@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Sprite incorrectCheckpointSprite;
     [SerializeField] private Sprite correctCheckpointSprite;
-    [SerializeField] private Sprite[] badgesUnlitImages;
     [SerializeField] private Sprite neutralCheckpointSprite;
     
 
@@ -82,6 +81,13 @@ public class GameManager : MonoBehaviour
     
     [Header("Badges")]
     private int noOfBadgesWon;
+
+    private int noOfBadgesPlayedThisLevel;
+    [Header("Badges")] 
+    [SerializeField] private Badges[] level1Badges;
+    [SerializeField] private Badges[] level2Badges;
+
+
 
     [Header("Level Summary Screen")]
     [SerializeField] private TMP_Text congratulatoryText;
@@ -110,22 +116,15 @@ public class GameManager : MonoBehaviour
 
     private static bool levelRestarted = true;
 
-
-    private void Awake()
-    {
-        //A good practice is to get and store your Get components in a variable because the Get Component call is expensive
-        
-        selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
-
-    }
-
     private void Start()
     {
         _soundManager = SoundManager.instance;
+     
     }
 
     public void OnStart()
-    {
+    { 
+        
         _soundManager.Stop("BGMusic");
         alreadyEarned = 0;
         ResetProgressBar();
@@ -154,28 +153,93 @@ public class GameManager : MonoBehaviour
     public void ResetProgressBar()
     {
         progressBarMask.fillAmount = 0f;
-        for (int i = 0; i < checkPointsParents.transform.childCount; i++)
+        switch (MainAppManager.mainAppManager.selectedLevel + 1 )
         {
-            switch (i+1)
+            case 1:
             {
-                case 4:
-                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
-                        badgesUnlitImages[0];
-                    break;
-                case 7:
-                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
-                        badgesUnlitImages[1];
-                    break;
-                case 10:
-                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
-                        badgesUnlitImages[2];
-                    break;
-                default:
-                    checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
-                        neutralCheckpointSprite;
-                    break;
+                for (int i = 0; i < checkPointsParents.transform.childCount; i++)
+                {
+                    switch (i + 1)
+                    {
+                        case 4:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                level1Badges[0].unlitBadge;
+                            break;
+                        case 7:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                level1Badges[1].unlitBadge;
+                            break;
+                        case 10:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                level1Badges[2].unlitBadge;
+                            break;
+                        default:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                neutralCheckpointSprite;
+                            break;
+                    }
+                }
+                break;
             }
+            case 2:
+            {
+                for (int i = 0; i < checkPointsParents.transform.childCount; i++)
+                {
+                    switch (i + 1)
+                    {
+                        case 4:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                level2Badges[0].unlitBadge;
+                            break;
+                        case 7:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                               level2Badges[1].unlitBadge;
+                            break;
+                        case 10:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                level2Badges[2].unlitBadge;
+                            break;
+                        default:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                neutralCheckpointSprite;
+                            break;
+                    }
+                }
+                break;
+            }
+            case 3:
+            {
+                for (int i = 0; i < checkPointsParents.transform.childCount; i++)
+                {
+                    switch (i + 1)
+                    {
+                        case 4:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[0]
+                                    .unlitBadge;
+                            break;
+                        case 7:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[1]
+                                    .unlitBadge;
+                            break;
+                        case 10:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[2]
+                                    .unlitBadge;
+                            break;
+                        default:
+                            checkPointsParents.transform.GetChild(i).gameObject.GetComponent<Image>().sprite =
+                                neutralCheckpointSprite;
+                            break;
+                    }
+                }
+                break;
+            }
+                
         }
+        
+
         
     }
 
@@ -215,6 +279,14 @@ public class GameManager : MonoBehaviour
             trueAnswerTmpText.text = _currentQuestion.trueAnswerText;
         if (falseAnswerTmpText)
             falseAnswerTmpText.text = _currentQuestion.falseAnswerText;
+
+        if (MainAppManager.mainAppManager.selectedLevel + 1 == 3)
+        {
+            _currentQuestion.questionBadge = MainAppManager.mainAppManager.characters[selectedHeroIndex]
+                        .finalCharacterBadges[noOfBadgesPlayedThisLevel];
+        }
+
+        
         EnableButtons(true);
         
     }
@@ -224,6 +296,7 @@ public class GameManager : MonoBehaviour
     //Update Loop just updates the players score visually during gameplay.
     private void Update()
     {
+        selectedHeroIndex = PlayerPrefs.GetInt("HeroIndex");
         if(!timerStopped)
         //Helped with the smooth timer animation. Added plus one to the countdownBaseValue to account for the timer ending on zero
             countdownRadialBarMask.fillAmount -= 1.0f / (countdownBaseValue + 1f) * Time.deltaTime;
@@ -333,9 +406,22 @@ public class GameManager : MonoBehaviour
             trueInnerBtn.DOColor(new Color(0f / 255f, 211f / 255f, 57f / 255f), 0.5f);
             if (_currentQuestion.isBadgeWorthy)
             {
-                currentQuestionCheckpoint.GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
-                noOfBadgesWon++;
-                UpdateBadgesFound();
+                if (MainAppManager.mainAppManager.selectedLevel+1 == 3)
+                {
+                    currentQuestionCheckpoint.GetComponent<Image>().sprite = MainAppManager.mainAppManager
+                        .characters[selectedHeroIndex].finalCharacterBadges[noOfBadgesPlayedThisLevel].litBadge;
+                    noOfBadgesPlayedThisLevel++;
+                    noOfBadgesWon++;
+                    UpdateBadgesFound();
+                }
+                else
+                {
+                    currentQuestionCheckpoint.GetComponent<Image>().sprite = _currentQuestion.questionBadge.litBadge;
+                    noOfBadgesPlayedThisLevel++;
+                    noOfBadgesWon++;
+                    UpdateBadgesFound();
+                }
+               
             }
             else
             {
@@ -351,10 +437,16 @@ public class GameManager : MonoBehaviour
             PlayRedVignetteAnimation();
             trueInnerBtn.DOColor(new Color(246f / 255f, 40f / 255f, 40f / 255f), 0.5f);
             wrongAnswers ++;
-            if (_currentQuestion.isBadgeWorthy)return;
+            if (_currentQuestion.isBadgeWorthy)
+            {
+                noOfBadgesPlayedThisLevel++;
+            }
+            else
+            {
                 currentQuestionCheckpoint.GetComponent<Image>().sprite = incorrectCheckpointSprite;
-            
-            Debug.Log("You have this number of wrong answers : " + wrongAnswers);
+                
+            }
+  
             
         }
         //ProgressBarHandler();
@@ -375,9 +467,21 @@ public class GameManager : MonoBehaviour
             falseInnerBtn.DOColor(new Color(0f / 255f, 211f / 255f, 57f / 255f), 0.5f);
             if (_currentQuestion.isBadgeWorthy)
             {
-                currentQuestionCheckpoint.GetComponent<Image>().sprite = _currentQuestion.LitbadgeImage;
-                noOfBadgesWon++;
-                UpdateBadgesFound();
+                if (MainAppManager.mainAppManager.selectedLevel+1 == 3)
+                {
+                    currentQuestionCheckpoint.GetComponent<Image>().sprite = MainAppManager.mainAppManager
+                        .characters[selectedHeroIndex].finalCharacterBadges[noOfBadgesPlayedThisLevel].litBadge;
+                    noOfBadgesPlayedThisLevel++;
+                    noOfBadgesWon++;
+                    UpdateBadgesFound();
+                }
+                else
+                {
+                    currentQuestionCheckpoint.GetComponent<Image>().sprite = _currentQuestion.questionBadge.litBadge;
+                    noOfBadgesPlayedThisLevel++;
+                    noOfBadgesWon++;
+                    UpdateBadgesFound();
+                }
             }
             else
             {
@@ -393,12 +497,14 @@ public class GameManager : MonoBehaviour
             PlayRedVignetteAnimation();
             falseInnerBtn.DOColor(new Color(246f / 255f, 40f / 255f, 40f / 255f), 0.5f);
             wrongAnswers++;
-            if (_currentQuestion.isBadgeWorthy)return;
-                currentQuestionCheckpoint.GetComponent<Image>().sprite = incorrectCheckpointSprite;
-        
-
-            
-            Debug.Log("You have this number of wrong answers : " + wrongAnswers);
+            if (_currentQuestion.isBadgeWorthy)
+            {
+                noOfBadgesPlayedThisLevel++;
+            }
+            else
+            {
+                  currentQuestionCheckpoint.GetComponent<Image>().sprite = incorrectCheckpointSprite;
+            }
 
         }
         //ProgressBarHandler();
@@ -410,9 +516,9 @@ public class GameManager : MonoBehaviour
         {
             case 1:
             {
-                for (int i = 0; i < MainAppManager.mainAppManager.level1Badges.Length; i++)
+                for (int i = 0; i < level1Badges.Length; i++)
                 {
-                    if (_currentQuestion.LitbadgeImage == MainAppManager.mainAppManager.level1Badges[i])
+                    if (_currentQuestion.questionBadge.litBadge == level1Badges[i].litBadge)
                     {
                         if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
                         {
@@ -430,9 +536,9 @@ public class GameManager : MonoBehaviour
             }
             case 2:
             {
-                for (int i = 0; i < MainAppManager.mainAppManager.level2Badges.Length; i++)
+                for (int i = 0; i < level2Badges.Length; i++)
                 {
-                    if (_currentQuestion.LitbadgeImage == MainAppManager.mainAppManager.level2Badges[i])
+                    if (_currentQuestion.questionBadge.litBadge == level2Badges[i].litBadge)
                     {
                         if (PlayerPrefs.GetInt($"Level2Badge{i + 1}") == 1)
                         {
@@ -450,9 +556,9 @@ public class GameManager : MonoBehaviour
             }
             case 3:
             {
-                for (int i = 0; i < MainAppManager.mainAppManager.level3Badges.Length; i++)
+                for (int i = 0; i < MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges.Length; i++)
                 {
-                    if (_currentQuestion.LitbadgeImage == MainAppManager.mainAppManager.level3Badges[i])
+                    if (_currentQuestion.questionBadge.litBadge == MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge)
                     {
                         if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
                         {
@@ -590,7 +696,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
                         {
-                            badgeImages[i].sprite = MainAppManager.mainAppManager.level1Badges[i];
+                            badgeImages[i].sprite = level1Badges[i].litBadge;
                         }
                     }
                     break;
@@ -603,7 +709,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt($"Level2Badge{i + 1}") == 1)
                         {
-                            badgeImages[i].sprite = MainAppManager.mainAppManager.level2Badges[i];
+                            badgeImages[i].sprite = level2Badges[i].litBadge;
                         }
                     }
                     break;
@@ -616,7 +722,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
                         {
-                            badgeImages[i].sprite = MainAppManager.mainAppManager.level3Badges[i];
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge;
                         }
                     }
                     break;
@@ -673,7 +779,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt($"Level1Badge{i + 1}") == 1)
                         {
-                            badgeImages[i].sprite = MainAppManager.mainAppManager.level1Badges[i];
+                            badgeImages[i].sprite = level1Badges[i].litBadge;
                         }
                     }
                     break;
@@ -684,7 +790,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt($"Level2Badge{i + 1}") == 1)
                         {
-                            badgeImages[i].sprite = MainAppManager.mainAppManager.level2Badges[i];
+                            badgeImages[i].sprite = level2Badges[i].litBadge;
                         }
                     }
                     break;
@@ -695,7 +801,7 @@ public class GameManager : MonoBehaviour
                     {
                         if (PlayerPrefs.GetInt($"Level3Badge{i + 1}") == 1)
                         {
-                            badgeImages[i].sprite = MainAppManager.mainAppManager.level3Badges[i];
+                            badgeImages[i].sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge;
                         }
                     }
                     break;
@@ -786,10 +892,50 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
     
+    //Badge Set up for Level Start Menu too lazy to rewrite it
+    public void SetupBadges(GameObject badgeHolder)
+    {
+        switch (MainAppManager.mainAppManager.selectedLevel+1)
+        {
+            case 1:
+            {
+                for (int i = 0; i < badgeHolder.transform.childCount; i++)
+                {
+                    var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
+                    child.sprite = level1Badges[i].litBadge;
+                }
+                break;
+            } 
+            case 2:
+            {
+                for (int i = 0; i < badgeHolder.transform.childCount; i++)
+                {
+                    var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
+                    child.sprite = level2Badges[i].litBadge;
+                }
+                break;
+            } 
+            case 3:
+            {
+                for (int i = 0; i < badgeHolder.transform.childCount; i++)
+                {
+                    var child = badgeHolder.transform.GetChild(i).GetComponent<Image>();
+                    child.sprite = MainAppManager.mainAppManager.characters[selectedHeroIndex].finalCharacterBadges[i].litBadge;
+                }
+                break;
+            }
+            default:
+                break;
+
+        }
+    }
+
+
 
     public void ResetData()
     {
         noOfBadgesWon = 0;
+        noOfBadgesPlayedThisLevel = 0;
         playerLife = 3;
         correctAnswers = 0;
         wrongAnswers = 0;

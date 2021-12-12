@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q4AnswerTrue
   falseAnswerKey: ID_Q4AnswerFalse
   isBadgeWorthy: 1
-  LitbadgeImage: {fileID: 21300000, guid: f5eb48bde29f4c14c8ce467b6d6bcd02, type: 3}
+  questionBadge: {fileID: 11400000, guid: 33ce59963d71da74da50591548d7c56c, type: 2}
   textQuestion: Are all carriers of the disease visibly sick?
   trueAnswerText: No, some  can be asymptomatic.
   falseAnswerText: Yes, otherwise it means they are not ill.

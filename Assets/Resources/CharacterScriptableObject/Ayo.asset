@@ -44,7 +44,11 @@ MonoBehaviour:
     type: 3}
   animatedCharacterLevel3: {fileID: 1321234735316672037, guid: c180d656ede6f4c40a4fba31dcdde6b7,
     type: 3}
-  characterDescriptionText: "Ayo vit en Afrique Centrale. Son super pouvoir est une
-    armure qui prot\xE8ge des Fake News"
-  characterSuperPowerText: "Armure de v\xE9rit\xE9"
-  characterGoalText: "\xC9duquer l'Afrique sur le Covid19"
+  finalCharacterBadges:
+  - {fileID: 11400000, guid: a8d670784b6f5ff4a8dd0e5b941af8f5, type: 2}
+  - {fileID: 11400000, guid: 943836f921d171d4baee1343998d76e5, type: 2}
+  - {fileID: 11400000, guid: 5e8783352cebc234cb8a8a371fae0961, type: 2}
+  characterDescriptionText: 'Ayo lives in Central Africa. Her super power is her
+    ability to detect and avoid fake news. '
+  characterSuperPowerText: Armour of truth
+  characterGoalText: Educate Africa on the COVID19

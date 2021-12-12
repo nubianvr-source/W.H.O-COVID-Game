@@ -18,7 +18,7 @@ MonoBehaviour:
   trueAnswerKey: ID_Q17AnswerTrue
   falseAnswerKey: ID_Q17AnswerFalse
   isBadgeWorthy: 1
-  LitbadgeImage: {fileID: 21300000, guid: 41be3153ecd8c1645b1758395b566419, type: 3}
-  textQuestion: During this pandemic, can you give your friends handshakes?
-  trueAnswerText: Yes, they are my friends.
-  falseAnswerText: No, it's better to greet them with your fist to avoid being contaminated.
+  questionBadge: {fileID: 11400000, guid: cc4c87843c63e0e4783d91f66fcd0d99, type: 2}
+  textQuestion: Can children contract the disease?
+  trueAnswerText: No, they are very strong.
+  falseAnswerText: Yes, but they do not become as sick as most adults.

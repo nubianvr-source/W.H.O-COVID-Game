@@ -44,7 +44,11 @@ MonoBehaviour:
     type: 3}
   animatedCharacterLevel3: {fileID: 4729324590978769087, guid: 9fae6e8e16874aa4bb192bc1c7b04887,
     type: 3}
-  characterDescriptionText: Bachir vit en Afrique du Nord. Son super pouvoir est
-    de distributeur de bonnes informations
-  characterSuperPowerText: Porteur de bonnes nouvelles
-  characterGoalText: "R\xE9pandre de bonnes nouvelles et applaudir"
+  finalCharacterBadges:
+  - {fileID: 11400000, guid: 63c95f146c6ae1247930367cc43b0480, type: 2}
+  - {fileID: 11400000, guid: ec14d322b0c2e5647b775a520d2e4770, type: 2}
+  - {fileID: 11400000, guid: d215aab98dba60d4cbe0a89e484eabc4, type: 2}
+  characterDescriptionText: 'Bachir resides in North Africa and his super power is 
+    spreading good news. '
+  characterSuperPowerText: Bearer of Good News
+  characterGoalText: Spread Good News & Cheer
