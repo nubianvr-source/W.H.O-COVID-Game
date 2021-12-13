@@ -70,10 +70,14 @@ static const unsigned       kToolBarHeight = 40;
 
 - (void) setupContents {
     
-    [self.view setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]];
+    //[self.view setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.5]];
     self.datePickerContainer = [[UIView alloc] initWithFrame:CGRectZero];
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    
+    #ifdef __IPHONE_13_4
+    if (@available(iOS 13.4, *)) {
+        self.datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+    }
+    #endif
 
     [self.datePicker setDate:_initialDate];
 
@@ -98,40 +102,39 @@ static const unsigned       kToolBarHeight = 40;
    
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.datePickerContainer];
-    
-    [self setupConstraints];
 }
 
 - (void)setupConstraints
-{
-    
-    // Setting constraints for the container - Move this to a custom view controller
+{    
+   // Setting constraints for the container - Move this to a custom view controller
     [self.datePickerContainer setTranslatesAutoresizingMaskIntoConstraints:FALSE];
-    
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    float maxSize = screenSize.width > screenSize.height ? screenSize.height : screenSize.width;
+    
     [self.datePickerContainer.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = TRUE;
     [self.datePickerContainer.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = TRUE;
-    if(screenSize.width > screenSize.height) // For having more space when presented in landscape
+    
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad)
     {
-        [self.datePickerContainer.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.6].active = TRUE;
+        [self.datePickerContainer.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:1].active = TRUE;
+        [self.datePickerContainer.widthAnchor constraintEqualToConstant:self.view.frame.size.width].active = TRUE;
     }
     else
     {
-        [self.datePickerContainer.heightAnchor constraintEqualToAnchor:self.view.heightAnchor multiplier:0.4].active = TRUE;
+        float maxSize = screenSize.width > screenSize.height ? screenSize.height : screenSize.width;
+        [self.datePickerContainer.widthAnchor constraintEqualToConstant:maxSize].active = TRUE;
     }
-    [self.datePickerContainer.widthAnchor constraintEqualToConstant:maxSize].active = TRUE;
 
     [self.toolbar setTranslatesAutoresizingMaskIntoConstraints:FALSE];
     [self.toolbar.topAnchor constraintEqualToAnchor:self.datePickerContainer.topAnchor].active = TRUE;
-    [self.toolbar.leadingAnchor constraintEqualToAnchor:self.datePickerContainer.leadingAnchor].active = TRUE;
-    [self.toolbar.trailingAnchor constraintEqualToAnchor:self.datePickerContainer.trailingAnchor].active = TRUE;
     [self.toolbar.heightAnchor constraintEqualToConstant:kToolBarHeight].active = TRUE;
+    [self.toolbar.centerXAnchor constraintEqualToAnchor:self.datePickerContainer.centerXAnchor].active = TRUE;
+    [self.toolbar.widthAnchor constraintEqualToConstant:self.view.frame.size.width].active = TRUE;
+    
 
     [self.datePicker setTranslatesAutoresizingMaskIntoConstraints:FALSE];
     [self.datePicker.topAnchor constraintEqualToAnchor:self.toolbar.bottomAnchor].active = TRUE;
-    [self.datePicker.leadingAnchor constraintEqualToAnchor:self.datePickerContainer.leadingAnchor].active = TRUE;
-    [self.datePicker.trailingAnchor constraintEqualToAnchor:self.datePickerContainer.trailingAnchor].active = TRUE;
+    [self.datePicker.leftAnchor constraintEqualToAnchor:self.datePickerContainer.leftAnchor].active = TRUE;
+    [self.datePicker.rightAnchor constraintEqualToAnchor:self.datePickerContainer.rightAnchor].active = TRUE;
     [self.datePicker.bottomAnchor constraintEqualToAnchor:self.datePickerContainer.bottomAnchor].active = TRUE;
 }
 

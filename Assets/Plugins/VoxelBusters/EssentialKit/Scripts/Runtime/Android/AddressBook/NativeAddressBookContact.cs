@@ -42,10 +42,6 @@ namespace VoxelBusters.EssentialKit.AddressBookCore.Android
         #endregion
         #region Public methods
 
-        public string GetDisplayName()
-        {
-            return Call<string>(Native.Method.kGetDisplayName);
-        }
         public string GetGivenName()
         {
             return Call<string>(Native.Method.kGetGivenName);
@@ -67,6 +63,10 @@ namespace VoxelBusters.EssentialKit.AddressBookCore.Android
             AndroidJavaObject nativeObj = Call<AndroidJavaObject>(Native.Method.kGetProfilePicture);
             NativeAsset data  = new  NativeAsset(nativeObj);
             return data;
+        }
+        public string GetDisplayName()
+        {
+            return Call<string>(Native.Method.kGetDisplayName);
         }
 
         #endregion

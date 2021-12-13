@@ -56,7 +56,7 @@ static ReachabilityChangeNativeCallback     _hostReachabilityChangeCallback     
         // register for notification
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reachabilityChanged:)
-                                                     name:kReachabilityChangedNotification
+                                                     name:kNPReachabilityChangedNotification
                                                    object:nil];
     }
     return self;

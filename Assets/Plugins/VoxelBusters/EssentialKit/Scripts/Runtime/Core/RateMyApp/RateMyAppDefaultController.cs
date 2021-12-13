@@ -114,7 +114,7 @@ namespace VoxelBusters.EssentialKit
 
         private void SaveStateInfo(ControllerStateInfo stateInfo)
         {
-            Assertions.AssertIfArgIsNull(stateInfo, "stateInfo");
+            Assert.IsArgNotNull(stateInfo, "stateInfo");
 
             string  jsonStr     = JsonUtility.ToJson(stateInfo);
             PlayerPrefs.SetString(kPrefKey, jsonStr);

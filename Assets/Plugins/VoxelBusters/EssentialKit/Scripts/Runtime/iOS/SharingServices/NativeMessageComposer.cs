@@ -25,7 +25,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         {
              // create object
             var     nativePtr   = MessageComposerBinding.NPMessageComposerCreate();
-            Assertions.AssertIfTrue(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
+            Assert.IsFalse(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
 
             // set properties
             NativeObjectRef     = new IosNativeObjectRef(nativePtr, retain: false);
@@ -138,7 +138,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         private static void HandleMessageComposerClosedCallbackInternal(IntPtr nativePtr, MFMessageComposeResult result)
         {
             var     owner       = NativeInstanceMap.GetOwner<NativeMessageComposer>(nativePtr);
-            Assertions.AssertIfPropertyIsNull(owner, "owner");
+            Assert.IsPropertyNotNull(owner, "owner");
 
             // send result
             owner.SendCloseEvent(SharingUtility.ConvertToMessageComposerResultCode(result), null);

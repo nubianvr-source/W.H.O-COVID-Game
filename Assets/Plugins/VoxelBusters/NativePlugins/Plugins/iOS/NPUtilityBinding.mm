@@ -72,6 +72,7 @@ NPBINDING DONTSTRIP void NPUtilityFreeCPointerObject(IntPtr nativePtr)
 
 NPBINDING DONTSTRIP void NPUtilitySetLastTouchPosition(float posX, float posY)
 {
-    float   contentScale    = [[UIScreen mainScreen] scale];
-    SetLastTouchPosition(CGPointMake(posX / contentScale, posY / contentScale));
+    SetLastTouchPosition(NPConverToNativePosition(posX, posY));
 }
+
+

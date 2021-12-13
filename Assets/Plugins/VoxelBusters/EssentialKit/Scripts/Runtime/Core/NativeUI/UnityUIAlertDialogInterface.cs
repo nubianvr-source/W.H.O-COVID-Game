@@ -19,8 +19,8 @@ namespace VoxelBusters.EssentialKit.NativeUICore
         public UnityUIAlertDialogInterface(UnityUIAlertDialog dialogPrefab, RectTransform parent)
         {
             // check argument
-            Assertions.AssertIfArgIsNull(dialogPrefab, "dialogPrefab");
-            Assertions.AssertIfArgIsNull(parent, "parent");
+            Assert.IsArgNotNull(dialogPrefab, "dialogPrefab");
+            Assert.IsArgNotNull(parent, "parent");
 
             // create object
             m_unityDialog           = Object.Instantiate(dialogPrefab, parent, false);

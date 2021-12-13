@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0ea44ec561e4ff9a51024a414c5e02, type: 3}
+  m_Script: {fileID: 0}
   m_Name: EssentialKitSettings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: VoxelBusters.EssentialKit:VoxelBusters.EssentialKit:EssentialKitSettings
   m_applicationSettings:
     m_logLevel: 3
     m_appStoreIds:
       m_ios: 
       m_tvos: 
-      m_android: com.NubianInteractive.COVIDWarriorQuest
+      m_android: 
     m_usagePermissionSettings:
       m_addressBookUsagePermission:
         m_description: $productName uses contacts.
@@ -50,19 +50,19 @@ MonoBehaviour:
           m_tvos: 
           m_android: 
     m_rateMyAppSettings:
-      m_isEnabled: 1
+      m_isEnabled: 0
       m_confirmationDialogSettings:
         m_canShow: 1
-        m_promptTitle: Rate Us
-        m_promptDescription: If you are enjoying playing COVID Warrior Quest would
-          you mind taking a moment to rate it? It wont take more than a minute.
+        m_promptTitle: Rate My App
+        m_promptDescription: If you enjoy using Native Plugins would you mind taking
+          a moment to rate it? It wont take more than a minute. Thanks for your support.
         m_okButtonLabel: Ok
         m_cancelButtonLabel: Cancel
         m_remindLaterButtonLabel: Remind Me Later
         m_canShowRemindMeLaterButton: 1
       m_defaultControllerSettings:
         m_initialPromptConstraints:
-          m_minHours: 1
+          m_minHours: 2
           m_minLaunches: 0
         m_repeatPromptConstraints:
           m_minHours: 6

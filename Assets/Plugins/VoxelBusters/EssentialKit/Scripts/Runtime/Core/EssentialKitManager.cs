@@ -32,30 +32,12 @@ namespace VoxelBusters.EssentialKit
             DebugLogger.SetLogLevel(settings.ApplicationSettings.LogLevel);
 
             // initialize features
-            if (settings.BillingServicesSettings.IsEnabled)
-            {
-                BillingServices.Initialize();
-            }
-            if (settings.CloudServicesSettings.IsEnabled)
-            {
-                CloudServices.Initialize();
-            }
-            if (settings.DeepLinkServicesSettings.IsEnabled)
-            {
-                DeepLinkServices.Initialize();
-            }
-            if (settings.GameServicesSettings.IsEnabled)
-            {
-                GameServices.Initialize();
-            }
+            
             if (settings.NetworkServicesSettings.IsEnabled)
             {
                 NetworkServices.Initialize();
             }
-            if (settings.NotificationServicesSettings.IsEnabled)
-            {
-                NotificationServices.Initialize();
-            }
+
             if (settings.ApplicationSettings.RateMyAppSettings.IsEnabled)
             {
                 if (null == FindObjectOfType<RateMyApp>())
@@ -71,8 +53,8 @@ namespace VoxelBusters.EssentialKit
 
         private static void ActivateRateMyAppService()
         {
-            var     prefab      = Resources.Load<GameObject>(Constants.kPluginResourcesPath + "RateMyApp");
-            Assertions.AssertIfPropertyIsNull(prefab, "prefab");
+            var     prefab      = Resources.Load<GameObject>("RateMyApp");
+            Assert.IsPropertyNotNull(prefab, "prefab");
 
             Instantiate(prefab, Vector3.zero, Quaternion.identity);
         }

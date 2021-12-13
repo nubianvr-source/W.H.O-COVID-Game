@@ -31,9 +31,9 @@ android {
         exclude 'META-INF/DEPENDENCIES'
     }
  
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
-        targetSdkVersion 29
+        targetSdkVersion 30
         consumerProguardFiles 'proguard.txt'
     }
  

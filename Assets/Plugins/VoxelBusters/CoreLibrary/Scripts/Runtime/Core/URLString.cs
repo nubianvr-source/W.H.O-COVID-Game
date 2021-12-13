@@ -45,8 +45,8 @@ namespace VoxelBusters.CoreLibrary
         public static URLString URLWithPath(string path)
         {
             // validate arguments
-            Assertions.AssertIfStringIsNullOrEmpty(path, "path");
-            Assertions.AssertIfTrue(path.StartsWith("file"), "Input value is not http path.");
+            Assert.IsNotNullOrEmpty(path, "path");
+            Assert.IsFalse(path.StartsWith("file"), "Input value is not http path.");
 
             // format value if required
             if (false == path.StartsWith("http"))
@@ -64,8 +64,8 @@ namespace VoxelBusters.CoreLibrary
         public static URLString FileURLWithPath(string path)
         {
             // validate arguments
-            Assertions.AssertIfStringIsNullOrEmpty(path, "path");
-            Assertions.AssertIfTrue(path.StartsWith("http"), "Input value is not local file path.");
+            Assert.IsNotNullOrEmpty(path, "path");
+            Assert.IsFalse(path.StartsWith("http"), "Input value is not local file path.");
 
             // format value if required
             if (false == path.StartsWith("file")

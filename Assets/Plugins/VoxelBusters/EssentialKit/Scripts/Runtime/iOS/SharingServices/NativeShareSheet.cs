@@ -25,7 +25,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         {
              // create object
             var     nativePtr   = ShareSheetBinding.NPShareSheetCreate();
-            Assertions.AssertIfTrue(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
+            Assert.IsFalse(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
 
             // set properties
             NativeObjectRef     = new IosNativeObjectRef(nativePtr, retain: false);
@@ -102,7 +102,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         private static void HandleShareSheetClosedCallbackInternal(IntPtr nativePtr, bool completed, string error)
         {
             var     owner       = NativeInstanceMap.GetOwner<NativeShareSheet>(nativePtr);
-            Assertions.AssertIfPropertyIsNull(owner, "owner");
+            Assert.IsPropertyNotNull(owner, "owner");
 
             // send result
             var     errorObj    = Error.CreateNullableError(description: error);

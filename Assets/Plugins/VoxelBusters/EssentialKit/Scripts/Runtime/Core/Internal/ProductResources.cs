@@ -22,7 +22,6 @@ namespace VoxelBusters.EssentialKit
 
         private     const   string      kDiscordPage                            = "https://discord.gg/y4kQAefbJ8";
 
-
         private     const   string      kAddressBookPage                        = "https://assetstore.essentialkit.voxelbusters.com/address-book";
 
         private     const   string      kBillingServicesPage                    = "https://assetstore.essentialkit.voxelbusters.com/billing-services";
@@ -43,11 +42,11 @@ namespace VoxelBusters.EssentialKit
 
         private     const   string      kSharingPage                            = "https://assetstore.essentialkit.voxelbusters.com/sharing";
 
-        private     const   string      kUIPage                                 = "https://assetstore.essentialkit.voxelbusters.com/features/native-ui";
+        private     const   string      kUIPage                                 = "https://assetstore.essentialkit.voxelbusters.com/native-ui";
         
-        private     const   string      kWebViewPage                            = "https://assetstore.essentialkit.voxelbusters.com/features/web-view";
+        private     const   string      kWebViewPage                            = "https://assetstore.essentialkit.voxelbusters.com/web-view";
 
-        private     const   string      kDeepLinkServicesPage                   = "https://assetstore.essentialkit.voxelbusters.com/features/deep-link-services";
+        private     const   string      kDeepLinkServicesPage                   = "https://assetstore.essentialkit.voxelbusters.com/deep-link-services";
         
         #endregion
 

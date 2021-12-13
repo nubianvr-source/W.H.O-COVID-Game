@@ -25,7 +25,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         {
              // create object
             var     nativePtr   = SocialShareComposerBinding.NPSocialShareComposerCreate(composerType);
-            Assertions.AssertIfTrue(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
+            Assert.IsFalse(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
 
             // set properties
             NativeObjectRef     = new IosNativeObjectRef(nativePtr, retain: false);
@@ -111,7 +111,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         private static void HandleSocialShareComposerClosedCallbackInternal(IntPtr nativePtr, SLComposeViewControllerResult result)
         {
             var     owner   = NativeInstanceMap.GetOwner<NativeSocialShareComposer>(nativePtr);
-            Assertions.AssertIfPropertyIsNull(owner, "owner");
+            Assert.IsPropertyNotNull(owner, "owner");
 
             // send result
             owner.SendCloseEvent(SharingUtility.ConvertToShareComposerResultCode(result), null);

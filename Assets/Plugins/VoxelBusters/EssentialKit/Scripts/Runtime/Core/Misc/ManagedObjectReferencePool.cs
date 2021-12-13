@@ -18,7 +18,7 @@ namespace VoxelBusters.EssentialKit.GameServicesCore
         public static void Retain(object obj)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(obj, "obj");
+            Assert.IsArgNotNull(obj, "obj");
 
             s_objectList.Add(obj);
         }
@@ -26,7 +26,7 @@ namespace VoxelBusters.EssentialKit.GameServicesCore
         public static void Release(object obj)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(obj, "obj");
+            Assert.IsArgNotNull(obj, "obj");
 
             s_objectList.Remove(obj);
         }

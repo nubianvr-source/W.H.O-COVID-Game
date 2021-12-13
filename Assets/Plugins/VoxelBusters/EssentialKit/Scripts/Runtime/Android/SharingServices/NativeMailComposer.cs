@@ -39,19 +39,12 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
         }
         public static bool CanSendMail(NativeContext context)
         {
-            return GetClass().CallStatic<bool>(Native.Method.kCanSendMail, context.NativeObject);
+            return GetClass().CallStatic<bool>(Native.Method.kCanSendMail, new object[] { context.NativeObject } );
         }
 
         #endregion
         #region Public methods
 
-        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMailComposer][Method : AddAttachment]");
-#endif
-            Call(Native.Method.kAddAttachment, data.NativeObject, mimeType, fileName);
-        }
         public string GetFeatureName()
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
@@ -59,12 +52,47 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
 #endif
             return Call<string>(Native.Method.kGetFeatureName);
         }
+        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMailComposer][Method : AddAttachment]");
+#endif
+            Call(Native.Method.kAddAttachment, new object[] { data.NativeObject, mimeType, fileName } );
+        }
+        public void SetSubject(string subject)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMailComposer][Method : SetSubject]");
+#endif
+            Call(Native.Method.kSetSubject, new object[] { subject } );
+        }
+        public void SetToRecipients(string[] recipients)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMailComposer][Method : SetToRecipients]");
+#endif
+            Call(Native.Method.kSetToRecipients, new object[] { recipients } );
+        }
+        public void SetBccRecipients(string[] recipients)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMailComposer][Method : SetBccRecipients]");
+#endif
+            Call(Native.Method.kSetBccRecipients, new object[] { recipients } );
+        }
+        public void SetCcRecipients(string[] recipients)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMailComposer][Method : SetCcRecipients]");
+#endif
+            Call(Native.Method.kSetCcRecipients, new object[] { recipients } );
+        }
         public void SetBody(string body, bool isHtml)
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
             DebugLogger.Log("[Class : NativeMailComposer][Method : SetBody]");
 #endif
-            Call(Native.Method.kSetBody, body, isHtml);
+            Call(Native.Method.kSetBody, new object[] { body, isHtml } );
         }
         public void Show(NativeMailComposerListener listener)
         {
@@ -72,36 +100,8 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
 #if NATIVE_PLUGINS_DEBUG_ENABLED
                 DebugLogger.Log("[Class : NativeMailComposer][Method(RunOnUiThread) : Show]");
 #endif
-                Call(Native.Method.kShow, listener);
+                Call(Native.Method.kShow, new object[] { listener } );
             });
-        }
-        public void SetSubject(string subject)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMailComposer][Method : SetSubject]");
-#endif
-            Call(Native.Method.kSetSubject, subject);
-        }
-        public void SetToRecipients(string[] recipients)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMailComposer][Method : SetToRecipients]");
-#endif
-            Call(Native.Method.kSetToRecipients, recipients);
-        }
-        public void SetBccRecipients(string[] recipients)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMailComposer][Method : SetBccRecipients]");
-#endif
-            Call(Native.Method.kSetBccRecipients, recipients);
-        }
-        public void SetCcRecipients(string[] recipients)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMailComposer][Method : SetCcRecipients]");
-#endif
-            Call(Native.Method.kSetCcRecipients, recipients);
         }
 
         #endregion

@@ -57,6 +57,8 @@ static ShareSheetClosedNativeCallback   _shareSheetClosedCallback;
 
 - (void)showAtPosition:(CGPoint)position withAnimation:(BOOL)animated
 {
+    position = NPConverToNativePosition(position.x, position.y);
+    
     __weak NPShareSheetWrapper* weakSelf = self;
     
     // create new instance
@@ -66,11 +68,12 @@ static ShareSheetClosedNativeCallback   _shareSheetClosedCallback;
     }];
     [self setActivityController:activityVC];
     
+    
     // show the view controller
     [UnityGetGLViewController() presentViewControllerInPopoverStyleIfRequired:activityVC
                                                                  withDelegate:self
                                                                  fromPosition:position
-                                                     permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                                permittedArrowDirections : UIPopoverArrowDirectionAny
                                                                      animated:YES
                                                                    completion:^{
         NSLog(@"[NativePlugins] Showing share sheet.");

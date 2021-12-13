@@ -48,17 +48,17 @@ namespace VoxelBusters.EssentialKit.AddressBookCore.Simulator
 
         private AddressBookSimulatorData LoadData()
         {
-            return SimulatorDatabase.Instance.GetObject<AddressBookSimulatorData>(NativeFeatureType.kAddressBook);
+            return SimulatorServices.GetObject<AddressBookSimulatorData>(NativeFeatureType.kAddressBook);
         }
 
         private void SaveData()
         {
-            SimulatorDatabase.Instance.SetObject(NativeFeatureType.kAddressBook, m_simulatorData);
+            SimulatorServices.SetObject(NativeFeatureType.kAddressBook, m_simulatorData);
         }
 
         public static void Reset() 
         {
-            SimulatorDatabase.Instance.RemoveObject(NativeFeatureType.kAddressBook);
+            SimulatorServices.RemoveObject(NativeFeatureType.kAddressBook);
         }
 
         #endregion

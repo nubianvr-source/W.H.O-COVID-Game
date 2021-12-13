@@ -42,6 +42,7 @@ namespace VoxelBusters.EssentialKit
         {
             // create interface object
             s_nativeInterface       = NativeFeatureActivator.CreateInterface<INativeAddressBookInterface>(ImplementationBlueprint.AddressBook, UnitySettings.IsEnabled);
+            AddressBookContactBase.defaultImage = UnitySettings.DefaultImage;
         }
 
         #endregion

@@ -131,7 +131,7 @@ namespace VoxelBusters.EssentialKit
         public void SetText(string value)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(value, "value");
+            Assert.IsArgNotNull(value, "value");
 
             try
             {
@@ -167,7 +167,7 @@ namespace VoxelBusters.EssentialKit
         public void AddImage(Texture2D image, TextureEncodingFormat textureEncodingFormat = TextureEncodingFormat.JPG)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(image, "image");
+            Assert.IsArgNotNull(image, "image");
 
             try
             {
@@ -191,7 +191,7 @@ namespace VoxelBusters.EssentialKit
         public void AddImage(byte[] imageData)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(imageData, "imageData");
+            Assert.IsArgNotNull(imageData, "imageData");
 
             try
             {
@@ -211,7 +211,7 @@ namespace VoxelBusters.EssentialKit
         public void AddURL(URLString url)
         {
             // validate arguments
-            Assertions.AssertIfFalse(url.IsValid, "Specified url is invalid.");
+            Assert.IsTrue(url.IsValid, "Specified url is invalid.");
 
             try
             {
@@ -231,7 +231,7 @@ namespace VoxelBusters.EssentialKit
         public void SetCompletionCallback(EventCallback<SocialShareComposerResult> callback)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(callback, "callback");
+            Assert.IsArgNotNull(callback, "callback");
 
             // save callback reference
             m_callback  = callback;
@@ -278,15 +278,10 @@ namespace VoxelBusters.EssentialKit
                 ResultCode  = resultCode,
             };
 
-            Callback callback = () =>
-            {
-                m_callback.Invoke(result, error);
+            CallbackDispatcher.InvokeOnMainThread(m_callback, result, error);
 
-                // release native object
-                Destroy(gameObject);
-            };
-
-            CallbackDispatcher.InvokeOnMainThread(callback);
+            // release native object
+            Destroy(gameObject);
         }
 
         #endregion

@@ -85,7 +85,7 @@ namespace VoxelBusters.EssentialKit
         public static void OpenAppStorePage(params PlatformConstant[] applicationIds)
         {
             // validate arguments
-            Assertions.AssertIfArrayIsNullOrEmpty(applicationIds, "applicationIds");
+            Assert.IsNotNullOrEmpty(applicationIds, "applicationIds");
 
             try
             {
@@ -111,7 +111,7 @@ namespace VoxelBusters.EssentialKit
         public static void OpenAppStorePage(string applicationId)
         {
             // validate arguments
-            Assertions.AssertIfStringIsNullOrEmpty(applicationId, "Application id null/empty.");
+            Assert.IsNotNullOrEmpty(applicationId, "Application id null/empty.");
 
             try
             {

@@ -49,22 +49,6 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore.Android
         {
             return Call<int>(Native.Method.kGetMaxRetryCount);
         }
-        public string GetIpAddress()
-        {
-            return Call<string>(Native.Method.kGetIpAddress);
-        }
-        public int GetPortNumber()
-        {
-            return Call<int>(Native.Method.kGetPortNumber);
-        }
-        public long GetConnectionTimeOutPeriod()
-        {
-            return Call<long>(Native.Method.kGetConnectionTimeOutPeriod);
-        }
-        public float GetTimeGapBetweenPolls()
-        {
-            return Call<float>(Native.Method.kGetTimeGapBetweenPolls);
-        }
         public void SetIpAddress(string ipAddress)
         {
             Call(Native.Method.kSetIpAddress, ipAddress);
@@ -84,6 +68,22 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore.Android
         public void SetMaxRetryCount(int retryCount)
         {
             Call(Native.Method.kSetMaxRetryCount, retryCount);
+        }
+        public string GetIpAddress()
+        {
+            return Call<string>(Native.Method.kGetIpAddress);
+        }
+        public int GetPortNumber()
+        {
+            return Call<int>(Native.Method.kGetPortNumber);
+        }
+        public long GetConnectionTimeOutPeriod()
+        {
+            return Call<long>(Native.Method.kGetConnectionTimeOutPeriod);
+        }
+        public float GetTimeGapBetweenPolls()
+        {
+            return Call<float>(Native.Method.kGetTimeGapBetweenPolls);
         }
 
         #endregion

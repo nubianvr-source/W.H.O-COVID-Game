@@ -11,13 +11,13 @@ namespace VoxelBusters.EssentialKit.AddressBookCore
     {
         #region Static fields
 
-        internal    static  Texture2D           defaultImage;
+        internal    static  Texture2D       defaultImage;
 
         #endregion
 
         #region Fields
 
-        private      NativeOperationResultContainer<TextureData>        m_cachedData;
+        private     TextureData             m_cachedData;
 
         #endregion
 
@@ -95,34 +95,43 @@ namespace VoxelBusters.EssentialKit.AddressBookCore
 
         public void LoadImage(EventCallback<TextureData> callback)
         {
+
+            // send the default image if exists
+            TextureData proxyData = null;
+            if (defaultImage != null)
+            {
+                proxyData = new TextureData(defaultImage);
+                CallbackDispatcher.InvokeOnMainThread(callback, proxyData, null);
+            }
+
             // check whether cached inforamtion is available
             if (null == m_cachedData)
             {
-                // send proxy results
-                if (defaultImage != null)
-                {
-                    var     proxyData           = new TextureData(defaultImage);
-                    var     proxyDataContainer  = NativeOperationResultContainer<TextureData>.Create(result: proxyData); 
-                    CallbackDispatcher.InvokeOnMainThread(callback, proxyDataContainer);
-                }
-
                 // make actual call
-                LoadImageInternal((imageData, error) =>
+                LoadImageInternal((rawData, error) =>
                 {
                     // create data container
-                    var     actualData          = (imageData == null) ? null : new TextureData(imageData);
-                    var     actualDataContainer = NativeOperationResultContainer<TextureData>.Create(result: actualData); 
+                    var     result      = (rawData == null) ? null : new TextureData(rawData);
+
+                    // load placeholder if no rawData
+                    if (result == null)
+                    {
+                        result = proxyData;
+                    }
 
                     // save result
-                    m_cachedData    = actualDataContainer;
+                    if (result != null)
+                    {
+                        m_cachedData    = result;
+                    }
 
                     // send result to caller object
-                    CallbackDispatcher.InvokeOnMainThread(callback, actualDataContainer);
+                    CallbackDispatcher.InvokeOnMainThread(callback, result, error);
                 });
             }
             else
             {
-                CallbackDispatcher.InvokeOnMainThread(callback, m_cachedData);
+                CallbackDispatcher.InvokeOnMainThread(callback, m_cachedData, null);
             }
         }
 

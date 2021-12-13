@@ -76,9 +76,10 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore
             while (true)
             {
                 bool    nowConnected    = false;
+#if !UNITY_WEBGL
                 for (int iter = 0; iter < maxRetryCount; iter++)
                 {
-                    Ping    ping        = new Ping(pingAddress);
+                    Ping ping        = new Ping(pingAddress);
                     float   elapsedTime = 0f;
 
                     // ping test
@@ -97,6 +98,9 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore
                         break;
                     }
                 }
+#else
+                yield return null;
+#endif
 
                 // update others about state change
                 if (!isConnected)
@@ -131,6 +135,6 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore
             SendInternetConnectivityChangeEvent(newStatus);
         }
 
-        #endregion
+#endregion
     }
 }

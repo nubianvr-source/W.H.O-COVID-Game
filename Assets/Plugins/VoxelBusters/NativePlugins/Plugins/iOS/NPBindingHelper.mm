@@ -259,7 +259,8 @@ NSString* NPToJson(id object, NSError** error)
         NSData* jsonData    = [NSJSONSerialization dataWithJSONObject:object
                                                               options:0
                                                                 error:error];
-        if (!error)
+        
+        if (*error == nil)
         {
             return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         }
@@ -278,7 +279,7 @@ id NPFromJson(NSString* jsonString, NSError** error)
             id  object      = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                   options:0
                                                                     error:error];
-            if (!error)
+            if (*error == nil)
             {
                 return object;
             }
@@ -313,6 +314,7 @@ NSDateFormatter* GetDateFormatter()
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSDateFormatter*        dateFormatter   = [[NSDateFormatter alloc] init];
+        [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
         
@@ -404,6 +406,12 @@ NPUnityRect NPRectMake(CGRect rect)
     npRect.height   = rect.size.height;
     
     return npRect;
+}
+
+CGPoint NPConverToNativePosition(float posX, float posY)
+{
+    float   contentScale    = [[UIScreen mainScreen] scale];
+    return CGPointMake(posX / contentScale, posY / contentScale);
 }
 
 #pragma mark - Color methods

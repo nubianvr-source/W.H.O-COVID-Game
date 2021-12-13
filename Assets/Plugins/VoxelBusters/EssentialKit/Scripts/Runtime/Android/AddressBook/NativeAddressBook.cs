@@ -32,26 +32,12 @@ namespace VoxelBusters.EssentialKit.AddressBookCore.Android
         #endregion
         #region Public methods
 
-        public bool IsAuthorized()
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeAddressBook][Method : IsAuthorized]");
-#endif
-            return Call<bool>(Native.Method.kIsAuthorized);
-        }
-        public void ReadContacts(NativeReadContactsListener listener)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeAddressBook][Method : ReadContacts]");
-#endif
-            Call(Native.Method.kReadContacts, listener);
-        }
         public void RequestPermission(NativeRequestContactsPermissionListener listener)
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
             DebugLogger.Log("[Class : NativeAddressBook][Method : RequestPermission]");
 #endif
-            Call(Native.Method.kRequestPermission, listener);
+            Call(Native.Method.kRequestPermission, new object[] { listener } );
         }
         public string GetFeatureName()
         {
@@ -59,6 +45,20 @@ namespace VoxelBusters.EssentialKit.AddressBookCore.Android
             DebugLogger.Log("[Class : NativeAddressBook][Method : GetFeatureName]");
 #endif
             return Call<string>(Native.Method.kGetFeatureName);
+        }
+        public void ReadContacts(NativeReadContactsListener listener)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeAddressBook][Method : ReadContacts]");
+#endif
+            Call(Native.Method.kReadContacts, new object[] { listener } );
+        }
+        public bool IsAuthorized()
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeAddressBook][Method : IsAuthorized]");
+#endif
+            return Call<bool>(Native.Method.kIsAuthorized);
         }
 
         #endregion

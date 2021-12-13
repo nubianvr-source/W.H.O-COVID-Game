@@ -39,40 +39,12 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
         }
         public static bool IsComposerAvailable(NativeContext context, NativeSocialShareComposerType type)
         {
-            return GetClass().CallStatic<bool>(Native.Method.kIsComposerAvailable, context.NativeObject, NativeSocialShareComposerTypeHelper.CreateWithValue(type));
+            return GetClass().CallStatic<bool>(Native.Method.kIsComposerAvailable, new object[] { context.NativeObject, NativeSocialShareComposerTypeHelper.CreateWithValue(type) } );
         }
 
         #endregion
         #region Public methods
 
-        public void SetUrl(string urlString)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : SetUrl]");
-#endif
-            Call(Native.Method.kSetUrl, urlString);
-        }
-        public void SetText(string text)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : SetText]");
-#endif
-            Call(Native.Method.kSetText, text);
-        }
-        public void SetComposerType(NativeSocialShareComposerType type)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : SetComposerType]");
-#endif
-            Call(Native.Method.kSetComposerType, NativeSocialShareComposerTypeHelper.CreateWithValue(type));
-        }
-        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : AddAttachment]");
-#endif
-            Call(Native.Method.kAddAttachment, data.NativeObject, mimeType, fileName);
-        }
         public string GetFeatureName()
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
@@ -80,13 +52,41 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
 #endif
             return Call<string>(Native.Method.kGetFeatureName);
         }
+        public void SetUrl(string urlString)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : SetUrl]");
+#endif
+            Call(Native.Method.kSetUrl, new object[] { urlString } );
+        }
+        public void SetText(string text)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : SetText]");
+#endif
+            Call(Native.Method.kSetText, new object[] { text } );
+        }
+        public void SetComposerType(NativeSocialShareComposerType type)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : SetComposerType]");
+#endif
+            Call(Native.Method.kSetComposerType, new object[] { NativeSocialShareComposerTypeHelper.CreateWithValue(type) } );
+        }
+        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeSocialShareComposer][Method : AddAttachment]");
+#endif
+            Call(Native.Method.kAddAttachment, new object[] { data.NativeObject, mimeType, fileName } );
+        }
         public void Show(NativeSocialShareComposerListener listener)
         {
             Activity.RunOnUiThread(() => {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
                 DebugLogger.Log("[Class : NativeSocialShareComposer][Method(RunOnUiThread) : Show]");
 #endif
-                Call(Native.Method.kShow, listener);
+                Call(Native.Method.kShow, new object[] { listener } );
             });
         }
 

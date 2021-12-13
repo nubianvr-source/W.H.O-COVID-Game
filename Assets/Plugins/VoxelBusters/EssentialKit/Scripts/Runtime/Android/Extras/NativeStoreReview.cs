@@ -58,7 +58,7 @@ namespace VoxelBusters.EssentialKit.ExtrasCore.Android
 #if NATIVE_PLUGINS_DEBUG_ENABLED
                 DebugLogger.Log("[Class : NativeStoreReview][Method(RunOnUiThread) : RequestStoreReview]");
 #endif
-                Call(Native.Method.kRequestStoreReview, listener);
+                Call(Native.Method.kRequestStoreReview, new object[] { listener } );
             });
         }
 

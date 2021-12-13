@@ -34,8 +34,8 @@ namespace VoxelBusters.EssentialKit.NativeUICore
             : base(mode)
         {
             // check arguments
-            Assertions.AssertIfArgIsNull(datePickerPrefab, "datePickerPrefab");
-            Assertions.AssertIfArgIsNull(parent, "parent");
+            Assert.IsArgNotNull(datePickerPrefab, "datePickerPrefab");
+            Assert.IsArgNotNull(parent, "parent");
 
             // set properties
             m_initialDate       = null;

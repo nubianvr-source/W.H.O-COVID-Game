@@ -24,7 +24,7 @@ namespace VoxelBusters.EssentialKit.NativeUICore.iOS
         {
             // prepare component
             var     nativePtr   = AlertControllerBinding.NPAlertControllerCreate(title: string.Empty, message: string.Empty, preferredStyle: AlertControllerUtility.ConvertToUIAlertControllerStyle(alertStyle));
-            Assertions.AssertIfTrue(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
+            Assert.IsFalse(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
 
             // set property
             NativeObjectRef     = new IosNativeObjectRef(nativePtr, retain: false);
@@ -103,7 +103,7 @@ namespace VoxelBusters.EssentialKit.NativeUICore.iOS
         private static void HandleAlertActionSelectCallbackInternal(IntPtr nativePtr, int selectedButtonIndex)
         {
             var     owner   = NativeInstanceMap.GetOwner<NativeAlertDialog>(nativePtr);
-            Assertions.AssertIfPropertyIsNull(owner, "owner");
+            Assert.IsPropertyNotNull(owner, "owner");
 
             owner.SendButtonClickEvent(selectedButtonIndex);
         }

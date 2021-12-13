@@ -51,6 +51,7 @@ void SetLastTouchPosition(CGPoint position);
 CGRect NPConvertScreenSpaceRectToNormalisedRect(CGRect frame);
 CGRect NPConvertNormalisedRectToScreenSpaceRect(CGRect normalisedRect);
 NPUnityRect NPRectMake(CGRect rect);
+CGPoint NPConverToNativePosition(float posX, float posY);
 
 // color methods
 NPUnityColor NPColorMake(float r, float g, float b, float a);
@@ -58,6 +59,7 @@ NPUnityColor NPColorCreateFromUIColor(UIColor* color);
 
 // converter
 NSString* NPGetTextEncodingName(NPUnityTextEncodingFormat format);
+
 
 // briding methods
 void* NPRetainWithOwnershipTransfer(id object);

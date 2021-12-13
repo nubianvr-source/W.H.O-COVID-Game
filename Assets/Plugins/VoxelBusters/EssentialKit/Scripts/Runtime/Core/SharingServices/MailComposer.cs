@@ -149,7 +149,7 @@ namespace VoxelBusters.EssentialKit
         public void SetToRecipients(params string[] values)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(values, "values");
+            Assert.IsArgNotNull(values, "values");
 
             try
             {
@@ -169,7 +169,7 @@ namespace VoxelBusters.EssentialKit
         public void SetCcRecipients(params string[] values)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(values, "values");
+            Assert.IsArgNotNull(values, "values");
 
             try
             {
@@ -189,7 +189,7 @@ namespace VoxelBusters.EssentialKit
         public void SetBccRecipients(params string[] values)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(values, "values");
+            Assert.IsArgNotNull(values, "values");
 
             try
             {
@@ -209,7 +209,7 @@ namespace VoxelBusters.EssentialKit
         public void SetSubject(string value)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(value, "value");
+            Assert.IsArgNotNull(value, "value");
 
             try
             {
@@ -230,7 +230,7 @@ namespace VoxelBusters.EssentialKit
         public void SetBody(string value, bool isHtml = false)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(value, "value");
+            Assert.IsArgNotNull(value, "value");
 
             try
             {
@@ -250,7 +250,7 @@ namespace VoxelBusters.EssentialKit
         public void AddScreenshot(string fileName)
         {
             // validate arguments
-            Assertions.AssertIfStringIsNullOrEmpty(fileName, "fileName");
+            Assert.IsNotNullOrEmpty(fileName, "fileName");
 
             try
             {
@@ -272,8 +272,8 @@ namespace VoxelBusters.EssentialKit
         public void AddImage(Texture2D image, string fileName, TextureEncodingFormat textureEncodingFormat = TextureEncodingFormat.JPG)
         { 
             // validate arguments
-            Assertions.AssertIfArgIsNull(image, "image");
-            Assertions.AssertIfStringIsNullOrEmpty(fileName, "fileName");
+            Assert.IsArgNotNull(image, "image");
+            Assert.IsNotNullOrEmpty(fileName, "fileName");
 
             try
             {
@@ -299,9 +299,9 @@ namespace VoxelBusters.EssentialKit
         public void AddAttachment(byte[] data, string mimeType, string fileName)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(data, "data");
-            Assertions.AssertIfStringIsNullOrEmpty(mimeType, "mimeType");
-            Assertions.AssertIfStringIsNullOrEmpty(fileName, "fileName");
+            Assert.IsArgNotNull(data, "data");
+            Assert.IsNotNullOrEmpty(mimeType, "mimeType");
+            Assert.IsNotNullOrEmpty(fileName, "fileName");
 
             try
             {
@@ -321,7 +321,7 @@ namespace VoxelBusters.EssentialKit
         public void SetCompletionCallback(EventCallback<MailComposerResult> callback)
         {
             // validate arguments
-            Assertions.AssertIfArgIsNull(callback, "callback");
+            Assert.IsArgNotNull(callback, "callback");
 
             // save callback reference
             m_callback  = callback;

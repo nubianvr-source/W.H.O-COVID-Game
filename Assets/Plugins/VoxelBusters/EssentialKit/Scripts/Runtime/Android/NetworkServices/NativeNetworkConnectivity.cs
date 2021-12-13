@@ -32,20 +32,6 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore.Android
         #endregion
         #region Public methods
 
-        public void Start(NativeNetworkPollSettings settings)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeNetworkConnectivity][Method : Start]");
-#endif
-            Call(Native.Method.kStart, settings.NativeObject);
-        }
-        public void Stop()
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeNetworkConnectivity][Method : Stop]");
-#endif
-            Call(Native.Method.kStop);
-        }
         public string GetFeatureName()
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
@@ -58,7 +44,21 @@ namespace VoxelBusters.EssentialKit.NetworkServicesCore.Android
 #if NATIVE_PLUGINS_DEBUG_ENABLED
             DebugLogger.Log("[Class : NativeNetworkConnectivity][Method : SetListener]");
 #endif
-            Call(Native.Method.kSetListener, listener);
+            Call(Native.Method.kSetListener, new object[] { listener } );
+        }
+        public void Start(NativeNetworkPollSettings settings)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeNetworkConnectivity][Method : Start]");
+#endif
+            Call(Native.Method.kStart, new object[] { settings.NativeObject } );
+        }
+        public void Stop()
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeNetworkConnectivity][Method : Stop]");
+#endif
+            Call(Native.Method.kStop);
         }
 
         #endregion

@@ -30,24 +30,24 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - VoxelBusters.EssentialKit
-    - VoxelBusters.EssentialKit.AndroidModule
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
-    - VoxelBusters.EssentialKit.iOSModule
+    - VoxelBusters.EssentialKit.AndroidModule
     - VoxelBusters.Parser
     - NativeShare.Runtime
-    - VoxelBusters.CoreLibrary
-    - VoxelBusters.EssentialKit.Demo
-    - VoxelBusters.CoreLibrary.NativePlugins.AndroidModule
-    - VoxelBusters.CoreLibrary.NativePlugins
+    - VoxelBusters.EssentialKit.iOSModule
     - Nobi.UiRoundedCorners
-    - VoxelBusters.CoreLibrary.NativePlugins.iOSModule
-    - VoxelBusters.CoreLibrary.Editor
-    - VoxelBusters.EssentialKit.Editor
-    - VoxelBusters.EssentialKit.SimulatorModule
-    - PsdPlugin
+    - VoxelBusters.CoreLibrary.NativePlugins
+    - VoxelBusters.EssentialKit.Demo
     - VoxelBusters.CoreLibrary.Editor.NativePlugins
+    - VoxelBusters.EssentialKit.Editor
+    - VoxelBusters.CoreLibrary.NativePlugins.AndroidModule
+    - VoxelBusters.CoreLibrary
+    - VoxelBusters.CoreLibrary.NativePlugins.iOSModule
+    - PsdPlugin
+    - VoxelBusters.EssentialKit.SimulatorModule
     - NativeShare.Editor
+    - VoxelBusters.CoreLibrary.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

@@ -39,29 +39,22 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
         }
         public static bool CanSendText(NativeContext context)
         {
-            return GetClass().CallStatic<bool>(Native.Method.kCanSendText, context.NativeObject);
-        }
-
-        public static bool CanSendAttachments(NativeContext context)
-        {
-            return GetClass().CallStatic<bool>(Native.Method.kCanSendAttachments, context.NativeObject);
+            return GetClass().CallStatic<bool>(Native.Method.kCanSendText, new object[] { context.NativeObject } );
         }
 
         public static bool CanSendSubject(NativeContext context)
         {
-            return GetClass().CallStatic<bool>(Native.Method.kCanSendSubject, context.NativeObject);
+            return GetClass().CallStatic<bool>(Native.Method.kCanSendSubject, new object[] { context.NativeObject } );
+        }
+
+        public static bool CanSendAttachments(NativeContext context)
+        {
+            return GetClass().CallStatic<bool>(Native.Method.kCanSendAttachments, new object[] { context.NativeObject } );
         }
 
         #endregion
         #region Public methods
 
-        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMessageComposer][Method : AddAttachment]");
-#endif
-            Call(Native.Method.kAddAttachment, data.NativeObject, mimeType, fileName);
-        }
         public string GetFeatureName()
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
@@ -69,19 +62,33 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
 #endif
             return Call<string>(Native.Method.kGetFeatureName);
         }
-        public void SetBody(string body, bool isHtml)
+        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMessageComposer][Method : SetBody]");
+            DebugLogger.Log("[Class : NativeMessageComposer][Method : AddAttachment]");
 #endif
-            Call(Native.Method.kSetBody, body, isHtml);
+            Call(Native.Method.kAddAttachment, new object[] { data.NativeObject, mimeType, fileName } );
+        }
+        public void SetSubject(string value)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMessageComposer][Method : SetSubject]");
+#endif
+            Call(Native.Method.kSetSubject, new object[] { value } );
         }
         public void SetRecipients(string[] receipients)
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
             DebugLogger.Log("[Class : NativeMessageComposer][Method : SetRecipients]");
 #endif
-            Call(Native.Method.kSetRecipients, receipients);
+            Call(Native.Method.kSetRecipients, new object[] { receipients } );
+        }
+        public void SetBody(string body, bool isHtml)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeMessageComposer][Method : SetBody]");
+#endif
+            Call(Native.Method.kSetBody, new object[] { body, isHtml } );
         }
         public void Show(NativeMessageComposerListener listener)
         {
@@ -89,15 +96,8 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
 #if NATIVE_PLUGINS_DEBUG_ENABLED
                 DebugLogger.Log("[Class : NativeMessageComposer][Method(RunOnUiThread) : Show]");
 #endif
-                Call(Native.Method.kShow, listener);
+                Call(Native.Method.kShow, new object[] { listener } );
             });
-        }
-        public void SetSubject(string value)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeMessageComposer][Method : SetSubject]");
-#endif
-            Call(Native.Method.kSetSubject, value);
         }
 
         #endregion

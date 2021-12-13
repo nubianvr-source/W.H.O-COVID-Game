@@ -62,7 +62,7 @@ namespace VoxelBusters.EssentialKit.ExtrasCore.Android
 #if NATIVE_PLUGINS_DEBUG_ENABLED
                 DebugLogger.Log("[Class : NativeApplicationUtility][Method(RunOnUiThread) : OpenGooglePlayStoreLink]");
 #endif
-                Call(Native.Method.kOpenGooglePlayStoreLink, packageName);
+                Call(Native.Method.kOpenGooglePlayStoreLink, new object[] { packageName } );
             });
         }
 

@@ -2,8 +2,7 @@
     "name": "VoxelBusters.EssentialKit",
     "references": [
         "VoxelBusters.CoreLibrary",
-        "VoxelBusters.CoreLibrary.NativePlugins",
-        "VoxelBusters.Parser"
+        "VoxelBusters.CoreLibrary.NativePlugins"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

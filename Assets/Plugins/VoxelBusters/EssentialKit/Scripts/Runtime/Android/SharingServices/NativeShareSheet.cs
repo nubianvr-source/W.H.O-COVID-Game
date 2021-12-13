@@ -40,34 +40,6 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
         #endregion
         #region Public methods
 
-        public void SetUrl(string urlString)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeShareSheet][Method : SetUrl]");
-#endif
-            Call(Native.Method.kSetUrl, urlString);
-        }
-        public void SetText(string value)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeShareSheet][Method : SetText]");
-#endif
-            Call(Native.Method.kSetText, value);
-        }
-        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeShareSheet][Method : AddAttachment]");
-#endif
-            Call(Native.Method.kAddAttachment, data.NativeObject, mimeType, fileName);
-        }
-        public void AddAttachmentAsync(string path, string mimeType)
-        {
-#if NATIVE_PLUGINS_DEBUG_ENABLED
-            DebugLogger.Log("[Class : NativeShareSheet][Method : AddAttachmentAsync]");
-#endif
-            Call(Native.Method.kAddAttachmentAsync, path, mimeType);
-        }
         public string GetFeatureName()
         {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
@@ -75,14 +47,33 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
 #endif
             return Call<string>(Native.Method.kGetFeatureName);
         }
-        public void Show(NativeShareSheetListener listener)
+        public void SetUrl(string urlString)
         {
-            Activity.RunOnUiThread(() => {
 #if NATIVE_PLUGINS_DEBUG_ENABLED
-                DebugLogger.Log("[Class : NativeShareSheet][Method(RunOnUiThread) : Show]");
+            DebugLogger.Log("[Class : NativeShareSheet][Method : SetUrl]");
 #endif
-                Call(Native.Method.kShow, listener);
-            });
+            Call(Native.Method.kSetUrl, new object[] { urlString } );
+        }
+        public void SetText(string value)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeShareSheet][Method : SetText]");
+#endif
+            Call(Native.Method.kSetText, new object[] { value } );
+        }
+        public void AddAttachment(NativeByteBuffer data, string mimeType, string fileName)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeShareSheet][Method : AddAttachment]");
+#endif
+            Call(Native.Method.kAddAttachment, new object[] { data.NativeObject, mimeType, fileName } );
+        }
+        public void AddAttachmentAsync(string path, string mimeType)
+        {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+            DebugLogger.Log("[Class : NativeShareSheet][Method : AddAttachmentAsync]");
+#endif
+            Call(Native.Method.kAddAttachmentAsync, new object[] { path, mimeType } );
         }
         public string GetSaveDirectory()
         {
@@ -90,6 +81,15 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.Android
             DebugLogger.Log("[Class : NativeShareSheet][Method : GetSaveDirectory]");
 #endif
             return Call<string>(Native.Method.kGetSaveDirectory);
+        }
+        public void Show(NativeShareSheetListener listener)
+        {
+            Activity.RunOnUiThread(() => {
+#if NATIVE_PLUGINS_DEBUG_ENABLED
+                DebugLogger.Log("[Class : NativeShareSheet][Method(RunOnUiThread) : Show]");
+#endif
+                Call(Native.Method.kShow, new object[] { listener } );
+            });
         }
 
         #endregion

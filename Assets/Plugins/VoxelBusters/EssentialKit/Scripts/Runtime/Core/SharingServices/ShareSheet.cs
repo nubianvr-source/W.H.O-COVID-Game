@@ -283,15 +283,10 @@ namespace VoxelBusters.EssentialKit
                 ResultCode  = resultCode,
             };
 
-            Callback callback = () =>
-            {
-                m_callback.Invoke(result, error);
+            CallbackDispatcher.InvokeOnMainThread(m_callback, result, error);
 
-                // release native object
-                Destroy(gameObject);
-            };
-
-            CallbackDispatcher.InvokeOnMainThread(callback);
+            // release native object
+            Destroy(gameObject);
         }
 
         #endregion

@@ -62,7 +62,10 @@ namespace VoxelBusters.EssentialKit
             base.OnSingletonAwake();
 
             // configure component
-            m_controller    = GetComponent<IRateMyAppController>() ?? gameObject.AddComponent<RateMyAppDefaultController>();
+            m_controller = GetComponent<IRateMyAppController>();
+
+            if(m_controller == null)
+                m_controller = gameObject.AddComponent<RateMyAppDefaultController>();
         }
 
         private void Update()

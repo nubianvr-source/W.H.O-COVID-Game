@@ -25,7 +25,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         {
              // create object
             var     nativePtr   = MailComposerBinding.NPMailComposerCreate();
-            Assertions.AssertIfTrue(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
+            Assert.IsFalse(IntPtr.Zero == nativePtr, Diagnostics.kCreateNativeObjectError);
 
             // set properties
             NativeObjectRef     = new IosNativeObjectRef(nativePtr, retain: false);
@@ -133,7 +133,7 @@ namespace VoxelBusters.EssentialKit.SharingServicesCore.iOS
         private static void HandleMailComposerClosedCallbackInternal(IntPtr nativePtr, MFMailComposeResult result, string error)
         {
             var     owner   = NativeInstanceMap.GetOwner<NativeMailComposer>(nativePtr);
-            Assertions.AssertIfPropertyIsNull(owner, "owner");
+            Assert.IsPropertyNotNull(owner, "owner");
 
             // send result
             var     errorObj    = Error.CreateNullableError(description: error);
