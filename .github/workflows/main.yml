@@ -97,7 +97,7 @@ jobs:
           name: build-Android
           path: build/Android
           
- buildWebGL:
+  buildWebGL:
     needs: testRunner
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
