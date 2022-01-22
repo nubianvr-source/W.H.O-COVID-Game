@@ -32,22 +32,22 @@ MonoBehaviour:
     - VoxelBusters.EssentialKit
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - VoxelBusters.CoreLibrary.NativePlugins
     - VoxelBusters.EssentialKit.AndroidModule
+    - VoxelBusters.CoreLibrary
     - VoxelBusters.Parser
     - NativeShare.Runtime
     - VoxelBusters.EssentialKit.iOSModule
     - Nobi.UiRoundedCorners
-    - VoxelBusters.CoreLibrary.NativePlugins
-    - VoxelBusters.EssentialKit.Demo
-    - VoxelBusters.CoreLibrary.Editor.NativePlugins
-    - VoxelBusters.EssentialKit.Editor
     - VoxelBusters.CoreLibrary.NativePlugins.AndroidModule
-    - VoxelBusters.CoreLibrary
+    - VoxelBusters.EssentialKit.Demo
     - VoxelBusters.CoreLibrary.NativePlugins.iOSModule
+    - VoxelBusters.EssentialKit.Editor
+    - VoxelBusters.CoreLibrary.Editor
     - PsdPlugin
     - VoxelBusters.EssentialKit.SimulatorModule
+    - VoxelBusters.CoreLibrary.Editor.NativePlugins
     - NativeShare.Editor
-    - VoxelBusters.CoreLibrary.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
