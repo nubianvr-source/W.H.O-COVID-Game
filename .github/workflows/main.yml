@@ -55,9 +55,10 @@ jobs:
           path: ${{ steps.testRunner.outputs.artifactsPath }}
 
 
-  buildAndroid:
+          
+  buildWebGL:
     needs: testRunner
-    name: Build for Android 📱
+    name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -84,18 +85,38 @@ jobs:
         uses: actions/cache@v2
         with:
           path: Library
-          key: Library-build-Android
+          key: Library-build-WebGL
           restore-keys: |
             Library-build-
             Library-
       - uses: game-ci/unity-builder@v2
         with:
-          targetPlatform: Android
+          targetPlatform: WebGL
 
       - uses: actions/upload-artifact@v2
         with:
-          name: build-Android
-          path: build/Android
+          name: build-WebGL
+          path: build/WebGL
 
+  
+
+  deployPages:
+    needs: buildWebGL
+    name: Deploy to Github Pages 🚀
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-WebGL
+          path: build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: build/WebGL
 
   
