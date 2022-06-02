@@ -859,3 +859,4 @@ Received Import Request.
 Start importing Assets/AppIcons/Assets.xcassets/AppIcon.appiconset/180.png using Guid(ce2b969c55ca7c14b9419f76f69463cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db1457a534c444f2c241ac54d292a1d1') in 0.016434 seconds 
   Import took 0.024357 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
